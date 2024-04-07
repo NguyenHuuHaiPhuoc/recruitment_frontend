@@ -232,6 +232,7 @@
     <div class="right-side">
       <div class="pill-group">
         @for (item of [
+          { title: 'Home Component', link:'home'},
           { title: 'Explore the Docs', link: 'https://angular.dev' },
           { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
           { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
@@ -241,9 +242,9 @@
           <a
             class="pill"
             [href]="item.link"
-            target="_blank"
-            rel="noopener"
-          >
+            >
+            <!-- target="_blank"
+            rel="noopener" -->
             <span>{{ item.title }}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -333,4 +334,6 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet />
+<div class="container">
+  <router-outlet />
+</div>
