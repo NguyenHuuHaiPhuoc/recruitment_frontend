@@ -1,18 +1,46 @@
 import { Routes } from '@angular/router';
-import { AboutComponent } from './body/about/about.component';
-import { HomeComponent } from './body/home/home.component';
-import { JobListNewComponent } from './body/home/job-list-new/job-list-new.component';
-import { JobdetailComponent } from './body/jobs/jobdetail/jobdetail.component';
-import { JobcategoryComponent } from './body/home/jobcategory/jobcategory.component';
-import { NotFoundComponent } from './body/error/not-found/not-found.component';
-import { ContactComponent } from './body/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
+import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
+// import { JobcategoryComponent } from './components/home/home/jobcategory/jobcategory.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { RegisterComponent } from './components/Utilities-icons/account/register/register.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
-  { path: 'body-about', component: AboutComponent },
-  { path: 'body-home', component: HomeComponent },
-  { path: 'body-job-list', component: JobListNewComponent },
-  { path: 'body-job-detail', component: JobdetailComponent },
-  { path: 'body-job-category', component: JobcategoryComponent },
-  { path: 'body-error-404', component: NotFoundComponent },
-  { path: 'body-contact', component: ContactComponent },
+  {
+    path: 'the-gioi-viec-lam',
+    title: 'Thế giới việc làm',
+    component: HomeComponent
+  },
+  // {
+  //   path: 'viec-lam',
+  //   title: 'Danh sách công việc',
+  //   component: JobListNewComponent,
+  // },
+  {
+    path: 'viec-lam/cong-ty',
+    title: 'Công ty TNHH ABC',
+    component: JobdetailComponent,
+  },
+  {
+    path: 'about',
+    title: 'Về chúng tôi',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    title: 'Liên hệ',
+    component: ContactComponent,
+  },
+  {
+    path: 'dang-ky',
+    title: 'Đăng ký',
+    component: RegisterComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  },
 ];

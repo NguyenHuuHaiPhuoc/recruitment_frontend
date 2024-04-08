@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderMenustartComponent } from './header/header-menustart/header-menustart.component';
-import { HeaderCarouselstrartComponent } from './header/header-carouselstrart/header-carouselstrart.component';
-import { HeaderSearchComponent } from './header/header-search/header-search.component';
-import { FooterComponent } from './footer/footer.component';
+import { Location } from '@angular/common';
+import { HeaderMenustartComponent } from './components/header/header-menustart/header-menustart.component';
+import { HeaderCarouselstrartComponent } from './components/header/header-carouselstrart/header-carouselstrart.component';
+import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderMenustartComponent, HeaderCarouselstrartComponent, HeaderSearchComponent, FooterComponent],
+  imports: [
+    RouterOutlet,
+    HeaderMenustartComponent,
+    HeaderCarouselstrartComponent,
+    HeaderSearchComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'my-demo';
@@ -35,6 +42,15 @@ export class AppComponent {
         'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
       imageAlt: 'person2',
     },
-  ]
-  
+  ];
+
+  constructor(private location: Location){}
+
+  getURL() : string {
+    const path: string = this.location.path();
+    const segments: string[] = path.split('/');
+    const lastSegment: string = segments[segments.length - 1];
+    return lastSegment;
+  }
+
 }

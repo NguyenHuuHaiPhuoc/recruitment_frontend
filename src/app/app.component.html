@@ -1,4 +1,8 @@
-<app-header-menustart></app-header-menustart>
+
+@if (getURL() && (getURL() === "dang-ky" || getURL() === "dang-nhap") ) {
+    <router-outlet></router-outlet>
+} @else {
+    <app-header-menustart></app-header-menustart>
 
 <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 
@@ -7,5 +11,6 @@
 <!-- <app-feedback-clients></app-feedback-clients> -->
 
 <app-footer></app-footer>
-<!-- <app-register></app-register>
-<app-signin></app-signin> -->
+}
+
+
