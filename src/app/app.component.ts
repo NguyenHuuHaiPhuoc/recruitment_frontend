@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderMenustartComponent } from './header/header-menustart/header-menustart.component';
+import { HeaderCarouselstrartComponent } from './header/header-carouselstrart/header-carouselstrart.component';
+import { HeaderSearchComponent } from './header/header-search/header-search.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderMenustartComponent, HeaderCarouselstrartComponent, HeaderSearchComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
