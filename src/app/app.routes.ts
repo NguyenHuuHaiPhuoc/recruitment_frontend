@@ -10,7 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   {
-    path: 'the-gioi-viec-lam',
+    path: 'easyjob',
     title: 'Thế giới việc làm',
     component: HomeComponent
   },

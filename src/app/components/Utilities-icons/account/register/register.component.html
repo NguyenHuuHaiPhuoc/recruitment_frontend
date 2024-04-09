@@ -1,44 +1,55 @@
-
 <!-- end document-->
-<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
-    <div class="wrapper wrapper--w780">
-        <div class="card card-3">
-            <div class="card-heading"></div>
-            <div class="card-body">
-                <h2 class="title">Registration Info</h2>
-                <form method="POST">
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Name" name="name">
-                    </div>
-                    <div class="input-group">
-                        <input class="input--style-3 js-datepicker" type="text" placeholder="Birthdate" name="birthday">
-                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                    </div>
-                    <div class="input-group">
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="gender">
-                                <option disabled="disabled" selected="selected">Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                            </select>
-                            <div class="select-dropdown"></div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <input class="input--style-3" type="email" placeholder="Email" name="email">
-                    </div>
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Phone" name="phone">
-                    </div>
-                    <div class="p-t-10">
-                        <button class="btn btn--pill btn--green" type="submit">Submit</button>
-                    </div>
-                    <div class="p-t-10">
-                        <a href="the-gioi-viec-lam" class="nav-link text-white" type="submit">Back to home &nbsp; <i class="bi bi-house"></i></a>
-                    </div>
-                </form>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <p class="modal-title mx-auto" id="exampleModalLabel">
+          <b class="fs-5">Chào bạn đến với Easy Job,</b><br />Bạn hãy dành ra vài giây để xác nhận thông tin dưới đây
+          nhé.
+        </p>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <div class="row mt-5">
+          <div class="col-6 text-center">
+            <div class="applicant mx-auto">
+              <img src="assets/img/register/applicant.png" alt="Applicant">
             </div>
+            <button type="button" data-bs-dismiss="modal" aria-label="Close" 
+                class="btn btn-success opacity-75 btn-applicant rounded-pill mt-5"
+                (click)="chosseApplicantRole()">
+                <input 
+                  type="radio"
+                  id="applicant"
+                  [(ngModel)]="roles"
+                  name="role" 
+                  value="applicant" 
+                  [hidden]="true"/>
+                  Tôi là ứng viên
+            </button>
+          </div>
+          <div class="col-6 text-center">
+            <img class="company mx-auto" src="assets/img/register/company.png" alt="Bussiness">
+            <button type="button"data-bs-dismiss="modal" aria-label="Close" 
+              class="btn btn-success opacity-75 btn-company rounded-pill mt-5"
+              (click)="chosseCompanyRole()">
+              <input 
+                type="radio"
+                id="company" 
+                [(ngModel)]="roles"
+                name="role"
+                value="company"
+                [hidden]="true"/>
+              Tôi là nhà tuyển dụng
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<button type="button" id="openModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  [hidden]="true">
+  Launch demo modal
+</button>
