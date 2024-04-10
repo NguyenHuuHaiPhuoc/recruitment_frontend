@@ -7,6 +7,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { RegisterComponent } from './components/Utilities-icons/account/register/register.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { SigninComponent } from './components/Utilities-icons/account/signin/signin.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +40,16 @@ export const routes: Routes = [
     path: 'dang-ky',
     title: 'Đăng ký',
     component: RegisterComponent,
+  },
+   {
+    path: 'dang-nhap',
+    title: 'Đăng nhap',
+    component: SigninComponent,
+  },
+   {
+    path: 'blog',
+    title: 'blog',
+    component: BlogComponent,
   },
   {
     path: '**',

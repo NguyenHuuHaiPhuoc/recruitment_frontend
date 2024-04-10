@@ -1,20 +1,40 @@
+<div class="register">
+<div class="register-above">
+  <h2 class="logowebsite">Easy Jobs</h2>
+</div>
+<div class="register-under">
 
+</div>
+
+</div>
 <!-- end document-->
-<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
-    <div class="wrapper wrapper--w780">
+    <div class="wrapper wrapper--w780 register-form">
         <div class="card card-3">
-            <div class="card-heading"></div>
+        
             <div class="card-body">
-                <h2 class="title">Registration Info</h2>
+                  <h1 class="form-register-subject">Đăng ký thành viên!</h1>
+                <div class="register-auth">
+                    <a href="#" class="btn-face m-b-20">
+						              <i class="bi bi-facebook"></i>
+						              Facebook
+					              </a>
+                        <a href="#" class="btn-google m-b-20">
+						            <img src="./assets/img/icon-google.png" alt="GOOGLE">
+					            	Google
+					              </a>
+                </div>
+
                 <form method="POST">
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Name" name="name">
+                      <label for="name">Name:</label>
+                        <input class="input--style-3" type="text" placeholder="  Type name" name="name">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3 js-datepicker" type="text" placeholder="Birthdate" name="birthday">
+                       <label for="phone">Phone:</label>
+                        <input class="input--style-3 js-datepicker" type="text" placeholder="  Type phone number" name="phonenumber">
                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                     </div>
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
                             <select name="gender">
                                 <option disabled="disabled" selected="selected">Gender</option>
@@ -24,21 +44,24 @@
                             </select>
                             <div class="select-dropdown"></div>
                         </div>
+                    </div> -->
+                    <div class="input-group">
+                      <label for="email">Email:</label>
+                        <input class="input--style-3" type="email" placeholder="  Type Email" name="email">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="email" placeholder="Email" name="email">
-                    </div>
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Phone" name="phone">
+                      <label for="password">Password</label>
+                        <input class="input--style-3" type="password" placeholder="" name="password">
                     </div>
                     <div class="p-t-10">
                         <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                      
+
                     </div>
                     <div class="p-t-10">
-                        <a href="the-gioi-viec-lam" class="nav-link text-white" type="submit">Back to home &nbsp; <i class="bi bi-house"></i></a>
+                        <a href="the-gioi-viec-lam" class="nav-link text-dark" type="submit">Back to home &nbsp; <i class="bi bi-house"></i></a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>

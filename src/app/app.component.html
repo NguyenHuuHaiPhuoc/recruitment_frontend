@@ -1,8 +1,17 @@
 
 @if (getURL() && (getURL() === "dang-ky" || getURL() === "dang-nhap") ) {
     <router-outlet></router-outlet>
-} @else {
-    <app-header-menustart></app-header-menustart>
+}@else if(getURL() === "blog"){
+  <app-header-menustart></app-header-menustart>
+<app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
+
+      <router-outlet></router-outlet>
+<app-footer></app-footer>
+
+} 
+
+@else {
+<app-header-menustart></app-header-menustart>
 
 <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 
