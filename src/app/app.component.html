@@ -8,9 +8,9 @@
       <router-outlet></router-outlet>
 <app-footer></app-footer>
 
-} 
-
-@else {
+} @else if(getURL() === "testimonial"){
+    <router-outlet></router-outlet>
+ }@else {
 <app-header-menustart></app-header-menustart>
 
 <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>

@@ -43,6 +43,7 @@ export class AppComponent {
       imageAlt: 'person2',
     },
   ];
+   
 
   constructor(private location: Location){}
 

@@ -1,3 +1,5 @@
+// const { style } = require("@angular/animations");
+
 (function ($) {
     "use strict";
 
@@ -78,3 +80,16 @@
     
 })(jQuery);
 
+// var currentItem = document.querySelectorAll(".job-item");;
+// var btn = document.getElementById('#');
+// var currentIndex = 5;
+// console.log(btn);
+// // btn.addEventListener('click', function(){
+// //   console.log("thang12");
+// //     for(var i= currentIndex;i<currentIndex+3;i++){
+// //       if(currentItem[i]){
+// //         currentIndex[i].style.display ='block';
+// //       }
+// //     }
+// //      currentIndex +=3; 
+// // });

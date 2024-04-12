@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AboutComponent } from '../about/about.component';
+import { QuickSearchComponent } from '../quick-search/quick-search.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AboutComponent],
+  imports: [QuickSearchComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
