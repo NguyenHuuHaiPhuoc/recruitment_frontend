@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
-// import { JobcategoryComponent } from './components/home/home/jobcategory/jobcategory.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { RegisterComponent } from './components/Utilities-icons/account/register/register.component';
-import { AppComponent } from './app.component';
+import { RegisterComponent } from './components/user/account/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/user/account/login/login.component';
 
 export const routes: Routes = [
   {
@@ -14,11 +13,6 @@ export const routes: Routes = [
     title: 'Thế giới việc làm',
     component: HomeComponent
   },
-  // {
-  //   path: 'viec-lam',
-  //   title: 'Danh sách công việc',
-  //   component: JobListNewComponent,
-  // },
   {
     path: 'viec-lam/cong-ty',
     title: 'Công ty TNHH ABC',
@@ -38,6 +32,11 @@ export const routes: Routes = [
     path: 'dang-ky',
     title: 'Đăng ký',
     component: RegisterComponent,
+  },
+  {
+    path: 'dang-nhap',
+    title: 'Đăng nhập',
+    component: LoginComponent,
   },
   {
     path: '**',
