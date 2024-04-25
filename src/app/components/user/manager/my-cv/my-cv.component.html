@@ -1,0 +1,371 @@
+<main>
+    <div class="my-cv">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body d-flex gap-3 justify-content-around">
+                        <div class="avatar">
+                            <img [src]="avatar" alt="avatar" />
+                        </div>
+                        <div class="info-user flex-fill px-5">
+                            <div class="fs-2 fw-bold text-dark mt-md-2">{{user.username}}</div>
+                            <div class="d-flex gap-md-4 mt-md-2">
+                                <div class="text-secondary">Java Developer</div>
+                                <div class="text-secondary">Số năm kinh nghiệm</div>
+                            </div>
+                            <div class="text-secondary mt-md-2">Ha Noi</div>
+                            <div class="d-flex gap-md-4 mt-md-2">
+                                <div class="text-secondary">{{user.username + '@gmail.com'}}</div>
+                                <div class="text-secondary">0912345678</div>
+                            </div>
+                            <div class="border-top mt-md-4"></div>
+                            <div class="mt-md-4">
+                                <button class="btn btn-share text-white fs-5"><i class="bi bi-share"></i>&ensp;Chia sẻ hồ
+                                    sơ</button>
+                                <button class="btn btn-download fs-5 mx-md-4"><i
+                                        class="bi bi-box-arrow-down"></i>&ensp;Tải xuống</button>
+                            </div>
+                        </div>
+                        <div class="update-info" role="button" (click)="openUpdateModal()">
+                            <i class="bi bi-pencil fs-5"></i>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" id="btn-modal-updateInfoUser" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#update-info-user" [hidden]="true"></button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="update-info-user" tabindex="-1"
+                            aria-labelledby="updateInfoUserModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="title  title-form-updateinfouser">
+                                            <h1 class="modal-title fs-5" id="updateInfoUserModalLabel">Thông tin cá nhân
+                                            </h1>
+                                            <p class="text-secondary">Điền đầy đủ thông tin giúp bạn tiếp cận với nhà
+                                                tuyển dụng một cách dễ dàng</p>
+                                        </div>
+                                        <button type="button" class="btn-close align-items-start"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="form_infoUser" (submit)="upadteUser()">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="full-name" class="col-form-label">Họ và tên:</label>
+                                                    <input type="text" class="form-control" id="full-name"
+                                                        formControlName="full_name" />
+                                                </div>
+                                                <div class=" col-md-6">
+                                                    <label for="position" class="col-form-label">Vị trí công
+                                                        việc:</label>
+                                                    <input class="form-control" id="position" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gender" class="col-form-label">Giới tính:</label>
+                                                <div class="raidio-gender">
+                                                    <label role="button" class="mx-md-3">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" />
+                                                        Nam
+                                                    </label>
+                                                    <label role="button" class="mx-md-3">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" />
+                                                        Nữ
+                                                    </label>
+                                                    <label role="button">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" />
+                                                        Khác
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="col-form-label">Email:</label>
+                                                <input class="form-control" id="email" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="col-form-label">số điện thoại:</label>
+                                                <input class="form-control" id="phone" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="col-form-label">Địa chỉ hiện tại:</label>
+                                                <input class="form-control" id="address" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sumary" class="col-form-label">Giới thiệu bản thân:</label>
+                                                <angular-editor [config]="configEditor" formControlName="sumary"
+                                                    name="sumary"></angular-editor>
+                                            </div>
+                                            <div class="mt-md-5 text-center">
+                                                <button class="btn btn-success text-white fs-5">Cập nhật</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-md-4">
+                    @if(edu.length <= 0){ <div class="card-title p-md-4 d-md-flex gap-md-5">
+                        <div>
+                            <h5>Học vấn</h5>
+                            <div class="text-secondary">Thêm thông tin học vấn vào hồ sơ giúp tóm tắt nền tảng và giá
+                                trị mà bạn đã đạt được và có thể hỗ trợ cho công việc.</div>
+                        </div>
+                        <div><img src="/assets/img/users/icon-education.png" alt="Education"></div>
+                        <div (click)="openAddEdu()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+                    </div>
+                    }@else {
+                    <div class="card-body">
+                        <div class="d-md-flex mx-md-3 pb-md-3">
+                            <h5 class="flex-grow-1">Học vấn</h5>
+                            <div (click)="openAddEdu()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+                        </div>
+                        @for (e of edu; track e.id) {
+                        <div class="mb-md-3">
+                            <div class="mx-md-3 p-md-3 d-md-flex rounded-3 card-education">
+                                <div class="icon-education"><img src="/assets/img/users/icon-university.png"
+                                        alt="Icon Education"></div>
+                                <div class="flex-grow-1 mx-md-4">
+                                    <h5>{{e.university_name}}</h5>
+                                    <div class="text-secondary">{{e.major}}</div>
+                                    <div>
+                                        <span class="text-secondary">{{e.start_date}}</span>
+                                        <span class="text-secondary mx-md-3">-</span>
+                                        <span class="text-secondary mx-md-3">{{e.end_date}}</span>
+                                    </div>
+                                    <div class="mt-md-2">{{e.description}}</div>
+                                </div>
+                                <div class="text-md-center" role="button">
+                                    <span class="mx-md-3" (click)="openEditEdu(e.id)"><i class="bi bi-pencil fs-5"></i></span>
+                                    <span (click)="deleteEducation(e.id)"><i class="bi bi-trash fs-5"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-skill></app-my-skill>
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-exp></app-my-exp>
+                </div>
+                <div class="card mt-md-4">
+                    <div class="card-body">
+                        Design các option tiếp theo
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body mx-auto">
+                        <h5 class="card-title  text-center">Thống kê số lượt xem từ NTD</h5>
+                        <p class="card-text text-center"><i class="text-danger">Phần này chỉ hiển thị với riêng bạn</i>
+                        </p>
+                        <div class="card card-follow" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong tuần</p>
+                            </div>
+                        </div>
+
+                        <div class="card card-follow mt-md-4" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong tháng</p>
+                            </div>
+                        </div>
+
+                        <div class="card card-follow mt-md-4" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong năm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divide-y mt-md-5 mb-md-5">
+                    <div>
+                        <div>Mẹo hay cho CV chuyên nghiệp của Developer</div>
+                        <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+                    <div class="border-bottom border-secondary border-opacity-25 mt-md-3 mb-md-3"></div>
+                    <div class="boder-top border-secondary-subtle mt-md-3">
+                        <div>Kết nối nhà tuyển dụng lý tưởng với bài Kiểm tra tính cách công việc của EasyJob</div>
+                        <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Button trigger Add Education -->
+<button type="button" id="btn-add-edu-modal" class="btn btn-primary" data-bs-toggle="modal"
+data-bs-target="#add" [hidden]="true">
+Add Education modal
+</button>
+
+<!-- Modal Add Education-->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="add-education-modal-title">Học vấn</h1>
+                <button type="button" id="btn-add-edu-close" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" (submit)="addEducation()">
+                    <div class="mb-md-3">
+                        <label for="university-name" class="form-label">Trường<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="university-name" />
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="major" class="form-label">Chuyên ngành<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="major" />
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="study-now" class="form-label">Thời gian</label>
+                        <div class="mb-md-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="study-now" (click)="isStudyNowChecked()"/>
+                            <label class="form-check-label" for="study-now">Tôi đang học ở đây</label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="start-date" class="form-label">Ngày bắt đầu</label>
+                                <div class="star-date d-md-flex gap-md-3">
+                                    <select class="form-select" aria-label="Start month select">
+                                        <option selected>Tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="Start year select">
+                                        <option selected>Năm</option>
+                                        @for (y of list_year; track y.id) {
+                                            <option value="{{y.id}}">{{y.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div [hidden]="isHiddenEndDate">
+                                    <label for="end-date" class="form-label">Ngày kết thúc</label>
+                                    <div class="end-date d-md-flex gap-md-3" >
+                                        <select class="form-select" aria-label="End month select">
+                                            <option selected>Tháng</option>
+                                            @for (m of list_month; track m.id) {
+                                                <option value="{{m.id}}">{{m.name}}</option>
+                                            }
+                                        </select>
+                                        <select class="form-select" aria-label="End year select">
+                                            <option selected>Năm</option>
+                                            @for (y of list_year; track y.id) {
+                                                <option value="{{y.id}}">{{y.name}}</option>
+                                            }
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="description" class="form-label">Mô tả chi tiết</label>
+                        <textarea class="form-control" id="description" rows="4" placeholder="Mô tả chi tiết quá trình học tập của bạn để nhà tuyển dụng hiểu rõ hơn"></textarea>
+                      </div>
+                    <div class="mt-md-5 text-center">
+                        <button type="submit" class="btn btn-success fs-5">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Education-->
+<button type="button" id="btn-edit-edu-modal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"
+    [hidden]="true">
+    Launch demo modal
+</button>
+
+<!--Edit Education Modal -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="edit-education-modal-title">Học vấn</h1>
+                <button type="button" id="btn-edit-edu-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form_infoEdu" method="post" (submit)="updateEducation()">
+                    <div class="mb-md-3">
+                        <label for="university-name" class="form-label">Trường<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="university-name" formControlName="university_name"/>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="major" class="form-label">Chuyên ngành<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="major" formControlName="major"/>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="study-now" class="form-label">Thời gian</label>
+                        <div class="mb-md-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="study-now" (click)="isStudyNowChecked()"/>
+                            <label class="form-check-label" for="study-now">Tôi đang học ở đây</label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="start-date" class="form-label">Ngày bắt đầu</label>
+                                <div class="star-date d-md-flex gap-md-3">
+                                    <select class="form-select" aria-label="Start month select" formControlName="start_month">
+                                        <option value="selected">Chọn tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="Start year select" formControlName="start_year">
+                                        <option value="selected">Chọn năm</option>
+                                        @for (m of list_year; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col" [hidden]="isHiddenEndDate">
+                                <label for="end-date" class="form-label">Ngày kết thúc</label>
+                                <div class="end-date d-md-flex gap-md-3" >
+                                    <select class="form-select" aria-label="End month select" formControlName="end_month">
+                                        <option value="selected">Chọn tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="End year select" formControlName="end_year">
+                                        <option value="selected">Chọn năm</option>
+                                        @for (m of list_year; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="description" class="form-label">Mô tả chi tiết</label>
+                        <textarea class="form-control" id="description" formControlName="description" rows="4" placeholder="Mô tả chi tiết quá trình học tập của bạn để nhà tuyển dụng hiểu rõ hơn"></textarea>
+                      </div>
+                    <div class="mt-md-5 text-center">
+                        <button type="submit" class="btn btn-success fs-5">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

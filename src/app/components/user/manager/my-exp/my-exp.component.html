@@ -1,0 +1,87 @@
+
+@if(listMyExp.length <= 0){
+    <div class="card-title p-md-4 d-md-flex gap-md-5">
+        <div>
+            <h5>Kinh nghiệm làm việc</h5>
+            <p class="text-secondary">Kinh nghiệm chi tiết phản ánh kỹ năng, giá trị và đóng góp của bạn trong thời gian bạn làm việc tại các công ty trước đây.</p>
+            
+        </div>
+        <img src="/assets/img/users/icon-work-experiences.png" alt="Experiences" />
+        <div role="button" (click)="openAddProjectModel()"><i class="bi bi-plus-circle fs-3"></i></div>
+    </div>
+}@else {
+    <div class="card-body">
+        <div class="d-md-flex">
+            <h5 class="flex-grow-1">Kinh nghiệm làm việc</h5>
+            <div role="button" (click)="openAddProjectModel()"><i class="bi bi-plus-circle fs-3"></i></div>
+        </div>
+        @for (i of listMyExp; track $index) {
+            <div class="card-exp mt-md-3 p-md-2 d-md-flex gap-md-4">
+                <div class="d-md-flex gap-md-2">
+                    <span>{{i.start_date}}</span>
+                    <span> - </span>
+                    <span>{{i.end_date ? i.end_date : 'Hiện tại'}}</span>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="text-secondary">
+                        <div class="text-danger">{{i.company_name}}</div>
+                        <div>{{i.position}}</div>
+                        @if (i.skill.length > 0) {
+                            <label class="fw-bold mt-md-3">Kỹ năng</label>
+                            <div class="skill mt-md-2">
+                                <div class="d-md-flex gap-md-2">
+                                    @for (s of i.skill; track s.id) {
+                                        <span>{{s.code}}</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div class="mt-md-3 tex-dark">{{i.description}}</div>
+                        @if (i.project.length > 0) {
+                            <label class="fw-bold mt-md-3">Dự án</label>
+                            @for (p of i.project; track $index) {
+                                <div class="project mt-md-3 d-md-flex position-relative">
+                                    <div class="icon-project position-absolute"><i class="bi bi-projector fs-1"></i></div>
+                                    <div class="info-project">
+                                        <div>{{p.name}}</div>
+                                        <div>
+                                            <span>{{p.start_date}}</span>
+                                            <span> - </span>
+                                            <span>{{p.completion_date}}</span>
+                                        </div>
+                                        <div class="text-break mt-md-3">{{p.description}}</div>
+                                        <div class="mt-md-2 fw-bold">Link dự án: {{p.url}}</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div><i class="bi bi-pencil fs-5"></i></div>
+            </div>
+        }
+    </div>
+}
+
+<!-- Add priject trigger modal -->
+<button type="button" class="btn btn-primary" id="btn-model-add_project" data-bs-toggle="modal" data-bs-target="#add-project-modal" [hidden]="true">
+    Add priject modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="add-project-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Dự án</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,4 +1,4 @@
-import { Component, Renderer2, ElementRef} from '@angular/core';
+import { Component, Renderer2} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 
@@ -29,7 +29,8 @@ export class RegisterComponent {
   public listSkillFilter:any[] = [];
   private listSkillChoose: any[] = [];
   private size = 0;
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+  //, private elementRef: ElementRef
+  constructor(private renderer: Renderer2) {
     
   }
   

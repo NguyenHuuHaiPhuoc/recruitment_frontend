@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { MySkillComponent } from './my-skill.component';
 
-describe('PopupComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('MySkillComponent', () => {
+  let component: MySkillComponent;
+  let fixture: ComponentFixture<MySkillComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent]
+      imports: [MySkillComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(MySkillComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

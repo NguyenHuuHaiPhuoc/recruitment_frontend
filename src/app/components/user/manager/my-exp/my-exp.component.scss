@@ -1,0 +1,19 @@
+.card-title img{
+    width: 100px;
+    height: 100px;
+}
+.card-exp{background-color: #FFFFFF;}
+.skill div, .description{flex-wrap: wrap;}
+.skill span{
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.project{
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.project .icon-project{top: -15px;}
+.project .info-project{margin-left: 55px;}

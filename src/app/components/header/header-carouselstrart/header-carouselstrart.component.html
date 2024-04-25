@@ -1,4 +1,4 @@
-<div ngif="images && images.length >0" class="carousel-container">
+<div ngif="images && images.length >0" class="container carousel-container p-0">
   <img *ngFor="let image of images ;let i =index"
   [src]="image.imageSrc" [alt]="image.imageAlt"
   [ngClass]="{'image-active':selectedIndex === i}"

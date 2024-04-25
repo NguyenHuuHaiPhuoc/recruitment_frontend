@@ -6,7 +6,7 @@
             <img src="assets/img/logo/logo.png" alt="Logo" />
           </a>
           <div class="row">
-            <form>
+            <form [formGroup]="form_login" (submit)="login()">
               <div class="mt-5 mb-3">
                 <h3 class="text-primary opacity-75">Chào bạn quay lại EasyJob</h3>
                 <p>Hãy cùng xây dựng một hồ sơ lý tưởng dành cho riêng bạn nào</p>
@@ -15,18 +15,30 @@
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group">
                   <div class="input-group-text"><i class="bi bi-envelope-fill" style="color: #00b14f;"></i></div>
-                  <input type="email" class="form-control" id="email" placeholder="Nhập email"/>
+                  <input type="email" class="form-control" id="email" formControlName="username" placeholder="Nhập email"/>
                 </div>
+                @if (form_login.controls['username'].invalid 
+                    && (form_login.controls['username'].touched || form_login.controls['username'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                        @if (form_login.controls['username'].errors) {<span>Bạn chưa nhập họ và tên.</span>}
+                      </div>
+                }
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Mật khẩu</label>
                 <div class="input-group">
                   <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
-                  <input type="text" class="form-control" id="password" placeholder="Nhập mật khẩu"/>
+                  <input type="text" class="form-control" id="password" formControlName="password" placeholder="Nhập mật khẩu"/>
                 </div>
+                @if (form_login.controls['password'].invalid 
+                    && (form_login.controls['password'].touched || form_login.controls['password'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                        @if (form_login.controls['password'].errors) {<span>Bạn chưa nhập mật khẩu.</span>}
+                      </div>
+                }
               </div>
               <p class="text-end" style="color: #00b14f;">Quên mật khẩu</p>
-              <button class="btn w-100 btn-register text-white">Đăng nhập</button>
+              <button class="btn w-100 btn-register text-white" [disabled]="!form_login.valid" (click)="login()">Đăng nhập</button>
             </form>
           </div>
           <p class="text-secondary mt-3 text-center">Hoặc đăng nhập bằng</p>

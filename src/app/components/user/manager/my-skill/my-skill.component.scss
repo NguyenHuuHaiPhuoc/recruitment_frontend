@@ -1,0 +1,25 @@
+// Css select option skill
+.view-skills{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .skill-item {
+    flex: 0 0 auto;
+    margin-right: 2px; 
+    margin-bottom: 5px; 
+  }
+  
+  .search-skill{
+    border: none;
+  }
+  .search-skill:focus{
+    outline: none;
+    border: none;
+  }
+  .list-skill{
+    background-color: #FFFFFF;
+    flex-wrap: wrap; /*xuong hang khi tran phan cha*/
+  }
+  .skil-item{background-color: #f1f2f695;}
+  .edit-list-skill{margin-left: 20px;}
