@@ -3,11 +3,15 @@ import {  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, 
 import { Company } from './Company';
 import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { TestuploadComponent } from '../../../testupload/testupload.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,CommonModule],
+  imports: [FormsModule,
+            ReactiveFormsModule,
+            CommonModule,
+            TestuploadComponent
+            ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -17,6 +21,7 @@ export class RegisterComponent {
   showPass:boolean=false;
   showPassConfirm:boolean=false;
   formValid:boolean= false;
+  imageFile: any ;
   // List skill (danh sách này sẽ được thay khi gọi api)
   public skills = [
     {id:1, code:'Java'},
@@ -94,6 +99,7 @@ export class RegisterComponent {
    
   ngOnInit() {
     this.openPopup();
+  
   }
 
   openPopup() {
@@ -240,13 +246,15 @@ export class RegisterComponent {
     this.userForm.get('website')?.value,
     this.userForm.get('address')?.value,
     this.userForm.get('date')?.value,
-    this.userForm.get('logo')?.value,
+    this.imageFile,
     this.userForm.get('phone')?.value,
     this.listSkillChoose,
     this.userForm.get('sumary')?.value,
     );
     console.log(obj);
+    // sau nay se gui doi tuong nay qua backend lưu xuống database
     this.router.navigateByUrl('/dang-nhap');
+    
    }else{
     this.formValid = true;
    }
@@ -258,5 +266,9 @@ export class RegisterComponent {
   hidePassConfirm(showPassConfirm:boolean){
     this.showPassConfirm=showPassConfirm;
   }
-  
+  getImage(event:any){
+   this.imageFile = event.target.files[0];
+    console.log(this.imageFile);
+  }
+   
 }

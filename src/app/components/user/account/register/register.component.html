@@ -110,9 +110,10 @@
 </div>
 
 } @else {
+
 <div class="container w-75">
   <a href="easyjob" class="img-logo">
-    <img src="assets/img/logo/logo.png" alt="Logo" />
+    <img src="assets/img/logo/logo.png" alt="Logo"/>
   </a>
   <div class="row">
     <h3 style="color: #00b14f;">Đăng ký tài khoản nhà tuyển dụng</h3>
@@ -121,7 +122,7 @@
   <div class="row">
     <div class="col">
       <div class="row mt-3">
-        <form [formGroup]="userForm">
+        <form [formGroup]="userForm" enctype="multipart/form-data">
 
           <h4>Thông tin tài khoản</h4>
           <div class="mb-3">
@@ -303,7 +304,7 @@
             </div>
             <div class="col-md-6">
               <label for="logo" class="form-label">Logo công ty</label>
-              <input type="file" class="form-control" id="logo" name="logo" formControlName="logo">
+              <input type="file" class="form-control" id="logo" name="logo" formControlName="logo" (change)="getImage($event)">
                   <div *ngIf="userForm.controls['logo'].invalid 
                             &&
                              (userForm.controls['logo'].dirty 
@@ -383,6 +384,7 @@
       </div> -->
   </div>
 </div>
+
 }
 <!--  -->
 <!-- code notification -->

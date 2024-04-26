@@ -9,7 +9,7 @@ export class  Company{
     website : string;
     address : string;
     date : Date;
-    logo : string;
+    logo : any;
     phone : string;
     skill : any[];
     summary : string;
@@ -26,7 +26,7 @@ export class  Company{
     website:string,
     address:string,
     date:Date,
-    logo:string,
+    logo:any,
     phone:string,
     skill:any[],
     summary:string

@@ -1,64 +1,61 @@
 <!-- Category Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Danh mục ngành nghề</h1>
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Danh mục</h1>
         <div class="row g-4">
+          <p style="font-size: 20px; font-weight: bold; color: rgb(47, 47, 231);">Top Ngôn Ngữ Thịnh Hành</p>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                 <a class="cat-item rounded p-4" href="">
-                    <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
-                    <h6 class="mb-3">Marketing</h6>
+                   <img class="img_js" src="./assets/img/logo/programming_language/python.svg.png" alt="">
+                    <h6 class="mb-3 mt-3">Python</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                 <a class="cat-item rounded p-4" href="">
-                    <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                    <h6 class="mb-3">Tester</h6>
+                  <img class="img_js" src="./assets/img/logo/programming_language/java.png" alt="">
+                    <h6 class="mb-3 mt-3">Java</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                 <a class="cat-item rounded p-4" href="">
-                    <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-                    <h6 class="mb-3">Tuyển Dụng</h6>
+                   <img class="img_js" src="./assets/img/logo/programming_language/js.png" alt="">
+
+                    <h6 class="mb-3 mt-3">JavaScript</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                 <a class="cat-item rounded p-4" href="">
-                    <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
-                    <h6 class="mb-3">Quản Lý Dự Án</h6>
+                   <img class="img_js" src="./assets/img/logo/programming_language/c.jpg" alt="">
+
+                    <h6 class="mb-3 mt-3">C/C++</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a class="cat-item rounded p-4" href="">
-                    <i class="fas fa-3x fa-laptop-code text-primary mb-4"></i>
-                    <h6 class="mb-3">Nhà Phát Triển WEB</h6>
-                    <p class="mb-0">123 Công Việc</p>
-                </a>
             </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <a class="cat-item rounded p-4" href="">
-                    <i class="fas fa-3x fa-gamepad text-primary mb-4"></i>
-                    <h6 class="mb-3">Nhà Phát Triển Game</h6>
-                    <p class="mb-0">123 Công Việc</p>
+             <div class="row g-4 mt-3 listTopCompany">
+            <p style="font-size: 20px; font-weight: bold; color:  rgb(47, 47, 231);">Top Công Ty Hàng Đầu</p>
+            <!-- auto slide start -->
+
+ <ngx-slick-carousel [config]="config" class="slickSwiper ">
+            <div  *ngFor="let company of companys" class="companyBox_container" data-wow-delay="0.1s" >
+                <a class="rounded  p-4" href="" ngxSlickItem>
+                    <div class="companyBox">
+                      <div class="companyLogo">
+                        <img src="{{company.logo}}" alt="">
+                      </div>
+                      
+                      <div class="companyBox_name">
+                        <div class="companyBlock__name is-uppercase mb-3">{{company.name}}</div>
+                        <span class="companyBlock__tag">Việc mới</span>
+                      </div>
+                    </div>
                 </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <a class="cat-item rounded p-4" href="">
-                    <i class="fas fa-3x fa-cloud text-primary mb-4"></i>
-                    <h6 class="mb-3">Cloud</h6>
-                    <p class="mb-0">123 Công Việc</p>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <a class="cat-item rounded p-4" href="">
-                    <i class="fas fa-3x fa-user-secret text-primary mb-4"></i>
-                    <h6 class="mb-3">Bảo mật & Bảo Trì</h6>
-                    <p class="mb-0">123 Công Việc</p>
-                </a>
-            </div>
+            </div> 
+  </ngx-slick-carousel>
+
         </div>
     </div>
 </div>
@@ -104,22 +101,22 @@
 <!-- Jobs Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Danh sách việc làm</h1>
         <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
             <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
-                        <h6 class="mt-n1 mb-0">Featured</h6>
+                        <h6 class="mt-n1 mb-0">Tất cả</h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
-                        <h6 class="mt-n1 mb-0">Full Time</h6>
+                        <h6 class="mt-n1 mb-0">Toàn thời gian </h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
-                        <h6 class="mt-n1 mb-0">Part Time</h6>
+                        <h6 class="mt-n1 mb-0">Bán thời gian</h6>
                     </a>
                 </li>
             </ul>
