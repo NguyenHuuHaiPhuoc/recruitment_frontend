@@ -1,5 +1,5 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, Renderer2 } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 declare var $:any;
@@ -24,8 +24,7 @@ export class MySkillComponent{
     {id:9, code:'MS SQL Server'}
   ];
   public searchs:any = '';
-  public option:any = '';
-  public isHiddenSelect:boolean = true;
+  public isHiddenSelect:boolean = true; /** xu ly lai voi bien nay (khi focus voi input) */
   public disabledSubmitAddSkill:boolean = true;
   public listSkillFilter:any = [];
   public listMySkill:any = [];/** Danh sach skill cua nguoi dung lay tu db */
@@ -33,7 +32,6 @@ export class MySkillComponent{
   private size:any = 0;
 
   constructor(
-    private fb: FormBuilder,
     private renderer: Renderer2
   ) {}
 
@@ -82,34 +80,36 @@ export class MySkillComponent{
     $('#btn-add-skill').trigger('click');
   }
 
-  choseOptionSkill(value:any){
-    // Disabled button khi chua chon option nao
-    if (this.listSkillChoose.length == 0) 
-      this.disabledSubmitAddSkill = !this.disabledSubmitAddSkill;
-    
+  choseOptionSkill(id:number,value:any){
     // Kiểm tra khi chọn 1 option 2 lần
-    const isValueInlistMySkill = this.listMySkill.includes(this.option);
-    const isValueInlistSkillChoose = this.listSkillChoose.includes(this.option);
-    if (!isValueInlistSkillChoose && !isValueInlistMySkill) {
+    const isValueInlistMySkill = this.listMySkill.filter((item:any) => item.id === id);
+    const isValueInlistSkillChoose = this.listSkillChoose.filter((item:any) => item.id === id);
+    
+    if (isValueInlistSkillChoose.length <=0 && isValueInlistMySkill.length <= 0) {
       this.listSkillChoose.push({
-        id: this.option,
+        id: id,
         code: value
       });
-      this.addSkillElement(value);
+      this.addSkillElement(id,value);
       this.showSelectSkill();
       if($('.search-skill').val() != '') $('.search-skill').val('');
     }
+    // Disabled button khi chua chon option nao
+    if (this.listSkillChoose.length <= 0) 
+      this.disabledSubmitAddSkill = true;
+    else
+      this.disabledSubmitAddSkill = false;
   }
 
   // Add option được chọn vào danh sách và hiển thị ra giao diện
-  addSkillElement(value:any){
+  addSkillElement(id:any,value:any){
     const span_view_skills = document.getElementById('view-skills');
     
     // create and style <div>
     if(span_view_skills){
       const skill_item = document.createElement('div');
       skill_item.className = 'skill_item';
-      skill_item.setAttribute('id',this.option);
+      skill_item.setAttribute('id',id);
       skill_item.style.padding = '3px';
       skill_item.style.marginLeft = '5px';
       skill_item.style.border = '1px solid red';
@@ -141,19 +141,19 @@ export class MySkillComponent{
 
   // Xóa selecttion
   removeSkillElement(event: MouseEvent){
-    
     const selectedElement = event.target as HTMLElement;
     const parentElement = selectedElement.parentNode as HTMLElement;
-    const parentId = parentElement.id;
+    const parentId = parseInt(parentElement.id);
     
     this.listSkillChoose = this.listSkillChoose.filter((item) => item.id !== parentId); // Xóa phần tử skill trong mảng
     this.renderer.removeChild(parentElement.parentNode, parentElement); // Xóa phần tử option
-    
     // Kiem tra listSkillChose rong thi disabled nut cap nhat
-    if (this.listSkillChoose.length == 0) 
-      this.disabledSubmitAddSkill = !this.disabledSubmitAddSkill;
+    if (this.listSkillChoose.length <= 0) 
+      this.disabledSubmitAddSkill = true;
+    else
+      this.disabledSubmitAddSkill = false;
   }
-
+  
   // Filter input search skills
   searchSkill(event: Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
@@ -161,7 +161,11 @@ export class MySkillComponent{
     this.listSkillFilter = this.skills.filter(item => {
       return JSON.stringify(item.code).toLowerCase().includes(searchTerm);
     });
-    selectElement.size = this.listSkillFilter.length;
+    
+    if (this.listSkillFilter.length == 1)
+      selectElement.size = (this.listSkillFilter.length + 1);
+    else
+      selectElement.size = this.listSkillFilter.length;
   }
 
   // Create skill in db

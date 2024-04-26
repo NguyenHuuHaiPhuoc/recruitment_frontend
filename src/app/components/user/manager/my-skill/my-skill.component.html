@@ -52,13 +52,13 @@
             <label for="skill" class="form-label">Chọn kỹ năng của bạn</label>
             <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()" >
               <div>
-                <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)" />
+                <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)"/>
               </div>
             </span>
-            <select class="form-select" id="skills" size="" [(ngModel)]="option" name="option" #setSize
+            <select class="form-select" id="skills" size="" name="option" #setSize
               [hidden]="isHiddenSelect">
               @for (item of listSkillFilter; track item.id) {
-              <option value="{{item.id}}" (click)="choseOptionSkill(item.code)">{{item.code}}</option>
+              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
               }
             </select>
             <div class="btn-save mt-md-3 text-center">
@@ -95,10 +95,10 @@
                 <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)" />
               </div>
             </span>
-            <select class="form-select" id="skills" size="" [(ngModel)]="option" name="option" #setSize
+            <select class="form-select" id="skills" size="" name="option" #setSize
               [hidden]="isHiddenSelect">
               @for (item of listSkillFilter; track item.id) {
-              <option value="{{item.id}}" (click)="choseOptionSkill(item.code)">{{item.code}}</option>
+              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
               }
             </select>
             <div class="btn-save mt-md-3 text-center">
