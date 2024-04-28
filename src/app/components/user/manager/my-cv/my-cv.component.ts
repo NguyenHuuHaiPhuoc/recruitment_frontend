@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MySkillComponent } from '../my-skill/my-skill.component';
 import Swal from 'sweetalert2';
 import { MyExpComponent } from '../my-exp/my-exp.component';
+import { MyProjectComponent } from '../my-project/my-project.component';
 
 
 declare var $: any;
@@ -15,6 +16,7 @@ declare var $: any;
   imports: [
     MySkillComponent,
     MyExpComponent,
+    MyProjectComponent,
     HttpClientModule,
     AngularEditorModule,
     ReactiveFormsModule
