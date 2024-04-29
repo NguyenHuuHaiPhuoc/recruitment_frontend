@@ -1,0 +1,44 @@
+// Process
+.Thing-container {
+    width: 70%;
+    margin-left: 15rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Thing-dash {
+    position: absolute;
+    border-bottom: 3px dashed #d2d2d2;
+    width: 100%;
+    height: 16px;
+    z-index: 1;
+}
+
+.Thing {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.Thing-step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: #aaa;
+    z-index: 1;
+    
+    color: #fff;
+
+    border-radius: 50%;
+}
+#step-1{background: #05ad5e;}
+
+// .cv-content{
+//     height: 200px;
+//     overflow-y: scroll;
+// }

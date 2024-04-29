@@ -49,7 +49,6 @@ export class AppComponent {
   constructor(private location: Location, private authService: AuthService){}
 
   ngOnInit() {
-    // console.log(this.getURL());
     
   }
 

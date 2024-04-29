@@ -4,10 +4,13 @@
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
-} @else if (getURL() && (getURL() === "/u/cv-managerment")) {
+} @else if (getURL() && (getURL() === "/u/cv")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
+} @else if (getURL() && (getURL() === "/u/cv/edit")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
 }
 @else {
     <app-header-menustart></app-header-menustart>

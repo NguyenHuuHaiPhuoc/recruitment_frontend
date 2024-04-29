@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+import { Route, Router } from "@angular/router";
 
+declare var $:any;
 @Component({
     selector: 'app-manager-cv',
     standalone: true,
@@ -8,4 +10,13 @@ import { Component } from "@angular/core";
     styleUrl: './manager-cv.component.scss'
 })
 
-export class ManagerCvComponent {}
+export class ManagerCvComponent {
+    constructor (
+        private router: Router
+    ) {}
+
+    openAddCvModal () {$('#btn-add-cv_modal').trigger('click');}
+    openEditCV () {
+        this.router.navigate(['/u/cv/edit']);
+    }
+}

@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/user/account/login/login.component';
 import { SettingProfileComponent } from './components/user/manager/setting-profile/setting-profile.component';
 import { ManagerComponent } from './components/user/manager/manager.component';
+import { EditCvComponent } from './components/user/manager/edit-cv/edit-cv.component';
 
 export const routes: Routes = [
   
@@ -37,9 +38,14 @@ export const routes: Routes = [
     component: SettingProfileComponent,
   },
   {
-    path: 'u/cv-managerment',
+    path: 'u/cv',
     title: 'EasyJob - Việc làm hàng đầu',
     component: ManagerComponent,
+  },
+  {
+    path: 'u/cv/edit',
+    title: 'EasyJob - Việc làm hàng đầu',
+    component: EditCvComponent,
   },
   {
     path: 'dang-ky',

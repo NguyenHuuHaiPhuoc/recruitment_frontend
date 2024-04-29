@@ -6,7 +6,7 @@
         </ul>
         <div class="action-cv d-md-flex gap-md-3">
             <button class="btn btn-dark opacity-75 fs-5 fw-bold">Tải CV lên <i class="bi bi-cloud-upload ms-md-3"></i></button>
-            <button class="btn btn-danger fs-5 fw-bold">Tạo CV mới &ensp; <i class="bi bi-file-earmark-person ms-md-3"></i></button>
+            <button class="btn btn-danger fs-5 fw-bold" (click)="openAddCvModal()">Tạo CV mới &ensp; <i class="bi bi-file-earmark-person ms-md-3"></i></button>
         </div>
     </div>
     <div class="list-cv mt-md-3">
@@ -58,7 +58,7 @@
                 <td class="p-md-4">
                     <div class="f-md-flex gap-md-2" style="display: flex;">
                         <div class="fs-3 fw-bold" role="button"><i class="bi bi-eye"></i></div>
-                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-pencil"></i></div>
+                        <div class="fs-3 fw-bold" role="button" (click)="openEditCV()"><i class="bi bi-pencil"></i></div>
                         <div class="fs-3 fw-bold" role="button"><i class="bi bi-cloud-download"></i></div>
                         <div class="fs-3 fw-bold" role="button"><i class="bi bi-trash"></i></div>
                     </div>
@@ -68,7 +68,7 @@
           </table>
     </div>
     <div class="d-md-flex justify-content-between">
-        <a href="#" class="text-danger fw-bold">Hướng dẫn</a>
+        <a href="#" target="_blank" class="text-danger fw-bold">Hướng dẫn</a>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -78,5 +78,42 @@
               <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
           </nav>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="btn-add-cv_modal" data-bs-toggle="modal" data-bs-target="#add-cv" [hidden]="true">
+    Launch demo modal
+  </button>
+  
+<!-- Modal -->
+<div class="modal fade" id="add-cv" tabindex="-1" aria-labelledby="addCvModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="title text-center mt-md-4">
+                    <h3 class="text-danger">Tạo CV chuẩn dành riêng cho lập trình viên</h3>
+                </div>
+                <div class="form-add-cv p-md-5">
+                    <form action="">
+                        <div class="mt-md-3">
+                            <label class="form-label">Tên CV *</label>
+                            <input type="text" class="form-control" placeholder="VD: Nguyễn Văn A - Developer"/>
+                        </div>
+                        <div class="mt-md-3">
+                            <label class="form-label">Ngôn ngữ *</label>
+                            <select name="" id="" class="form-select">
+                                <option [selected]="true">Tiếng Việt</option>
+                                <option>Tiếng Anh</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="add-cv-action position-relative">
+                    <button type="button" class="btn btn-outline-secondary position-absolute fs-5" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-outline-danger position-absolute fs-5">Tạo CV</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
