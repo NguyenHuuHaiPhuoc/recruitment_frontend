@@ -15,7 +15,7 @@ import { AuthService } from './service/auth/auth-service.service';
     HeaderMenustartComponent,
     HeaderCarouselstrartComponent,
     HeaderSearchComponent,
-    FooterComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
