@@ -3,9 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeaderMenustartComponent } from './components/header/header-menustart/header-menustart.component';
 import { HeaderCarouselstrartComponent } from './components/header/header-carouselstrart/header-carouselstrart.component';
+import { AuthService } from './service/auth/auth-service.service';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AuthService } from './service/auth/auth-service.service';
 
 @Component({
   selector: 'app-root',
