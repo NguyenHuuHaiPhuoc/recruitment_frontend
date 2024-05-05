@@ -1,66 +1,363 @@
-<div class="border-bottom">
-    <div class="container">
-        <div class="row py-md-4">
-            <div class="col-md-4 fw-bold" role="button" (click)="backToCV()" style="font-size: 19px;">
-                <i class="bi bi-arrow-left me-md-3"></i>
-                Quay về quản lý CV
-            </div>
-            <div class="col-md-8">
-                <div class="container">
-                    <div class="Thing-container">
-                        <div class="Thing-dash"></div>
-                        <div class="Thing">
-                            <div class="Thing-step" id="step-1">1</div>
-                        </div>
-                
-                        <div class="Thing">
-                            <div class="Thing-step" id="step-2">2</div>
-                        </div>
-                
-                        <div class="Thing">
-                            <div class="Thing-step" id="step-3">3</div>
-                        </div>
-                
-                        <div class="Thing">
-                            <div class="Thing-step" id="step-4">4</div>
+<div >
+    <div class="card rounded-0">
+        <div class="border-bottom">
+            <div class="container">
+                <div class="row py-md-4">
+                    <div class="col-md-4 fw-bold" style="font-size: 19px;">
+                        <span role="button" (click)="backToCV()">
+                            <i class="bi bi-arrow-left me-md-3"></i>
+                            Quay về quản lý CV
+                        </span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="container">
+                            <div class="Thing-container">
+                                <div class="Thing-dash-1"></div>
+                                <div class="Thing">
+                                    <div class="Thing-step" id="step-1">1</div>
+                                </div>
+                                <div class="Thing-dash-2"></div>
+                                <div class="Thing">
+                                    <div class="Thing-step" id="step-2">2</div>
+                                </div>
+                                <div class="Thing-dash-3"></div>
+                                <div class="Thing">
+                                    <div class="Thing-step" id="step-3">3</div>
+                                </div>
+                                <div class="Thing">
+                                    <div class="Thing-step" id="step-4">4</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="card-body" style="background: #F2F2F2;">
+            <div class="container p-0">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5 class="mb-md-4">Thông tin cơ bản</h5>
+                        <div id="list-info" class="list-group">
+                            <a class="list-group-item list-group-item-action" href="#list-item-1">
+                                <i class="bi bi-person-fill me-md-3"></i>
+                                Thông tin cá nhân
+                            </a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-2">
+                                <i class="bi bi-pencil-square me-md-3"></i>
+                                Giới thiệu bản thân
+                            </a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-3">
+                                <i class="bi bi-bookmark-star me-md-3"></i>
+                                Học vấn
+                            </a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-4">
+                                <i class="bi bi-credit-card-2-front me-md-3"></i>
+                                Kỹ năng lập trình
+                            </a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-5">
+                                <i class="bi bi-person-workspace me-md-3"></i>
+                                Kinh nghiệm làm việc
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div data-bs-spy="scroll" data-bs-target="#list-info" data-bs-smooth-scroll="true"
+                            class="scrollspy-example p-md-4 cv-content" id="scrollspy" tabindex="0">
+                            <h4 id="list-item-1">Thông tin cá nhân</h4>
+                            <div class="form-info p-md-3">
+                                <form action="" class="form-info-user">
+                                    <div class="row">
+                                        <div class="col-md-8 info-user">
+                                            <div class="mt-md-3 row">
+                                                <label class="form-label col-md-4 fw-bold">Họ và tên *</label>
+                                                <input type="text" class="form-control col-md-8" placeholder="Nhập họ và tên"/>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Vị trí ứng tuyển *</label>
+                                                <input type="text" class="form-control col-md-8" placeholder="Nhập vị trí ứng tuyển"/>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Email *</label>
+                                                <input type="email" class="form-control col-md-8" placeholder="Nhập email"/>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Số điện thoại *</label>
+                                                <input type="number" class="form-control col-md-8" placeholder="Nhập số điện thoại"/>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Giới tính *</label>
+                                                <div class="col-md-8 d-md-flex gap-md-3">
+                                                    <div class="form-check d-md-flex gap-md-2">
+                                                        <input type="radio" name="gender" id="male">
+                                                        <label class="form-check-label">
+                                                          Nam
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check d-md-flex gap-md-2">
+                                                        <input type="radio" name="gender" id="female">
+                                                        <label class="form-check-label">
+                                                            Nữ
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Ngày sinh *</label>
+                                                <input type="date" class="form-control col-md-8" />
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Thành phố *</label>
+                                                <input type="text" class="form-control col-md-8" />
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Địa chỉ cụ thể *</label>
+                                                <input type="text" class="form-control col-md-8" placeholder="Đường, phường, quận"/>
+                                            </div>
+                                            <div class="mt-md-5 row">
+                                                <label class="form-label col-md-4 fw-bold">Github *</label>
+                                                <input type="text" class="form-control col-md-8" placeholder="http://github.com/username"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            @if (image_user.length > 0) {
+                                                <div class="image-user p-md-2 border">
+                                                    <img src="/assets/img/users/icon-project.png" class="border" alt="Avatar">
+                                                </div>
+                                            }
+                                            <div class="image-file p-md-2 border">
+                                                <input type="file" name="" id="image-user" hidden/>
+                                                <div class="d-md-flex flex-column gap-md-3 align-items-center justify-content-center border" role="button"
+                                                    (click)="openChooseImgUser()">
+                                                    <span>Thêm ảnh</span>
+                                                    <span><i class="bi bi-plus-circle"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <h4 id="list-item-2" class="mt-md-5">Giới thiệu bản thân</h4>
+                            <div class="form-sumary mt-md-3 p-md-3">
+                                <form action="">
+                                    <div class="mt-md-3 d-md-flex justify-content-between">
+                                        <label class="form-label fw-bold mb-md-3">Mô tả *</label>
+                                        <label class="text-primary fst-italic text-decoration-underline" 
+                                            (click)="openSumaryModal()" role="button">Click để xem mẫu giới thiệu</label>
+                                    </div>
+                                    <div>
+                                        <angular-editor [config]="configEditor" ></angular-editor>
+                                    </div>
+                                </form>
+                            </div>
+                            <h4 id="list-item-3" class="mt-md-5">Học vấn</h4>
+                            <div class="form-education mt-md-3 p-md-3">
+                                <form class="info-education">
+                                    <div class="mt-md-3 row">
+                                        <label class="col-md-4 form-label fw-bold">Tên cơ sở đào tạo *</label>
+                                        <input type="text" class="col-md-8 form-control university" placeholder="Nhập tên trường">
+                                    </div>
+                                    <div class="mt-md-5 row">
+                                        <label class="col-md-4 form-label fw-bold">Ngành đào tạo *</label>
+                                        <input type="text" class="col-md-8 form-control major" placeholder="Nhập tên chuyên ngành">
+                                    </div>
+                                    <div class="mt-md-5 row">
+                                        <label class="col-md-4 form-label fw-bold">Thời gian học tập *</label>
+                                        <div class="col-md-8">
+                                            <div class="d-md-flex gap-md-3">
+                                                <input type="checkbox" class="form-check-input" id="study-now" (click)="studyNow()"/>
+                                                <div class="form-check-label">Đang học tại đây</div>
+                                            </div>
+                                            <div class="d-md-flex gap-md-3 mt-md-2">
+                                                <input type="date" name="" id="start-date" class="form-control me-md-3"/>
+                                                <input type="date" name="" id="end-date" class="form-control" [disabled]="isStudyNow"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-md-5 row">
+                                        <label class="form-label col-md-4 fw-bold">Thông tin khác *</label>
+                                        <angular-editor [config]="configEditor" class="info-other"></angular-editor>
+                                    </div>
+                                </form>
+                            </div>
+                            <h4 id="list-item-4" class="mt-md-5">Kỹ năng lập trình</h4>
+                            <div class="form-skill mt-md-3 p-md-5">
+                                <form class="info-skill">
+                                    <div class="mt-md-1">
+                                        <label class="form-label fw-bold">Kỹ năng lập trình *</label>
+                                        <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()">
+                                            <div class="">
+                                                <input type="search" class="search-skill border-0" id="search-skill" name="searchs" (input)="searchSkill($event)"/>
+                                            </div>
+                                        </span>
+                                        <select class="form-select" id="skills" size="" name="skill"  #setSize
+                                            [hidden]="hiddenSelect">
+                                            @for (item of listSkillFilter; track item.id) {
+                                                <option value="{{item.code}}" (click)="selectOption(item.id, item.code)">{{item.code}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="mt-md-5 border-top pt-md-5">
+                                        <label class="form-label fw-bold">Kỹ năng khác *</label>
+                                        <input type="text" class="form-control" placeholder="Nhập kỹ năng khác cách nhau bởi dấu phẩy">
+                                    </div>
+                                </form>
+                            </div>
+                            <h4 id="list-item-5" class="mt-md-5">Kinh nghiệm làm việc</h4>
+                            <div class="form-exp mt-md-3 p-md-3">
+                                <div class="type-exp d-md-flex gap-md-3 justify-content-center">
+                                    <button type="button" class="no-exp btn-exp-active" (click)="noActive()">Chưa có kinh nghiệm</button>
+                                    <button type="button" class="have-exp" (click)="yesActive()">Đã có kinh nghiệm</button>
+                                </div>
+                                <div class="form-no-exp">
+                                    @if (listProject.length <= 0) {
+                                        <div class="mx-md-5 mt-md-4 p-md-3 fst-italic text-center border border-secondary" id="note">
+                                            <div>Với các bạn chưa có kinh nghiệm có thể</div>
+                                            <div><b class="text-decoration-underline" role="button" (click)="openAddProject()">Thêm</b> các dự án tại trường hoặc dự án cá nhân</div>
+                                        </div>
+                                    } @else {
+                                        <div class="card mt-md-3 mx-md-4">
+                                            <div class="card-body">
+                                                @for (i of listProject; track i.id) {
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-center"><i class="bi bi-projector"></i></div>
+                                                        <div class="col-md-8">
+                                                            <div>
+                                                                <span class="fw-bold fs-3">{{i.name}}</span>
+                                                                <span class="text-danger fst-italic ms-md-5">{{i.completion_time}}</span>
+                                                            </div>
+                                                            <div class="text-danger fst-italic mt-md-3">{{i.use_tech}}</div>
+                                                            <div class="mt-md-3">{{i.description}}</div>
+                                                        </div>
+                                                        <div class="col-md-2 text-end"><i class="bi bi-pencil"></i></div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="form-have-exp mt-md-3" hidden>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="">
+                                                <div class="mt-md-3 row">
+                                                    <label class="form-label fw-bold col-md-3">Tên công ty</label>
+                                                    <input type="text" class="form-control col-md-9 w-75" placeholder="Nhập tên dự án" name="pro_name" id="pro-name"/>
+                                                </div>
+                                                <div class="mt-md-5 row">
+                                                    <label class="col-md-3 form-label fw-bold">Vị trí công việc</label>
+                                                    <input type="text" class="form-control col-md-9 w-75" placeholder="Nhập vị trí công việc"/>
+                                                </div>
+                                                <div class="mt-md-5 row">
+                                                    <label class="col-md-4 form-label fw-bold">Thời gian làm việc *</label>
+                                                    <div class="col-md-8">
+                                                        <div class="d-md-flex gap-md-3">
+                                                            <input type="checkbox" class="form-check-input" id="working" (click)="working()"/>
+                                                            <div class="form-check-label">Đang làm việc tại đây</div>
+                                                        </div>
+                                                        <div class="d-md-flex gap-md-3 mt-md-2">
+                                                            <input type="date" name="" id="start-date" class="form-control me-md-3"/>
+                                                            <input type="date" name="" id="end-date" class="form-control" [disabled]="isWorking"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-md-5 row">
+                                                    <label class="col-md-2 form-label fw-bold">Mô tả</label>
+                                                    <angular-editor [config]="configEditor" ></angular-editor>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button class="btn fs-4 text-uppercase fw-bold border-dark">xem trước</button>
+            <button class="btn btn-danger fs-4 text-uppercase fw-bold px-5 ms-md-3" (click)="saveCV()">lưu cv</button>
+        </div>
     </div>
 </div>
-<div>
-    <div class="container p-0">
-        <div class="row">
-            <div class="col-md-4">
-                <div id="list-example" class="list-group">
-                    <a class="list-group-item" href="#list-item-1">Item 1</a>
-                    <a class="list-group-item " href="#list-item-2">Item 2</a>
-                    <a class="list-group-item " href="#list-item-3">Item 3</a>
-                    <a class="list-group-item " href="#list-item-4">Item 4</a>
-                  </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="btn-sumary-modal" data-bs-toggle="modal" data-bs-target="#sumaryModal" [hidden]="true">
+    Click để xem thông tin mẫu
+  </button>
+  
+<!-- Modal -->
+<div class="modal fade" id="sumaryModal" tabindex="-1" aria-labelledby="sumaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title fs-5" id="sumaryModalLabel">Mẫu thông tin mục giới thiệu</h4>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li>Tôi có 7 năm kinh nghiệm làm việc trong lĩnh vực phát triển phần mềm.</li>
+                <li>Tôi có kinh nghiệm và vững vàng về Phần mềm và Ứng dụng web sử dụng Java.</li>
+                <li>Tôi có thể áp dụng các khung thử nghiệm tự động hóa Selenium và Appium bằng Java.</li>
+                <li>Tôi có kinh nghiệm tích hợp các thử nghiệm tự động hóa và triển khai ứng dụng vào Tích hợp liên tục, Jenkins.</li>
+                <li>Xây dựng dự án và quản lý nhóm phát triển.</li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger add project modal -->
+<button type="button" class="btn btn-primary" id="add-project-modal" data-bs-toggle="modal" data-bs-target="#addProjectModal" [hidden]="true">
+    Click để add project
+  </button>
+  
+<!-- Modal -->
+<div class="modal fade" id="addProjectModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title fs-5" id="projectModalLabel">Dự án</h4>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+        <div class="modal-body">
+            <div class="list-project">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="">
+                            <div class="mt-md-3 row">
+                                <div class="col-md-3"><label class="form-label fw-bold">Tên dự án</label></div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Nhập tên dự án" name="pro_name" id="pro-name"/>
+                                </div>
+                            </div>
+                            <div class="mt-md-3 row">
+                                <div class="col-md-3"><label class="form-label fw-bold">Công nghệ sử dụng</label></div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Nhập công nghệ sử dụng"/>
+                                </div>
+                            </div>
+                            <div class="mt-md-5 row">
+                                <div class="col-md-3"><label class="form-label fw-bold">Thời gian</label></div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Bao nhiêu tháng" name="completion_time" id="cpmpletion-time"/>
+                                </div>
+                            </div>
+                            <div class="mt-md-5">
+                                <label class="form-label fw-bold">Mô tả</label>
+                                <angular-editor [config]="configEditor" ></angular-editor>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8">
-                <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example cv-content" tabindex="0">
-                    <h4 id="list-item-1">Item 1</h4>
-                    <p>
-                        This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
-                    </p>
-                    <h4 id="list-item-2">Item 2</h4>
-                    <p>
-                        This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
-                    </p>
-                    <h4 id="list-item-3">Item 3</h4>
-                    <p>
-                        This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
-                    </p>
-                    <h4 id="list-item-4">Item 4</h4>
-                    <p>
-                        This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
-                    </p>
-                  </div>
-            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success fs-3 fw-bold">Lưu</button>
+        </div>
         </div>
     </div>
 </div>

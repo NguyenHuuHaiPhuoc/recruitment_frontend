@@ -16,7 +16,5 @@ export class ManagerCvComponent {
     ) {}
 
     openAddCvModal () {$('#btn-add-cv_modal').trigger('click');}
-    openEditCV () {
-        this.router.navigate(['/u/cv/edit']);
-    }
+    
 }

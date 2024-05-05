@@ -1,0 +1,74 @@
+<div class="row mt-md-5">
+  <h5 class="text-danger">Việc đã ứng tuyển</h5>
+  <div class="mt-md-3">
+    <table class="table">
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th scope="col" class="p-md-4">ID</th>
+          <th scope="col" class="p-md-4">Tên vị trí</th>
+          <th scope="col" class="p-md-4">Tên công ty</th>
+          <th scope="col" class="p-md-4">Ngày ứng tuyển</th>
+          <th scope="col" class="p-md-4">Trạng thái gần nhất</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (i of appliedJob; track i.id) {
+        <tr>
+          <th class="p-md-4" scope="row">{{i.id}}</th>
+          <td class="w-25 p-md-4">
+            <a href="#" class="text-danger fw-bold text-decoration-none">{{i.position}}</a>
+          </td>
+          <td class="w-25 fw-bold p-md-4">{{i.company_name}}</td>
+          <td class="p-md-4">{{i.apply_date}}</td>
+          <td class="p-md-4">
+            <div class="fw-bold form-select border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + i.id"
+              aria-expanded="false" aria-controls="collapseApplyStatus">
+              {{i.apply_status[i.apply_status.length - 1].message}}
+            </div>
+            <div class="collapse ps-md-4" id="{{i.id}}">
+              <div class="d-md-flex flex-column gap-md-3 mt-md-4">
+                @for (s of i.apply_status; track $index) {
+                  <div class="d-md-flex gap-md-3 position-relative">
+                    @if ($index == (i.apply_status.length - 1)) {
+                      <div class="step-item-tail position-absolute d-none"></div>
+                    } @else {
+                      <div class="step-item-tail position-absolute"></div>
+                    }
+                    <div><i class="bi bi-check2-circle text-success fs-4"></i></div>
+                    <div class="d-md-flex flex-column">
+                      <span>{{s.message}}</span>
+                      <span class="text-secondary">{{s.update_date}}</span>
+                    </div>
+                  </div>
+                } @empty {
+                  <div>
+                  </div>
+                }
+              </div>
+              
+            </div>
+          </td>
+        </tr>
+      } @empty {
+          <tr class="text-center">
+            <td colspan="5" class="p-md-4 text-danger fw-bold fst-italic">Bạn chưa ứng tuyển vị trí nào!</td>
+          </tr>
+      }
+    </table>
+    <div class="mt-md-4">
+      <nav>
+        <ul class="pagination justify-content-end">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link">1</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link">2</a></li>
+          <li class="page-item"><a class="page-link">3</a></li>
+          <li class="page-item">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -1,44 +1,137 @@
 // Process
 .Thing-container {
-    width: 70%;
-    margin-left: 15rem;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+  width: 70%;
+  margin-left: 15rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
-.Thing-dash {
-    position: absolute;
-    border-bottom: 3px dashed #d2d2d2;
-    width: 100%;
-    height: 16px;
-    z-index: 1;
+.Thing-dash-1,
+.Thing-dash-2,
+.Thing-dash-3
+ {
+  position: absolute;
+  border-bottom: 3px dashed #d2d2d2;
+  width: 35%;
+  height: 16px;
+  z-index: 1;
 }
+.Thing-dash-2{left: 12rem;}
+.Thing-dash-3{left: 23rem;}
 
 .Thing {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
 }
 
 .Thing-step {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    background: #aaa;
-    z-index: 1;
-    
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: #aaa;
+  z-index: 1;
 
-    border-radius: 50%;
+  color: #fff;
+
+  border-radius: 50%;
 }
-#step-1{background: #05ad5e;}
+#step-1 ,#step-2{
+  background: #05ad5e;
+}
+.Thing-dash-1{border-bottom:3px dashed #05ad5e;}
 
-// .cv-content{
-//     height: 200px;
-//     overflow-y: scroll;
-// }
+.cv-content {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+#scrollspy::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+#scrollspy::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+}
+#scrollspy::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+h5 {
+  color: #198754;
+}
+.list-group-item {
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  padding: 10px 27px;
+  border-radius: 8px;
+  font-size: 18px;
+} // Change --bs-list-group-active-bg:#0d6efd --> #198754 in bootstrap.min.css
+.form-info,
+.form-sumary,
+.form-education,
+.form-skill,
+.form-exp {
+  background-color: #fff;
+}
+.info-user input {
+  width: 65%;
+}
+.info-education {
+  .university,
+  .major {
+    width: 50%;
+  }
+  .info-other {
+    width: 65%;
+  }
+}
+.image-user,
+.image-file {
+  width: 200px;
+  height: 200px;
+}
+.image-user img,
+.image-file div {
+  width: 180px;
+  height: 180px;
+}
+.image-file div {
+  background-color: #f2f2f2;
+}
+.view-skills {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skill-item {
+  flex: 0 0 auto;
+  margin-right: 2px;
+  margin-bottom: 5px;
+}
+
+.search-skill {
+  border: none;
+}
+.search-skill:focus {
+  outline: none;
+  border: none;
+}
+.type-exp button{
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+.btn-exp-active{
+  background-color: #D96450;
+  color:#fff;
+}
+.delete-project{margin-left: 50px;}

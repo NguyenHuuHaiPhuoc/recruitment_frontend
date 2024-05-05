@@ -1,7 +1,7 @@
 import { Component, Renderer2} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
+declare var $:any;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -135,6 +135,10 @@ export class RegisterComponent {
   searchSkill(event: Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
     const selectElement = document.getElementById('skills') as HTMLSelectElement;
+    
+    if ($('.search-skill').val() != '')
+      this.isHiddenSelect = false;
+
     this.listSkillFilter = this.skills.filter(item => {
       return JSON.stringify(item).toLowerCase().includes(searchTerm);
     });

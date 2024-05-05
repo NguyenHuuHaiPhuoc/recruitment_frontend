@@ -21,7 +21,6 @@ import { AuthService } from './service/auth/auth-service.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'my-demo';
   account:any = {};
   images = [
     {

@@ -158,6 +158,10 @@ export class MySkillComponent{
   searchSkill(event: Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
     const selectElement = document.getElementById('skills') as HTMLSelectElement;
+
+    if ($('.search-skill').val() != '')
+      this.isHiddenSelect = false;
+
     this.listSkillFilter = this.skills.filter(item => {
       return JSON.stringify(item.code).toLowerCase().includes(searchTerm);
     });
