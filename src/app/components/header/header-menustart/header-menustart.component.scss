@@ -1,4 +1,25 @@
 .img-logo img{
-    width: 230px;
-    height: 130px;
-  }
+  width: 230px;
+  height: 130px;
+}
+
+.info-account{
+  background-color: #F1F1F1;
+}
+
+.dropdown-action{padding: 10px;}
+.dropdown-action a{
+  background-color: #F1F2F6;
+  margin-bottom: 10px;
+  padding: 15px 0 15px 10px;
+  border-radius: 8px;
+}
+.dropdown_info{width: 250px;}
+.dropdown_info img{
+  height: 32px;
+}
+
+.dropdown_info p{
+  margin: 0 30px 5px 10px;
+  color: #6f7882;
+}

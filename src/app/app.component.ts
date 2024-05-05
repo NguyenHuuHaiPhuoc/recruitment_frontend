@@ -5,6 +5,7 @@ import { HeaderMenustartComponent } from './components/header/header-menustart/h
 import { HeaderCarouselstrartComponent } from './components/header/header-carouselstrart/header-carouselstrart.component';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthService } from './service/auth/auth-service.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'my-demo';
+  account:any = {};
   images = [
     {
       imageSrc:
@@ -44,13 +45,15 @@ export class AppComponent {
     },
   ];
 
-  constructor(private location: Location){}
+  constructor(private location: Location, private authService: AuthService){}
+
+  ngOnInit() {
+    
+  }
 
   getURL() : string {
     const path: string = this.location.path();
-    const segments: string[] = path.split('/');
-    const lastSegment: string = segments[segments.length - 1];
-    return lastSegment;
+    return path;
   }
 
 }

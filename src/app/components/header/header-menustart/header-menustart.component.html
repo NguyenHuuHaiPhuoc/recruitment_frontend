@@ -1,37 +1,79 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="easyjob" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5 img-logo">
-        <img src="assets/img/logo/logo.png" alt="Logo" />
+        <img src="assets/img/logos/logo.png" alt="Logo EasyJob" />
     </a>
-    <!-- <a href="easyjob" class="row img-logo">
-      </a> -->
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="easyjob" class="nav-item nav-link active">Home</a>
-            <a href="about" class="nav-item nav-link">About</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
-                <div class="dropdown-menu rounded-0 m-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="easyjob">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="u/cv">Hồ sơ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact">Liên hệ</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Jobs</a>
+                <div class="dropdown-menu border-light rounded-2 m-0">
                     <a href="viec-lam" class="dropdown-item">Job List</a>
                     <a href="viec-lam/cong-ty" class="dropdown-item">Job Detail</a>
                 </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="body-job-category" class="dropdown-item">Job Category</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu border-light rounded-2 m-0">
+                    <a href="" class="dropdown-item">Job Category</a>
                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                     <a href="body-error-404" class="dropdown-item">404</a>
                 </div>
-            </div>
-            <a href="contact" class="nav-item nav-link">Contact</a>
-            <a href="dang-nhap" class="nav-item nav-link bg-primary rounded-0  text-white"> Đăng nhập</a>
-            <a href="dang-ky" class="nav-item nav-link">Đăng ký</a>
+            </li>
+        </ul>
+        <div class="navbar-nav mx-5">
+            <ul class="navbar-nav">
+                @if(!isLogin){
+                    <li class="nav-item">
+                        <a class="nav-link border border-info rounded-2 text-info p-3" href="dang-ky">Đăng ký</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link border border-info rounded-2 bg-info text-white p-3" href="dang-nhap">Đăng nhập</a>
+                    </li>
+                } @else {
+                    <li class="nav-item dropdown position-relative">
+                        <a href="#" class="nav-link dropdown-toggle border rounded-4 p-2 info-account" role="button" data-bs-toggle="dropdown">
+                            <span class="mx-2"><img src="/assets/img/users/icon-user-male-default.png" alt="avatar"></span>
+                            <span>{{user.username}}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-action border-light rounded-2 m-0 position-absolute" style="left: -70px;">
+                            <div class="dropdown_info d-flex border-bottom">
+                                <img src="/assets/img/users/icon-user-male-default.png" alt="avatar">
+                                <div class="caption mb-3">
+                                    <p class="info_name text-info">{{user.username}}</p>
+                                    <p class="info_code">
+                                        Mã ứng viên: #2348762
+                                    </p>
+                                    <p>{{user.username}}</p>
+                                </div>
+                            </div>
+                            <a href="u/cv" class="dropdown-item mt-md-3 text-info">
+                                <i class="bi bi-menu-button-wide-fill"></i> &nbsp;&nbsp; Bảng điều khiển                            </a>
+                            <a href="u/cap-nhat-thong-tin-ca-nhan" class="dropdown-item mt-md-3 text-info">
+                                <i class="bi bi-pencil-square"></i> &nbsp;&nbsp; Cài đặt thông tin cá nhân
+                            </a>
+                            <a role="button" class="dropdown-item text-danger mt-md-3" (click)="onLogout()">
+                                <i class="bi bi-box-arrow-left"></i> &nbsp;&nbsp; Đăng xuất
+                            </a>
+                        </div>
+                    </li>
+                }
+              </ul>
         </div>
         <!-- <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a> -->
     </div>
 </nav>
+
 <!-- Navbar End -->

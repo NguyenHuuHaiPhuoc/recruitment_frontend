@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="manager-cv mt-md-5 d-md-flex justify-content-between">
+        <ul class="list-unstyled d-md-flex gap-md-5 fs-5 fw-bold">
+            <li><a href="#" class="text-danger text-decoration-none">Quản lý CV</a></li>
+            <li class=" border-start border-danger px-md-5"><a href="#" class="text-danger text-decoration-none">Thư giới thiệu</a></li>
+        </ul>
+        <div class="action-cv d-md-flex gap-md-3">
+            <button class="btn btn-dark opacity-75 fs-5 fw-bold">Tải CV lên <i class="bi bi-cloud-upload ms-md-3"></i></button>
+            <button class="btn btn-danger fs-5 fw-bold" (click)="openAddCvModal()">Tạo CV mới &ensp; <i class="bi bi-file-earmark-person ms-md-3"></i></button>
+        </div>
+    </div>
+    <div class="list-cv mt-md-3">
+        <table class="table table-hover">
+            <thead class="table-light text-center">
+              <tr>
+                <th scope="col">Tên CV</th>
+                <th scope="col">Trạng thái CV</th>
+                <th scope="col">Lần chỉnh sửa cuối</th>
+                <th scope="col">Tùy chỉnh</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-md-4 text-center">
+                    <p>CV_NGUYEN HUU HAI PHUOC</p>
+                    <span class="border rounded-2 px-md-3 border-danger text-danger">Tạo trên EasyJob</span>
+                    <br/>
+                    <span class="text-danger">Chưa hoàn thành</span>
+                </td>
+                <td class="p-md-4 fst-italic" style="width: 505px;">
+                    <span class="d-md-flex gap-md-2">
+                        <i class="bi bi-info-circle"></i>
+                        Đã ứng tuyển vị trí [Fresher] Telecommunication Application Developers tại DEK TECHNOLOGIES ngày 23-11-2023.
+                    </span>
+                </td>
+                <td class="p-md-4">28-04-2024 20:10:28</td>
+                <td class="p-md-4">
+                    <div class="f-md-flex gap-md-2" style="display: flex;">
+                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-eye"></i></div>
+                        <div class="fs-3 fw-bold" role="button" ><a href="u/cv/edit" class="text-decoration-none text-dark"><i class="bi bi-pencil"></i></a></div>
+                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-cloud-download"></i></div>
+                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-trash"></i></div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-md-4 text-center">
+                    <p>CV_NGUYEN HUU HAI PHUOC</p>
+                    <span class="border rounded-2 px-md-3 border text-bg-secondary">Tải lên từ thiết bị của bạn</span>
+                </td>
+                <td class="p-md-4 fst-italic" style="width: 505px;">
+                    <span class="d-md-flex gap-md-2">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        Đã ứng tuyển vị trí [Fresher] Telecommunication Application Developers tại DEK TECHNOLOGIES ngày 23-11-2023.
+                    </span>
+                </td>
+                <td class="p-md-4">28-04-2024 20:10:28</td>
+                <td class="p-md-4">
+                    <div class="f-md-flex gap-md-2" style="display: flex;">
+                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-eye"></i></div>
+                        <div class="fs-3 fw-bold opacity-50" role="button" style="cursor: no-drop;"><i class="bi bi-pencil"></i></div>
+                        <div class="fs-3 fw-bold" role="button"><i class="bi bi-cloud-download"></i></div>
+                        <div class="fs-3 fw-bold opacity-50" role="button" style="cursor: no-drop;"><i class="bi bi-trash"></i></div>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="d-md-flex justify-content-between">
+        <a href="#" target="_blank" class="text-danger fw-bold">Hướng dẫn</a>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="btn-add-cv_modal" data-bs-toggle="modal" data-bs-target="#add-cv" [hidden]="true">
+    Launch demo modal
+  </button>
+  
+<!-- Modal -->
+<div class="modal fade" id="add-cv" tabindex="-1" aria-labelledby="addCvModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="title text-center mt-md-4">
+                    <h3 class="text-danger">Tạo CV chuẩn dành riêng cho lập trình viên</h3>
+                </div>
+                <div class="form-add-cv p-md-5">
+                    <form action="">
+                        <div class="mt-md-3">
+                            <label class="form-label">Tên CV *</label>
+                            <input type="text" class="form-control" placeholder="VD: Nguyễn Văn A - Developer"/>
+                        </div>
+                        <div class="mt-md-3">
+                            <label class="form-label">Ngôn ngữ *</label>
+                            <select name="" id="" class="form-select">
+                                <option [selected]="true">Tiếng Việt</option>
+                                <option>Tiếng Anh</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="add-cv-action position-relative">
+                    <button type="button" class="btn btn-outline-secondary position-absolute fs-5" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-outline-danger position-absolute fs-5">Tạo CV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

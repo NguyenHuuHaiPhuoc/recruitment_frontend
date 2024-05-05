@@ -1,0 +1,112 @@
+@if (listMySkill.length > 0) {
+<div class="card-body">
+  <div class="d-md-flex">
+    <h5 class="flex-grow-1">Kỹ năng</h5>
+    <div (click)="openAddSkillModal()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+  </div>
+  <div class="mt-md-3">
+    <p class="fw-bold">Kỹ nămg lập trình</p>
+    <div class="d-md-flex">
+      <div class="list-skill d-md-flex gap-md-3 p-md-2 rounded-3 flex-grow-1">
+        @for (s of listMySkill; track s.id) {
+          <span id="{{s.id}}" class="skil-item p-md-2 border rounded-3">
+              {{s.code}}
+            <i class="bi bi-trash text-danger" role="button" (click)="deleteSkill(s.id)"></i>
+          </span>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+}@else {
+<div class="card-title p-md-4 d-md-flex gap-md-5">
+  <div>
+    <h5>Kỹ năng</h5>
+    <p class="text-secondary">Mô tả kỹ các kỹ năng bạn có giúp người khác hiểu được điểm mạnh của bạn và giúp gia tăng
+      cơ hội kết nối với NTD.</p>
+  </div>
+  <div><img src="/assets/img/users/icon-skill.png" alt="Skill"></div>
+  <!-- <i class="bi bi-pencil fs-5"></i> -->
+  <div (click)="openAddSkillModal()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+</div>
+}
+
+<!-- Button trigger Add Skill modal -->
+<button type="button" class="btn btn-primary" id="btn-add-skill" data-bs-toggle="modal" data-bs-target="#form-add-skill"
+  [hidden]="true">
+  Add skill modal
+</button>
+
+<!-- Add Skill Modal -->
+<div class="modal fade" id="form-add-skill" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="addSkillModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addSkillModalLabel">Kỹ năng</h1>
+        <button type="button" class="btn-close" (click)="closeAddSkillModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form (submit)="addSkill()">
+            <label for="skill" class="form-label">Chọn kỹ năng của bạn</label>
+            <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()" >
+              <div>
+                <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)"/>
+              </div>
+            </span>
+            <select class="form-select" id="skills" size="" name="option" #setSize
+              [hidden]="isHiddenSelect">
+              @for (item of listSkillFilter; track item.id) {
+              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
+              }
+            </select>
+            <div class="btn-save mt-md-3 text-center">
+              <button type="submit" class="btn btn-success fs-5" [disabled]="disabledSubmitAddSkill">Cập nhật</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger Eddit Skill modal -->
+<button type="button" class="btn btn-primary" id="btn-edit-skill" data-bs-toggle="modal" data-bs-target="#form-edit-skill"
+  [hidden]="true">
+  Edit skill modal
+</button>
+
+<!-- Edit Skill Modal -->
+<div class="modal fade" id="form-edit-skill" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editSkillModalLabel">Form Edit Kỹ năng</h1>
+        <button type="button" class="btn-close" (click)="closeEditSkillModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form (submit)="addSkill()">
+            <label for="skill" class="form-label">Chọn kỹ năng của bạn</label>
+            <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()" >
+              <div>
+                <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)" />
+              </div>
+            </span>
+            <select class="form-select" id="skills" size="" name="option" #setSize
+              [hidden]="isHiddenSelect">
+              @for (item of listSkillFilter; track item.id) {
+              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
+              }
+            </select>
+            <div class="btn-save mt-md-3 text-center">
+              <button type="submit" class="btn btn-success fs-5" [disabled]="disabledSubmitAddSkill">Cập nhật</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

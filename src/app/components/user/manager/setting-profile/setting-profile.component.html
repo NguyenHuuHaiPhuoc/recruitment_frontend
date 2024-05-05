@@ -1,0 +1,85 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="info-group">
+                <h5 class="mt-3">Cập nhật thông tin cá nhân</h5>
+                <form class="row g-3">
+                    <div class="col-md-12">
+                        <label for="full_name" class="form-label">Họ và tên</label>
+                        <input type="password" class="form-control" id="full_name" placeholder="Nguen Van A">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone" placeholder="012345678">
+                    </div>
+                    <div class="col-md-12">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" [disabled]="true" placeholder="anv@gmail.com">
+                    </div>
+                    <div class="col-md-6">
+                      <button class="btn btn-info text-light">Cập nhật</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-sidebar ">
+                <div class="d-flex gap-4 mt-md-3">
+                    <div class="profile-avatar">
+                        <img [src]="image_preview" alt="avatar">
+                        <span class="position-relative">
+                            <a class="position-absolute upload-avatar" role="button" (click)="onUpload()">
+                                <i class="bi bi-camera text-info"></i>
+                            </a>
+                            <form action="" enctype="multipart/form-data" method="post" id="upload_avatar_form" [hidden]="true">
+                                <input type="file" name="avatar" id="avatar_image" (change)="selectImage($event)"/>
+                            </form>
+                        </span>
+                    </div>
+                    <div class="info-header">
+                        <h4>{{user.username}}</h4>
+                        <div class="d-flex gap-3 text-secondary">
+                            <span>Java Developer</span>
+                            <span>Số năm kinh nghiệm</span>
+                        </div>
+                        <div class="mt-3">
+                            <span class="border-0 rounded-2 bg-secondary text-white p-1">Tài khoản đã xác thực</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-secondary opacity-25 mt-3"></div>
+                <div class="info-update mt-3">
+                    <a href="u/cv" class="btn btn-outline-info">Cập nhật EasyJobCV profile</a>
+                </div>
+            </div>
+            <div class="divide-y mt-md-5 mb-md-5">
+                <div>
+                    <div>Mẹo hay cho CV chuyên nghiệp của Developer</div>
+                    <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                </div>
+                <div class="border-bottom border-secondary border-opacity-25 mt-md-3 mb-md-3"></div>
+                <div class="boder-top border-secondary-subtle mt-md-3">
+                    <div>Kết nối nhà tuyển dụng lý tưởng với bài Kiểm tra tính cách công việc của EasyJob</div>
+                    <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="info-recruiter-follow">
+                <h5 class="text-info">
+                    CV của bạn đã đủ tốt?
+                </h5>
+                <div class="text-secondary">Bao nhiêu nhà tuyển dụng đang quan tâm đến bạn?</div>
+                <div class="number-of-view mt-3 d-flex gap-3">
+                    <div class=" col-md-4 view text-white mx-auto text-center">
+                        <div class="fs-3 fw-bold pt-md-1">0</div>
+                        <div>lượt</div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <p class="text-secondary">Mỗi lượt Nhà tuyển dụng xem CV mang đến một cơ hội để bạn gần hơn với công việc phù hợp.</p>
+                        <a href="" class="btn btn-outline-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
