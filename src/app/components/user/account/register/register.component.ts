@@ -7,7 +7,7 @@ declare var $:any;
   standalone: true,
   imports: [FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  // styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   public roles  = '';

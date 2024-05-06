@@ -1,20 +1,21 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input, NgZone } from "@angular/core";
 
 @Component({
     selector: 'app-header-carouselstrart',
     standalone: true,
-    imports: [],
+    imports: [CommonModule],
     templateUrl: './header-carouselstrart.component.html',
     styleUrl: './header-carouselstrart.component.scss'
 })
 export class HeaderCarouselstrartComponent {
     constructor(private ngZone: NgZone){};
-  @Input() images :carouselImages[] =[];
+  @Input() images :any =[];
   @Input() indicators =true;
   @Input() controls = true;
   @Input() autoSlide = true;
   @Input() slideInterval =2000;
-  selectedIndex =0;
+  public selectedIndex:number = 0;
    //change slide in every 3 seconds
   
   ngOnInit(): void {
