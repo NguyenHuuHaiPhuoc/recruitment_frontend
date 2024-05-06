@@ -1,4 +1,98 @@
+<<<<<<< HEAD
 .header-search{
     background-color: #389C99;
 }
 .search,.keyword, .position option, .address option{color:#2A6563;}
+=======
+.menuSearch{
+  background: linear-gradient(182deg, #90e1ff, #3d9dee);
+  margin-bottom: 0;
+}
+.popup{
+  height: 350px;
+  width: 1120px;
+  top: 0;
+  z-index: 4;
+  margin-top: 15px;
+  position: absolute;
+  margin-top: 3rem;
+  background-color: #ffffff;
+  box-shadow: 0 0  1px 0.5px #d9d8d8;
+  border-radius: 10px;
+}
+.popup p{
+  margin-top:1rem ;
+  margin-left:1rem;
+}
+.searchbox{
+  z-index: 1;
+  position: relative;
+}
+// css repons
+@media (max-width: 767px) {
+  .popup{
+  height: 100px;
+  width: 100%;
+  top: 0;
+  z-index: 4;
+  margin-top: 15px;
+  position: absolute;
+  margin-top: 3rem;
+}
+}
+.title{
+  display: flex;
+ justify-content:space-between ;
+}
+.ItemHistory{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+  border-radius: 3rem;
+}
+.ItemHistory:hover{
+  background-color: rgb(236, 234, 234);
+}
+// icons
+.bi:hover{
+  color: rgb(0, 0, 0);
+}
+.bi{
+  color: rgb(190, 188, 188);
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.itemJobFavourite a{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.itemJobFavourite{
+  list-style: none;
+}
+.itemJobFavourite{
+   padding: 0.3rem;
+  border-radius: 3rem;
+}
+.itemJobFavourite:hover{
+  background-color: rgb(236, 234, 234);
+}
+.keyworks{
+  display: flex;
+  
+}
+.keyworks li{
+  list-style: none;
+  margin-right:0.5rem ;
+  display: inline-block;
+  background-color: rgb(209, 204, 204);
+  padding: 0.3rem;
+  border: 1px solid rgb(215, 212, 212);
+  font-size: 15px;
+}
+.keyworks li:hover{
+background-color: #b6d7f2;
+}
+>>>>>>> 2166157685c93f84ed1a15ee353eada3e42bba3b

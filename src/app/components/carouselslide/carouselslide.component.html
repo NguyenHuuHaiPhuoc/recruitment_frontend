@@ -1,0 +1,20 @@
+  <!-- auto slide start -->
+ 
+            <!-- <div class="listTopCompany">!-->
+            <ngx-slick-carousel [config]="config" class="slickSwiper"> 
+    <div *ngFor="let company of companys">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp companyBox_container mr-2" data-wow-delay="0.1s" ngxSlickItem>
+                <a class="cat-item rounded p-4" href="">
+                    <div class="companyBox">
+                      <img src="{{company.logo}}" alt="">
+                      <div class="companyBox_name">
+                        <div class="companyBlock__name is-uppercase mb-3">{{company.name}}</div>
+                        <span class="companyBlock__tag">Việc mới</span>
+                      </div>
+                    </div>
+                </a>
+            </div>
+     </div>
+            </ngx-slick-carousel>
+
+           <!-- </div> -->

@@ -11,9 +11,17 @@
 } @else if (getURL() && (getURL() === "/u/cv/edit")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
-}
-@else {
-    <app-header-menustart></app-header-menustart>
+} @else if(getURL() === "blog"){
+  <app-header-menustart></app-header-menustart>
+<app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
+
+      <router-outlet></router-outlet>
+<app-footer></app-footer>
+
+} @else if(getURL() === "testimonial"){
+    <router-outlet></router-outlet>
+ }@else {
+<app-header-menustart></app-header-menustart>
 
     <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 

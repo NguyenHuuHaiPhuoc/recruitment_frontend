@@ -1,17 +1,17 @@
 <div ngif="images && images.length > 0" class="container carousel-container p-0">
   @for (i of images; track $index) {
     <img [src]="i.imageSrc" alt="i.imageAlt"
-      [ngClass]="{'image-active':selectedIndex === $index}">
+    [ngClass]="{'image-active':selectedIndex === $index}">
   }
+  
+<div ngif="indicators" class="carousel-dot-container">
+  @for (i of images; track $index) {
+      <span class="dot"
+      [ngClass]="{'active':selectedIndex === $index}"
+      (click)="selectImage($index)"></span>
 
-  <div ngif="indicators" class="carousel-dot-container">
-    @for (i of images; track $index) {
-       <span class="dot"
-        [ngClass]="{'active':selectedIndex === $index}"
-        (click)="selectImage($index)"></span>
-
-     }
-  </div>
+    }
+</div>
 
   <button ngif="controls" class="btn-carousel btn-prev" (click)="onPrevClick()">
    <i class=" fas fa-arrow-circle-left icon-carousel icon-prev"
