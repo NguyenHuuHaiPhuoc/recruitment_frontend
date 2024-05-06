@@ -1,16 +1,11 @@
-<<<<<<< HEAD
-import { Component, Renderer2} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-declare var $:any;
-=======
-import { Component, Renderer2, ElementRef, input} from '@angular/core';
-import {  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
+import { Component, Renderer2, ElementRef } from '@angular/core';
+import {  FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Company } from './Company';
-import { CommonModule, DatePipe, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestuploadComponent } from '../../../testupload/testupload.component';
->>>>>>> 2166157685c93f84ed1a15ee353eada3e42bba3b
+
+declare var $:any;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -46,11 +41,6 @@ export class RegisterComponent {
   public listSkillFilter:any[] = [];
   private listSkillChoose: any[] = [];
   private size = 0;
-<<<<<<< HEAD
-  //, private elementRef: ElementRef
-  constructor(private renderer: Renderer2) {
-    
-=======
 
   userForm :FormGroup;
    constructor(private renderer: Renderer2, private elementRef: ElementRef,private formBuilder: FormBuilder,private router:Router) {
@@ -87,7 +77,6 @@ export class RegisterComponent {
       },{
       validators: [this.passwordMatchValidator,this.taxCodeValidator]
     });
->>>>>>> 2166157685c93f84ed1a15ee353eada3e42bba3b
   }
 
     // kiem tra xac nhan trung khop mat khau

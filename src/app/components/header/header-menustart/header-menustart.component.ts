@@ -24,6 +24,6 @@ export class HeaderMenustartComponent   {
 
    onLogout(){
     this.authService.logout();
-    this.router.navigate(['dang-nhap']);
+    this.router.navigate(['/dang-nhap']);
    }
 }

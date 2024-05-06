@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import { Component } from "@angular/core";
-
-@Component({
-    selector: 'app-header-search',
-    standalone: true,
-    imports: [],
-    templateUrl: './header-search.component.html',
-    styleUrl: './header-search.component.scss'
-})
-export class HeaderSearchComponent{
-=======
 import { NgIf } from '@angular/common';
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 @Component({
@@ -45,6 +33,5 @@ export class HeaderSearchComponent {
         }
     });
   }
->>>>>>> 2166157685c93f84ed1a15ee353eada3e42bba3b
 
 }

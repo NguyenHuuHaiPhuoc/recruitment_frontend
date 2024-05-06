@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // const { style } = require("@angular/animations");
->>>>>>> 2166157685c93f84ed1a15ee353eada3e42bba3b
 
 (function ($) {
     "use strict";
