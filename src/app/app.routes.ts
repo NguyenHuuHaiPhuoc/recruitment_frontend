@@ -1,8 +1,4 @@
 import { Routes } from '@angular/router';
-// import { AboutComponent } from './components/about/about.component';
-// import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
-// import { NotFoundComponent } from './components/error/not-found/not-found.component';
-// import { ContactComponent } from './components/contact/contact.component';
 import { RegisterComponent } from './components/user/account/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/user/account/login/login.component';
