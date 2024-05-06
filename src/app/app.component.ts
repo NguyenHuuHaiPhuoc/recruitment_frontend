@@ -15,7 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderMenustartComponent,
     HeaderCarouselstrartComponent,
     HeaderSearchComponent,
-    FooterComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
