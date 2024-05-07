@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './header-menustart.component.scss'
 })
 export class HeaderMenustartComponent   {
-  user:any = [];
+  public user:any = [];
   isLogin:any = false;
   constructor(
     private authService: AuthService,

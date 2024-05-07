@@ -5,6 +5,8 @@ import { LoginComponent } from './components/user/account/login/login.component'
 import { SettingProfileComponent } from './components/user/manager/setting-profile/setting-profile.component';
 import { ManagerComponent } from './components/user/manager/manager.component';
 import { EditCvComponent } from './components/user/manager/edit-cv/edit-cv.component';
+import { JoblistComponent } from './components/jobs/joblist/joblist.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
 
 export const routes: Routes = [
   
@@ -13,6 +15,16 @@ export const routes: Routes = [
     title: 'Thế giới việc làm',
     component: HomeComponent
   },
+  {
+    path: 'viec-lam',
+    title: 'Thế giới việc làm',
+    component: JoblistComponent
+  },
+  // {
+  //   path: 'testimonial',
+  //   title: 'Thế giới việc làm',
+  //   component: JoblistComponent
+  // },
   // {
   //   path: 'viec-lam/cong-ty',
   //   title: 'Công ty TNHH ABC',
@@ -53,8 +65,8 @@ export const routes: Routes = [
     title: 'Đăng nhập',
     component: LoginComponent,
   },
-  // {
-  //   path: '**',
-  //   component: NotFoundComponent,
-  // },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  },
 ];

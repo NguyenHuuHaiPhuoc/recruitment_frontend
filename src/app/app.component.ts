@@ -8,9 +8,6 @@ import { HeaderSearchComponent } from './components/header/header-search/header-
 import { FooterComponent } from './components/footer/footer.component';
 
 
-// import the cloundinaryModule
-// import the cloundinary classer
-
 @Component({
   selector: 'app-root',
   standalone: true,

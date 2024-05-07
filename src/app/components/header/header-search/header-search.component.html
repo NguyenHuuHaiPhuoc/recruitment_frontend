@@ -6,10 +6,10 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4 searchbox">
-                                <input type="text" class="form-control border-0" placeholder="Từ Khóa" (click)="onInputClick()" #toggleButton />
+                                <input type="text" class="form-control border-0" placeholder="Từ Khóa" (blur)="onInputClick()" (click)="onInputClick()" #toggleButton />
 
                                 <!-- gợi ý những từ khóa tìm kiếm -->
-                                <div class="popup" *ngIf="popupshow" #menu>
+                                <div class="popup" [hidden]="popupshow" >
                                 
                                   <div class="container mt-3">
                                     <div class="row">

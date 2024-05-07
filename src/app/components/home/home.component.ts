@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit{
     // hiển thị 5 công việc
     this.http.get(this.url).subscribe((data: any) =>{
     this.res = data.slice(0,limit);
-    console.log(this.res);
   });
 
   }
@@ -49,7 +48,6 @@ export class HomeComponent implements OnInit{
    this.limit +=5;
    this.http.get(this.url).subscribe((data: any) =>{
    this.res = data.slice(0,this.limit);
-    console.log(this.res);
  });
  this.loading = false;
  },700);

@@ -4,6 +4,10 @@
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
+} @else if (getURL() && (getURL() === "/viec-lam")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
 } @else if (getURL() && (getURL() === "/u/cv")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
@@ -11,14 +15,14 @@
 } @else if (getURL() && (getURL() === "/u/cv/edit")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
-} @else if(getURL() === "blog"){
+} @else if(getURL() === "/blog"){
   <app-header-menustart></app-header-menustart>
 <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 
       <router-outlet></router-outlet>
 <app-footer></app-footer>
 
-} @else if(getURL() === "testimonial"){
+} @else if(getURL() === "/testimonial"){
     <router-outlet></router-outlet>
  }@else {
 <app-header-menustart></app-header-menustart>
@@ -27,7 +31,6 @@
 
     <app-header-search></app-header-search>
     <router-outlet></router-outlet>
-    <!-- <app-feedback-clients></app-feedback-clients> -->
-
+    
     <app-footer></app-footer>
 }
