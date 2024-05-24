@@ -52,7 +52,6 @@ export class MySkillComponent{
     const selectElement = document.getElementById('skills');
     
     if(selectElement){
-      
       if(this.size === 0){
         this.size = 4;
       }else{

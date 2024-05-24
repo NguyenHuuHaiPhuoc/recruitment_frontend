@@ -24,7 +24,17 @@
 
 } @else if(getURL() === "/testimonial"){
     <router-outlet></router-outlet>
- }@else {
+} @else if(getURL() === "/dashboard-recruiter/dashboard"
+        || getURL() === "/dashboard-recruiter/cong-viec"
+){
+    <app-dashboard-recruiter></app-dashboard-recruiter>
+} @else if(getURL() === "/dashboard-admin/dashboard"
+        || getURL() === "/dashboard-admin/quan-ly-cong-viec"
+        || getURL() === "/dashboard-admin/code"
+){
+    <app-layout-admin></app-layout-admin>
+}
+@else {
 <app-header-menustart></app-header-menustart>
 
     <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>

@@ -1,20 +1,24 @@
 .dropend .dropdown-menu{display: none;}
 .dropend:hover > .dropdown-menu{
   display: block;
+  width: 750px;
+  max-height: 700px;
   position: absolute;
   top: 0;
   left:100%;
   margin-left: .125em;
-}
-.dropdown-item{
-  background: #F1F1F1;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 6px;
-}
-.dropdown-item img{
-  width: 20px;
-  height: 20px;
+  li{
+    display: inline-table;
+    width: 125px;
+    background: #F1F1F1;
+    margin: 10px 5px 10px 20px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  li:hover{
+    background-color: #2A6563;
+    color: #fff
+  }
 }
 
 .img-logo img{
@@ -42,4 +46,3 @@
   margin: 0 30px 5px 10px;
   color: #6f7882;
 }
-

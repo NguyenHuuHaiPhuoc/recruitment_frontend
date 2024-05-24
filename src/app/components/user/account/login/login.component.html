@@ -28,7 +28,7 @@
                 <label for="password" class="form-label">Mật khẩu</label>
                 <div class="input-group">
                   <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
-                  <input type="text" class="form-control" id="password" formControlName="password" placeholder="Nhập mật khẩu"/>
+                  <input type="password" class="form-control" id="password" formControlName="password" placeholder="Nhập mật khẩu"/>
                 </div>
                 @if (form_login.controls['password'].invalid 
                     && (form_login.controls['password'].touched || form_login.controls['password'].dirty)) {
@@ -38,7 +38,7 @@
                 }
               </div>
               <p class="text-end" style="color: #00b14f;">Quên mật khẩu</p>
-              <button class="btn w-100 btn-register text-white" [disabled]="!form_login.valid" (click)="login()">Đăng nhập</button>
+              <button class="btn btn-success w-100 btn-register bg-opacity-50" [disabled]="!form_login.valid">Đăng nhập</button>
             </form>
           </div>
           <p class="text-secondary mt-3 text-center">Hoặc đăng nhập bằng</p>

@@ -1,23 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../service/auth/auth-service.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
+declare var $:any;
 @Component({
   selector: 'app-setting-profile',
   standalone: true,
-  imports: [],
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './setting-profile.component.html',
-  styleUrl: './setting-profile.component.scss'
+  styleUrl: './setting-profile.component.scss',
+  providers: [
+    AuthService
+  ]
 })
-export class SettingProfileComponent {
+export class SettingProfileComponent implements OnInit{
   public user:any = [];
   public image_preview = '/assets/img/users/icon-user-male-default.png';
   public currentFile?: File;
-  constructor(private authService: AuthService) {
-    
+  public formUser : FormGroup;
+  constructor(
+    private authService: AuthService
+    , private fb : FormBuilder
+  ) {
+    this.formUser = this.fb.group ({
+      full_name: [null],
+      phone: [null]
+    });
   }
 
   ngOnInit(){
     this.user = this.authService.getAccount();
+    this.formUser?.setValue({
+      full_name: this.user.full_name,
+      phone: null
+    });
+    $('#email').attr('disabled',true);
+    $('#email').text(this.user.username);
   }
 
   onUpload(){
@@ -34,6 +54,7 @@ export class SettingProfileComponent {
     if (selectFile && selectFile.length > 0) {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
+      console.log(file);
       reader.onload = () => {
         
         // this.formUser.get('avatar').setValue({

@@ -1,6 +1,10 @@
-// body{
-//     font-family: 'Times New Roman', Times, serif;
-// }
+*{
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+}
 
 :root {
     --primary: #25316D;

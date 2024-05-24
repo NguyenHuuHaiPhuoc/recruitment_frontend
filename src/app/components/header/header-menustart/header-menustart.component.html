@@ -16,10 +16,19 @@
                             Cấp bậc
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          @for (i of levels; track i.id) {
+                            <li class="text-center" role="button">{{i.option_name}}</li>
+                          }
+                        </ul>
+                    </li>
+                    <li class="nav-item dropend">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kỹ năng
+                        </a>
+                        <ul class="dropdown-menu ">
+                            @for (i of technologiesUsing; track i.id) {
+                                <li class="text-center" role="button">{{i.option_name}}</li>
+                            }
                         </ul>
                     </li>
                     <li class="nav-item dropend">
@@ -27,21 +36,10 @@
                             Loại hình
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropend">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Kỹ năng
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          <li><a class="dropdown-item" href="#">On Office</a></li>
+                          <li><a class="dropdown-item" href="#">Hybrid</a></li>
+                          <li><a class="dropdown-item" href="#">Remote</a></li>
+                          <li><a class="dropdown-item" href="#">Oversea</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropend">
@@ -49,10 +47,10 @@
                             Địa điểm
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          <li><a class="dropdown-item" href="#">Hà Nội</a></li>
+                          <li><a class="dropdown-item" href="#">Hồ Chí Minh</a></li>
+                          <li><a class="dropdown-item" href="#">Đà nẵng</a></li>
+                          <li><a class="dropdown-item" href="#">Cần Thơ</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -94,13 +92,13 @@
                     <li class="nav-item dropdown position-relative">
                         <a href="#" class="nav-link dropdown-toggle border rounded-4 p-2 info-account" role="button" data-bs-toggle="dropdown">
                             <span class="mx-2"><img src="/assets/img/users/icon-user-male-default.png" alt="avatar"></span>
-                            <span>{{user.username}}</span>
+                            <span>{{user.full_name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-action border-light rounded-2 m-0 position-absolute" style="left: -70px;">
                             <div class="dropdown_info d-flex border-bottom">
                                 <img src="/assets/img/users/icon-user-male-default.png" alt="avatar">
                                 <div class="caption mb-3">
-                                    <p class="info_name text-info">{{user.username}}</p>
+                                    <p class="info_name text-info">{{user.full_name}}</p>
                                     <p class="info_code">
                                         Mã ứng viên: #2348762
                                     </p>
@@ -120,7 +118,6 @@
                 }
               </ul>
         </div>
-        <!-- <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a> -->
     </div>
 </nav>
 <!-- Navbar End -->

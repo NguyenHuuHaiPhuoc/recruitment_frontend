@@ -101,15 +101,6 @@
   outline: none;
   border: none;
 }
-
-// .select-skill select{
-//   scrollbar-width: thin;
-//   scrollbar-color: gray lightgray;
-// }
-
-// .select-skill select::-webkit-scrollbar{width: 8px;}
-// .select-skill select::-webkit-scrollbar-thumb{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);background-color: gray;}
-// .select-skill select::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);background-color: lightgray;border-radius: 10px;}
 .errorsNotification{
   margin-left: 40px;
   margin-bottom: 1rem;
@@ -118,4 +109,8 @@
 .btn_hide_show{
   border: none;
   background-color: rgb(229, 229, 229);
+}
+.logo-review{
+  width: 100px;
+  height: 100px;
 }
