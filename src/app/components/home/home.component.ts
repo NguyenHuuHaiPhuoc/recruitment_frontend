@@ -78,21 +78,71 @@ export class HomeComponent implements OnInit{
   ],
 };
 
+config_newJob  = {
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  dots: true,
+  
+   autoplaySpeed: 1000,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+  ],
+};
+
+config_list_language = {
+  infinite: true,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay:true,
+  dots: true,
+  
+   autoplaySpeed: 1000,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+  ],
+};
+
  companys =[
-  {logo: "assets/img/com-logo-1.jpg",
+  {logo: "assets/img/logo/company/fpt.png",
+    name:"FPT"
+  },
+    {logo: "assets/img/logo/company/logovin.webp",
     name:"vin"
   },
-    {logo: "assets/img/logovin.webp",
-    name:"vin"
-  },
-    {logo: "assets/img/logochailease.png",
+    {logo: "assets/img/logo/company/logochailease.png",
     name:"chailease"
   },
-    {logo: "assets/img/yamahalogo.jpg",
+    {logo: "assets/img/logo/company/yamahalogo.jpg",
     name:"Yamaha"
   },
-    {logo: "assets/img/lglogo.png",
+    {logo: "assets/img/logo/company/lglogo.png",
     name:"LG"
+  },
+   {logo: "assets/img/logo/company/vng.jpg",
+    name:"VNG"
   }
   
  

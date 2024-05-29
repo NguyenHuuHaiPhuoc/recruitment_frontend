@@ -1,0 +1,25 @@
+<div class="row header_news  bg-light p-3 ">
+  <h6>Cài đặt tài khoản</h6>
+</div>
+
+<div class="row bg-light m-3">
+
+    <div class="col-sm-3 containerleft">
+      <a routerLink="changepassword"  class="item d-flex m-3">
+        <i class="bi bi-lock-fill"></i>
+        <span>Đổi mật khẩu</span>
+      </a>
+      <div class="bodyleft m-3">
+        <a routerLink="businesslicense" class="item d-flex"><i class="bi bi-file-earmark"></i> <span>Giấy phép kinh doanh</span></a>
+        <a routerLink="updatecompany" class="item d-flex"><i class="bi bi-building-fill"></i> <span>Thông tin công ty</span></a>
+        <a routerLink="informationuser" class="item d-flex "><i class="bi bi-person-fill"></i> <span>Thông tin cá nhân </span></a>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+ 
+    @if(getURL() === 'changepassword' || getURL() === 'informationuser' || getURL() === 'businesslicense' || getURL() === 'updatecompany'){
+        <router-outlet></router-outlet>
+    }
+    </div>
+  </div>

@@ -1,0 +1,236 @@
+<mat-tab-group >
+
+  <mat-tab class="bg-primary w-100 h-100" label="Tuyển dụng"> 
+    <div class="mt-3 border bg-light">
+    <form  [formGroup]="userForm" class="p-2">
+      <h5 class="m-2">Đăng tuyển nhân tài</h5>
+      <div class="p-3">
+        <div class=" d-flex align-items-center justify-content-between p-2">
+          <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Vị trí tuyển dụng</label>
+            <div>
+               <input type="text" class="w-100" formControlName="location_recruitment"> 
+            </div>
+           
+          </div>
+          <div class="col-sm-5">
+            <label for="">Mức lương chi trả : </label>
+            <div class="mt-1">
+            <input type="text" formControlName="minSalary">
+            Đến
+            <input type="text" formControlName="maxSalary">
+            </div>
+          </div>
+        </div>
+           <div class="d-flex align-items-center justify-content-between p-2">
+          <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Kinh nghiệm </label>
+            <div>
+              <input type="text" class="w-100" formControlName="experience">
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <label for="">Hạn ứng tuyển: </label>
+            <div class="mt-1">
+            <input type="date" name="" id="" formControlName="limitDateRecruitment">
+            </div>
+          </div>
+        </div>
+
+         
+
+          <div class="  d-flex align-items-center justify-content-between p-2">
+          <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Địa Chỉ </label>
+            <div>
+              <select name="" id="" class="w-100" formControlName="location">
+                <option value="">hà nội</option>
+                <option value="">Hà tĩnh</option>
+                <option value="">vũng tàu</option>
+                <option value="">hải phòng</option>
+                <option value="">nghệ an</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <label for="">Nhập chi tiết địa chỉ: </label>
+            <div class="mt-1">
+            <input type="text" name="" id="" class="w-75" formControlName="locationDetail">
+            </div>
+          </div>
+        </div>
+
+         <div class="  d-flex align-items-center justify-content-between p-2">
+          <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Thời gian làm việc </label>
+            <div>
+             <input type="text" class="w-100" formControlName="timeWork">
+            </div>
+          </div>
+          <div class="col-sm-5"></div>
+        </div>
+        <div class=" d-flex p-2">
+          
+          <div class="w-75">
+            <label for="">Mô tả công việc</label>
+            <textarea name="" id="" class="w-100" formControlName="descriptionJob"></textarea>
+          </div>
+         </div>
+           <div class="p-2">
+          
+          <div class="w-75">
+            <label for="">Yêu cầu ứng viên</label>
+            <textarea name="" id="" class="w-100" formControlName="candidateRequirement"></textarea>
+          </div>
+         </div>
+        
+          <div class=" p-2">
+          <div class="w-75">
+            <label for="">
+              Quyền lợi nhận được
+            </label>
+            <textarea name="" id="" class="w-100" formControlName="benefit"></textarea>
+          </div>
+         </div>
+         <div class="d-flex justify-content-center m-2">
+           @if(error) {
+            <span class="text-danger">Vui lòng nhập đầy đủ tất cả các trường thông tin!</span>
+          }
+         </div>
+        <div class="d-flex justify-content-center m-2">
+         
+          <button class="btn btn-success" (click)="submitForm()">Đăng tuyển</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Quản lý bài đăng">
+    <div class="mt-3">
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">stt</th>
+      <th scope="col">Vị trí ứng tuyển</th>
+      <th scope="col">Lượt ứng tuyển</th>
+      <th scope="col">lượt xem</th>
+      <th scope="col">ngày đăng</th>
+      <th scope="col">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>mdo</td>
+       <td>Thorntondgfhcfhjdfhjfhjfhjfhjfhjfhjfhjhj</td>
+      <td class="d-flex justify-content-around">
+        <a class="function_handle bg-success" href="">sửa</a>
+        <a class="function_handle bg-danger" href="">xóa</a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>fat</td>
+       <td>Thornton</td>
+       <td class="d-flex justify-content-around">
+        <a class="function_handle bg-success" href="">sửa</a>
+        <a class="function_handle bg-danger" href="">xóa</a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>twitter</td>
+       <td>Thornton</td>
+       <td class="d-flex justify-content-around">
+        <a class="function_handle bg-success" href="">sửa</a>
+        <a class="function_handle bg-danger" href="">xóa</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Quản lý CV">
+    <div class="mt-3">
+      <div class="mb-2">
+        <label for="" class="text-dark">Vị trí đang tuyển :</label>
+        <div>
+          <select name="" id="">
+            <option value="">quản lý nhân sự</option>
+            <option value="">Lập trình viên java</option>
+            <option value="">Lập trình viên odoo</option>
+            <option value="">thực tập sinh reactjs</option>
+          </select>
+        </div>
+      </div>
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">stt</th>
+      <th scope="col">Tên ứng viên</th>
+      <th scope="col">Kỹ năng</th>
+      <th scope="col">sdt</th>
+      <th scope="col">địa chỉ</th>
+      <th scope="col">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>mdo</td>
+       <td>Thorntondgfhcfhjdfhjfhjfhjfhjfhjfhjfhjhj</td>
+      <td class="d-flex justify-content-around">
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  xem cv
+</button>      </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>fat</td>
+       <td>Thornton</td>
+       <td class="d-flex justify-content-around">
+           <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  xem cv
+</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>twitter</td>
+       <td>Thornton</td>
+     <td class="d-flex justify-content-around">
+     <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  xem cv
+</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- Modal xem cv-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-4">
+     <img src="./assets/img/about-1.jpg" alt="">
+    </div>
+  </div>
+</div>

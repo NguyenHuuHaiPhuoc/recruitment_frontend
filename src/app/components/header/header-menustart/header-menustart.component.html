@@ -8,29 +8,65 @@
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse menu" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="easyjob" class="nav-item nav-link active">Việc Làm</a>
             <a href="about" class="nav-item nav-link">Hồ Sơ</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Công Việc</a>
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="viec-lam" class="dropdown-item">Job List</a>
-                    <a href="viec-lam/cong-ty" class="dropdown-item">Job Detail</a>
+
+              <div class="align-content-center ">
+        <!-- <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Công Việc</a> -->
+               <button class="nav-link dropdown-toggle menuJobs" mat-button [matMenuTriggerFor]="congviec">Công Việc</button>
+                 <div class="fillterskill rounded-0 m-0">
+               <mat-menu #congviec="matMenu" > 
+                  <button mat-menu-item [matMenuTriggerFor]="capdo">Theo Cấp độ</button>
+                  <button mat-menu-item [matMenuTriggerFor]="kynang">Theo Kỹ Năng</button>
+                  <button mat-menu-item [matMenuTriggerFor]="diadiem">Theo địa điểm</button>
+               </mat-menu>
+              
+              <mat-menu #capdo="matMenu">
+              <a href="" mat-menu-item>Intern</a>
+              <a href="" mat-menu-item>Fresher</a>
+              <a href="" mat-menu-item>Junior</a>
+              <a href="" mat-menu-item>Middle</a>
+              <a href="" mat-menu-item>Senior</a>
+              <a href="" mat-menu-item>Leader</a>
+              <a href="" mat-menu-item>Manager</a>
+              <a href="" mat-menu-item>All Level</a>
+              </mat-menu>
+            <mat-menu #kynang="matMenu">
+              <a href="" mat-menu-item>Product Manager</a>
+              <a href="" mat-menu-item>Tester</a>
+              <a href="" mat-menu-item>Java developer</a>
+              <a href="" mat-menu-item>Python devloper</a>
+              <a href="" mat-menu-item>Java script</a>
+              <a href="" mat-menu-item>SQL devloper</a>
+              <a href="" mat-menu-item>Data Analyst</a>
+              <a href="" mat-menu-item>PHP developer</a>
+              <a href="" mat-menu-item>Cloud developer</a>
+              <a href="" mat-menu-item>System admin</a>
+            </mat-menu>
+            <mat-menu #diadiem="matMenu">
+              <a href="" mat-menu-item>Hồ Chí Minh</a>
+              <a href="" mat-menu-item>Hà Nội</a>
+              <a href="" mat-menu-item>Đà Nẵng</a>
+              <a href="" mat-menu-item>Cần thơ</a>
+              <a href="" mat-menu-item>Khác</a>
+            </mat-menu>
                 </div>
-            </div>
+              </div>
+        
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sự Nghiệp</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="body-job-category" class="dropdown-item">Định Hướng Nghề Nghiệp</a>
+                    <a href="/blog" class="dropdown-item">Định Hướng Nghề Nghiệp</a>
                     <a href="testimonial.html" class="dropdown-item">Bí kíp tìm việc</a>
                     <a href="body-error-404" class="dropdown-item">Tính lương Gross-net</a>
                     <a href="body-error-404" class="dropdown-item">Thị trường xu hướng tuyển dụng</a>
-
+                    <a href="body-error-404" class="dropdown-item">Kiến thức chuyên ngành</a>
                 </div>
             </div>
-            <a href="contact" class="nav-item nav-link">Contact</a>
-            <a href="dang-nhap" class="nav-item nav-link bg-primary rounded-0  text-white"> Đăng nhập</a>
+            <!-- <a href="contact" class="nav-item nav-link">Contact</a> -->
+            <a href="dang-nhap" class="nav-item nav-link  rounded-0  signin"> Đăng nhập</a>
             <a href="dang-ky" class="nav-item nav-link">Đăng ký</a>
         </div>
         <!-- <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a> -->

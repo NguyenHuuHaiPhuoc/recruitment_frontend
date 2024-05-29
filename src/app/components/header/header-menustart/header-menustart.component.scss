@@ -2,3 +2,43 @@
     width: 230px;
     height: 130px;
   }
+.signin{
+  background: linear-gradient(10deg,#5593dc,#66c5d9 80%,#69cada);
+}
+.signin:hover{
+  background: linear-gradient(50deg,#e01bfe,#db27d5 80%,#f22ee5);
+}
+.menu a:hover{
+  color: #69cada;
+}
+.dropdown_right:hover{
+ 
+}
+
+.childrent{
+ 
+}
+.parent:hover{
+  border-right: 2px solid rgb(244, 238, 238);
+}
+.parent_skill:hover .childrent{
+  display: block;
+}
+.fillterskill{
+  line-height: 50px;
+}
+.menuJobs{
+  font-weight: 500;
+  font-family:var(--bs-body-font-family);
+  align-items: center;
+}
+.dropend:hover > .dropdown-menu{
+  display: block;
+}
+.mat-menu-panel.menu {
+  display: none;
+}
+
+.menuJobs:hover + .fillterskill .mat-menu-panel.menu {
+  display: block;
+}

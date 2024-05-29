@@ -6,7 +6,6 @@ import { HeaderCarouselstrartComponent } from './components/header/header-carous
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-
 // import the cloundinaryModule
 // import the cloundinary classer
 

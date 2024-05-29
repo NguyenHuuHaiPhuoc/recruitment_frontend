@@ -1,5 +1,5 @@
 import { Component, Renderer2, ElementRef, input} from '@angular/core';
-import {  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
 import { Company } from './Company';
 import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class RegisterComponent {
   showPass:boolean=false;
   showPassConfirm:boolean=false;
   formValid:boolean= false;
-  imageFile: any ;
+  imageFile: any;
   // List skill (danh sách này sẽ được thay khi gọi api)
   public skills = [
     {id:1, code:'Java'},
@@ -45,7 +45,7 @@ export class RegisterComponent {
       this.userForm = this.formBuilder.group({
         email:['',
                   [Validators.required,Validators.email]],
-                 
+                  
         password:['',
                     [
                      Validators.required,
@@ -209,6 +209,7 @@ export class RegisterComponent {
     selectElement.size = this.listSkillFilter.length;
   }
   register(){
+    console.log(this.userForm.value);
      if(this.userForm.get('email')?.valid 
    &&
     this.userForm.get('password')?.valid
