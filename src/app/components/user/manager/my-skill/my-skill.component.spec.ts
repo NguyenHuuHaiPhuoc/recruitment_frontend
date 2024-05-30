@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderMenustartComponent } from './header-menustart.component';
+import { MySkillComponent } from './my-skill.component';
 
-describe('HeaderMenustartComponent', () => {
-  let component: HeaderMenustartComponent;
-  let fixture: ComponentFixture<HeaderMenustartComponent>;
+describe('MySkillComponent', () => {
+  let component: MySkillComponent;
+  let fixture: ComponentFixture<MySkillComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderMenustartComponent]
+      imports: [MySkillComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(HeaderMenustartComponent);
+    fixture = TestBed.createComponent(MySkillComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

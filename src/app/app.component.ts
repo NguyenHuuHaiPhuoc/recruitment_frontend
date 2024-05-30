@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeaderMenustartComponent } from './components/header/header-menustart/header-menustart.component';
 import { HeaderCarouselstrartComponent } from './components/header/header-carouselstrart/header-carouselstrart.component';
+import { AuthService } from './service/auth/auth-service.service';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -17,14 +18,13 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderMenustartComponent,
     HeaderCarouselstrartComponent,
     HeaderSearchComponent,
-    FooterComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent  {
-  title = 'my-demo';
- 
+export class AppComponent {
+  account:any = {};
   images = [
     {
       imageSrc:'./assets/img/header-carouselstart/hinh1.jpg',
@@ -41,13 +41,15 @@ export class AppComponent  {
   ];
    
 
-  constructor(private location: Location){}
+  constructor(private location: Location, private authService: AuthService){}
+
+  ngOnInit() {
+    
+  }
 
   getURL() : string {
     const path: string = this.location.path();
-    const segments: string[] = path.split('/');
-    const lastSegment: string = segments[segments.length - 1];
-    return lastSegment;
+    return path;
   }
 
 }

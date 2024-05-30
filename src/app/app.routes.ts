@@ -1,4 +1,11 @@
 import { Routes } from '@angular/router';
+import { RegisterComponent } from './components/user/account/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/user/account/login/login.component';
+import { SettingProfileComponent } from './components/user/manager/setting-profile/setting-profile.component';
+import { ManagerComponent } from './components/user/manager/manager.component';
+import { EditCvComponent } from './components/user/manager/edit-cv/edit-cv.component';
+import { Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
@@ -19,25 +26,41 @@ import { UpdatecompanyComponent } from './components/employer/employer-settingac
 import { CampaignComponent } from './components/employer/employer-campaign/campaign.component';
 
 export const routes: Routes = [
+  
   {
     path: 'easyjob',
     title: 'Thế giới việc làm',
     component: HomeComponent
   },
+  // {
+  //   path: 'viec-lam/cong-ty',
+  //   title: 'Công ty TNHH ABC',
+  //   component: JobdetailComponent,
+  // },
+  // {
+  //   path: 'about',
+  //   title: 'Về chúng tôi',
+  //   component: AboutComponent,
+  // },
+  // {
+  //   path: 'contact',
+  //   title: 'Liên hệ',
+  //   component: ContactComponent,
+  // },
   {
-    path: 'viec-lam/cong-ty',
-    title: 'Công ty TNHH ABC',
-    component: JobdetailComponent,
+    path: 'u/cap-nhat-thong-tin-ca-nhan',
+    title: 'Cài đặt thông tin cá nhân | EasyJob',
+    component: SettingProfileComponent,
   },
   {
-    path: 'about',
-    title: 'Về chúng tôi',
-    component: AboutComponent,
+    path: 'u/cv',
+    title: 'EasyJob - Việc làm hàng đầu',
+    component: ManagerComponent,
   },
   {
-    path: 'contact',
-    title: 'Liên hệ',
-    component: ContactComponent,
+    path: 'u/cv/edit',
+    title: 'EasyJob - Việc làm hàng đầu',
+    component: EditCvComponent,
   },
   {
     path: 'dang-ky',
@@ -102,7 +125,6 @@ export const routes: Routes = [
       }
     ]
   },
-  
   {
     path: '**',
     component: NotFoundComponent,

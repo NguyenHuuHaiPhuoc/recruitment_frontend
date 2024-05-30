@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import { Component, Renderer2, ElementRef, input} from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
+=======
+import { Component, Renderer2, ElementRef } from '@angular/core';
+import {  FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
+>>>>>>> test
 import { Company } from './Company';
-import { CommonModule, DatePipe, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestuploadComponent } from '../../../testupload/testupload.component';
+
+declare var $:any;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -13,7 +20,7 @@ import { TestuploadComponent } from '../../../testupload/testupload.component';
             TestuploadComponent
             ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  // styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   public roles  = '';
@@ -203,6 +210,10 @@ export class RegisterComponent {
     
     const searchTerm = (event.target as HTMLInputElement).value;
     const selectElement = document.getElementById('skills') as HTMLSelectElement;
+    
+    if ($('.search-skill').val() != '')
+      this.isHiddenSelect = false;
+
     this.listSkillFilter = this.skills.filter(item => {
       return JSON.stringify(item).toLowerCase().includes(searchTerm);
     });

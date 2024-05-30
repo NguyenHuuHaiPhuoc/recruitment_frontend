@@ -1,30 +1,21 @@
-import { NgClass, NgFor, NgIf} from '@angular/common';
-import { Component,Input,OnInit,inject,LOCALE_ID, PLATFORM_ID, OnDestroy,NgZone  } from '@angular/core';
-import {isPlatformBrowser} from "@angular/common"; // update this
-import { clearInterval, setInterval } from 'timers';
-
-interface carouselImages{
-  imageSrc:string;
-  imageAlt:string;
-}
+import { CommonModule } from "@angular/common";
+import { Component, Input, NgZone } from "@angular/core";
 
 @Component({
-  selector: 'app-header-carouselstrart',
-  standalone: true,
-  imports: [NgClass,NgFor,NgIf],
-  templateUrl: './header-carouselstrart.component.html',
-  styleUrl: './header-carouselstrart.component.scss'
+    selector: 'app-header-carouselstrart',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './header-carouselstrart.component.html',
+    styleUrl: './header-carouselstrart.component.scss'
 })
-
-export class HeaderCarouselstrartComponent implements OnInit{
-  
-  constructor(private ngZone: NgZone){};
-  @Input() images :carouselImages[] =[];
+export class HeaderCarouselstrartComponent {
+    constructor(private ngZone: NgZone){};
+  @Input() images :any =[];
   @Input() indicators =true;
   @Input() controls = true;
   @Input() autoSlide = true;
   @Input() slideInterval =2000;
-  selectedIndex =0;
+  public selectedIndex:number = 0;
    //change slide in every 3 seconds
   
   ngOnInit(): void {
@@ -56,5 +47,4 @@ export class HeaderCarouselstrartComponent implements OnInit{
      this.selectedIndex++;
     }
   } 
-  
 }

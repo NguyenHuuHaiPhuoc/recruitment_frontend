@@ -1,44 +1,25 @@
 .img-logo img{
-    width: 230px;
-    height: 130px;
-  }
-.signin{
-  background: linear-gradient(10deg,#5593dc,#66c5d9 80%,#69cada);
-}
-.signin:hover{
-  background: linear-gradient(50deg,#e01bfe,#db27d5 80%,#f22ee5);
-}
-.menu a:hover{
-  color: #69cada;
-}
-.dropdown_right:hover{
- 
+  width: 230px;
+  height: 130px;
 }
 
-.childrent{
- 
-}
-.parent:hover{
-  border-right: 2px solid rgb(244, 238, 238);
-}
-.parent_skill:hover .childrent{
-  display: block;
-}
-.fillterskill{
-  line-height: 50px;
-}
-.menuJobs{
-  font-weight: 500;
-  font-family:var(--bs-body-font-family);
-  align-items: center;
-}
-.dropend:hover > .dropdown-menu{
-  display: block;
-}
-.mat-menu-panel.menu {
-  display: none;
+.info-account{
+  background-color: #F1F1F1;
 }
 
-.menuJobs:hover + .fillterskill .mat-menu-panel.menu {
-  display: block;
+.dropdown-action{padding: 10px;}
+.dropdown-action a{
+  background-color: #F1F2F6;
+  margin-bottom: 10px;
+  padding: 15px 0 15px 10px;
+  border-radius: 8px;
+}
+.dropdown_info{width: 250px;}
+.dropdown_info img{
+  height: 32px;
+}
+
+.dropdown_info p{
+  margin: 0 30px 5px 10px;
+  color: #6f7882;
 }

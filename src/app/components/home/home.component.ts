@@ -1,15 +1,16 @@
 import { Component,OnInit} from '@angular/core';
-import { QuickSearchComponent } from '../quick-search/quick-search.component';
-import { Http2ServerRequest } from 'http2';
 import { HttpClient } from '@angular/common/http';
-import { NgFor, NgIf } from '@angular/common';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CarouselslideComponent } from '../carouselslide/carouselslide.component';
+import { QuickSearchComponent } from '../quick-search/quick-search.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [QuickSearchComponent,NgFor,NgIf, SlickCarouselModule , CarouselslideComponent],
+  imports: [
+    QuickSearchComponent,
+    SlickCarouselModule,
+    CarouselslideComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

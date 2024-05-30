@@ -1,7 +1,17 @@
-
-@if (getURL() && (getURL() === "dang-ky" || getURL() === "dang-nhap") ) {
+@if (getURL() && (getURL() === "/dang-ky" || getURL() === "/dang-nhap") ) {
     <router-outlet></router-outlet>
-}@else if(getURL() === "blog"){
+} @else if (getURL() && (getURL() === "/u/cap-nhat-thong-tin-ca-nhan")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+} @else if (getURL() && (getURL() === "/u/cv")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+} @else if (getURL() && (getURL() === "/u/cv/edit")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
+} @else if(getURL() === "blog"){
   <app-header-menustart></app-header-menustart>
   <app-header-carouselstrart [images]="images"></app-header-carouselstrart>
   <router-outlet></router-outlet>
@@ -15,9 +25,12 @@
 
 @else {
 <app-header-menustart></app-header-menustart>
-<app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
-<app-header-search></app-header-search>
-<router-outlet></router-outlet>
-<!-- <app-feedback-clients></app-feedback-clients> -->
-<app-footer></app-footer>
+   
+    <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
+
+    <app-header-search></app-header-search>
+    <router-outlet></router-outlet>
+    <!-- <app-feedback-clients></app-feedback-clients> -->
+
+    <app-footer></app-footer>
 }
