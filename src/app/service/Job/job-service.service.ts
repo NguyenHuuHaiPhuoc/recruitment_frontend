@@ -11,18 +11,28 @@ export class JobService{
         private http: HttpClient
     ) {}
 
-    public getAllJob ():Observable<any> {
-        return this.http.get<any>(this.api_url + '/jobs', {
+    public getAllJob (id:any):Observable<any> {
+        // let account = [];
+        // let item = localStorage.getItem('account');
+        // if (item != null) {
+        //     account = JSON.parse(item);
+        // }
+        // const token = localStorage.getItem(account.username+"_jwtToken");
+        return this.http.get(this.api_url + '/jobs/account_id='+id,{
             headers: this.createAuthorizationHeader()
         });
     }
 
     public getJobById (id:any):Observable<any> {
-        return this.http.get<any>(this.api_url + '/jobs/id=' + id);
+        return this.http.get<any>(this.api_url + '/jobs/id=' + id, {
+            headers: this.createAuthorizationHeader()
+        });
     }
 
     public createJob (job:any):Observable<any> {
-        return this.http.post<any>(this.api_url + '/jobs',job);
+        return this.http.post<any>(this.api_url + '/jobs',job, {
+            headers: this.createAuthorizationHeader()
+        });
     }
 
     private createAuthorizationHeader() {
@@ -37,7 +47,7 @@ export class JobService{
             return;
         }
         return new HttpHeaders().set(
-            'Athorization', 'Bearer' + token
+            'Authorization', 'Bearer ' + token
         );
     }
 }

@@ -1,6 +1,5 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -14,12 +13,33 @@ export const authGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem(account.username+"_jwtToken")
   const roles = account.roles;
   if(roles != null){
-    if(state.url.includes('dashboard-recruiter/dashboard') && roles[0] == 2){
+    if(state.url.includes('easyjob') && roles[0] == 3){
+      router.navigateByUrl(state.url);
+      console.error("Ban khong co quyen truy cap vao trang nay");
+      return false;
+    }
+    if(
+      (
+        state.url.includes('dashboard-recruiter/dashboard')
+        ||
+        state.url.includes('dashboard-recruiter/cong-viec')
+      )
+      && roles[0] == 2)
+    {
       console.error("Ban khong co quyen truy cap vao trang nay")
       return false;
     }
 
-    if (state.url.includes('dashboard-admin/dashboard') && roles[0] == 2 && roles[0] == 3) {
+    if (
+      (
+        state.url.includes('dashboard-admin/dashboard')
+        ||
+        state.url.includes('dashboard-admin/quan-ly-cong-viec')
+        ||
+        state.url.includes('dashboard-admin/code')
+      ) 
+      && (roles[0] == 2 || roles[0] == 3)) 
+    {
       console.error("Ban khong co quyen truy cap vao trang nay")
       return false;
     }

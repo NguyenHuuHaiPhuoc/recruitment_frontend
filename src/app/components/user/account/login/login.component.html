@@ -29,6 +29,13 @@
                 <div class="input-group">
                   <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
                   <input type="password" class="form-control" id="password" formControlName="password" placeholder="Nhập mật khẩu"/>
+                  <span class="input-group-text" (click)="showPassword()">
+                    @if (eyeShowPassword) {
+                      <i class="bi bi-eye fs-5 fw-bold"></i>
+                    }@else {
+                      <i class="bi bi-eye-slash fs-5 fw-bold"></i>
+                    }
+                  </span>
                 </div>
                 @if (form_login.controls['password'].invalid 
                     && (form_login.controls['password'].touched || form_login.controls['password'].dirty)) {

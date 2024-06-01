@@ -378,7 +378,7 @@ export class RegisterComponent implements OnInit {
               id: resp.result.id
             },
             role: {
-              id: 2
+              id: 1
             }
           }
         ;

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth-service.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class DashboardBodyComponent implements OnInit{
   public isLogin:boolean = false;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
   ngOnInit ():void {
     this.user = this.authService.getAccount();
@@ -38,5 +39,13 @@ export class DashboardBodyComponent implements OnInit{
       styleClass = 'body-md-screen';
     }
     return styleClass;
+  }
+
+  public logout () {
+    const username = this.authService.getAccount().username;
+    localStorage.removeItem(username+'_jwtToken');
+    localStorage.removeItem('stageUrl');
+    this.authService.logout();
+    this.router.navigate(['/dang-nhap']);
   }
 }

@@ -11,25 +11,36 @@ import { OptionDetailService } from '../../../service/option-detail/option-detai
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { ProcessService } from '../../../service/process/process-service.service';
+import { AuthService } from '../../../service/auth/auth-service.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 declare var $: any;
 @Component({
   selector: 'app-post-job',
   standalone: true,
-  imports: [CommonModule, AngularEditorModule, ReactiveFormsModule],
+  imports: [CommonModule, AngularEditorModule, ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './post-job.component.html',
   styleUrl: './post-job.component.scss',
-  providers: [JobService, OptionDetailService, ProcessService],
+  providers: [
+    JobService,
+    OptionDetailService,
+    ProcessService
+  ],
 })
 export class PostJobComponent implements OnInit {
   public jobs: any = [];
   public levels: any = [];
   public contractTypes: any = [];
   public workingForms: any = [];
+  public processByJob:any = [];
+  public isEditProcess:any = false;
+  public page:number = 1;
   public form_job: FormGroup;
+  private user = this.authService.getAccount();
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
     private jobService: JobService,
     private opDetailService: OptionDetailService,
     private proService: ProcessService
@@ -50,8 +61,10 @@ export class PostJobComponent implements OnInit {
       time_work: [null],
       address_work: [null],
       create_date: new Date(),
-      create_by: [1],
+      create_by: this.user.id.split('_')[0],
       status: [false],
+      is_confirmed: ['Chưa xét duyệt'],
+      confirm_by: ['']
     });
   }
 
@@ -84,8 +97,8 @@ export class PostJobComponent implements OnInit {
   };
 
   private loadData() {
-    this.jobService.getAllJob().subscribe((data) => {
-      this.jobs = data;
+    this.jobService.getAllJob(this.user.id.split('_')[0]).subscribe((data) => {
+      this.jobs= data.listResult;
     });
   }
 
@@ -93,35 +106,52 @@ export class PostJobComponent implements OnInit {
     $('.editJobModal').trigger('click');
     try {
       this.jobService.getJobById(id).subscribe((resp) => {
-        this.form_job.setValue({
-          position: resp.position,
-          level: resp.level,
-          tech_use: resp.tech_use,
-          year_exp: resp.year_exp,
-          salary: resp.salary,
-          member: resp.member,
-          expiration_date: moment(resp.expiration_date).format('YYYY-MM-DD'),
-          contract_type: resp.contract_type,
-          working_form: resp.working_form,
-          job_desc: resp.job_desc,
-          require: resp.require,
-          welfare: resp.welfare,
-          time_work: resp.time_work,
-          address_work: resp.address_work,
-          create_date: resp.create_date,
-          create_by: resp.create_by,
-          status: resp.status,
-        });
+        if (resp.status == 200) {
+          this.form_job.setValue({
+            position: resp.result.position,
+            level: resp.result.level,
+            tech_use: resp.result.tech_use,
+            year_exp: resp.result.year_exp,
+            salary: resp.result.salary,
+            member: resp.result.member,
+            expiration_date: moment(resp.result.expiration_date).format('YYYY-MM-DD'),
+            contract_type: resp.result.contract_type,
+            working_form: resp.result.working_form,
+            job_desc: resp.result.job_desc,
+            require: resp.result.require,
+            welfare: resp.result.welfare,
+            time_work: resp.result.time_work,
+            address_work: resp.result.address_work,
+            create_date: resp.result.create_date,
+            create_by: resp.result.create_by,
+            status: resp.result.status,
+            is_confirmed: resp.result.is_confirmed,
+            confirm_by: resp.result.confirm_by
+          });
+          this.proService.processByJobID(resp.result.id).subscribe({
+            next: (resp) => {
+              this.processByJob = resp.listResult;
+              if (this.processByJob.length <= 0) 
+                this.isEditProcess = true;
+            },
+            error(err) {
+              console.error(err)
+            }
+          });
+          
+        }
+        if (resp.status == 404) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: resp.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
     } catch (error) {
       console.log(error);
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Công việc không tìm thấy!',
-        showConfirmButton: false,
-        timer: 1500,
-      });
     }
   }
 
@@ -130,51 +160,37 @@ export class PostJobComponent implements OnInit {
     const step = $('#step-input').val();
     try {
       this.jobService.createJob(this.form_job.value).subscribe((resp) => {
-        const processInterview = [];
-        for (let i = 0; i < step; i++) {
-          let contentInterview = {
-            step: $('#step_label_' + (i + 1)).text(),
-            process_content: $('#content_interview_' + (i + 1)).val(),
-            create_date: '2024-05-16T21:49:12',
-            jobs: {
-              id: resp.id,
-            }
-          };
-          processInterview.push(contentInterview);
-        }
-        // const process = [
-        //   {
-        //     step: 'Vòng 1',
-        //     process_content: 'Vòng CV',
-        //     create_date: '2024-05-16T21:49:12',
-        //     jobs: {
-        //       id: resp.id,
-        //     },
-        //   },
-        //   {
-        //     step: 'Vòng 2',
-        //     process_content:
-        //       'Phỏng vấn với HR: Giới thiệu về công ty, chia sẻ phúc lợi',
-        //     create_date: '2024-05-16T21:49:12',
-        //     jobs: {
-        //       id: resp.id,
-        //     },
-        //   },
-        // ];
-        for (let i = 0; i < processInterview.length; i++) {
-          this.proService.createProcess(processInterview[i]).subscribe((resp) => {
-            console.log(resp);
+        if (step != '') {
+          const processInterview = [];
+          for (let i = 0; i < step; i++) {
+            let contentInterview = {
+              step: $('#step_label_' + (i + 1)).text(),
+              process_content: $('#content_interview_' + (i + 1)).val(),
+              create_date: new Date(),
+              jobs: {
+                id: resp.result.id,
+              }
+            };
+            processInterview.push(contentInterview);
+          }
+          
+          for (let i = 0; i < processInterview.length; i++) {
+            this.proService.createProcess(processInterview[i]).subscribe((resp) => {
+              console.log(resp);
+            });
+          }
+         
+          $('.close-add-job').trigger('click');
+          this.loadData();
+  
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Đăng công việc thành công!',
+            showConfirmButton: false,
+            timer: 1500,
           });
         }
-        $('.close-add-job').trigger('click');
-        this.loadData();
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Đăng công việc thành công!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
       });
     } catch (error) {
       console.log(error);
@@ -229,6 +245,13 @@ export class PostJobComponent implements OnInit {
       create_date: new Date(),
       create_by: 1,
       status: false,
+      is_confirmed: ['Chưa xét duyệt'],
+      confirm_by: ['']
     });
   }
+  // design edit process
+  public openEditProcess () {
+    this.isEditProcess=true;
+  }
+  public cancleEditProcess () {this.isEditProcess=false;}
 }

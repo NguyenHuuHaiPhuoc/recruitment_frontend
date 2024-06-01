@@ -1,6 +1,6 @@
 <div class="dashboard-body" [ngClass]="getClassBody()">
     <div class="row mt-md-0 mb-md-4 justify-content-end">
-        <div class="col-md-2">
+        <div class="col-md-2 w-25">
             @if (isLogin) {
                 <div class="dropdown">
                     <div class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -15,10 +15,10 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <p role="button" class="dropdown-item" (click)="logout()">
                                 <i class="bi bi-box-arrow-left me-md-3"></i>
                                 Đăng xuất
-                            </a>
+                            </p>
                         </li>
                     </ul>
                 </div>

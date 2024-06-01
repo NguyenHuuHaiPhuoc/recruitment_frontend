@@ -29,6 +29,22 @@
     display: flex;
     gap: 1rem;
 }
-table{border: .1rem solid #2A6563;}
+.table{
+    thead {
+      tr{
+        th{
+         background-color: #2A6563;
+         border-color:#2A6563;
+         color: #fff;
+        }
+      }
+    }
+  } 
 
-#myCell ul{height: 66px;}
+.step-item-tail{
+  width: 0;
+  height: 1.65rem;
+  border: 0.5px solid #05ad5e;
+  left: 6px;
+  top: 1.4rem;
+}

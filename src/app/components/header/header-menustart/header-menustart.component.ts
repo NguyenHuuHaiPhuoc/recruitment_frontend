@@ -44,6 +44,7 @@ export class HeaderMenustartComponent implements OnInit{
    onLogout(){
     const username = this.authService.getAccount().username;
     localStorage.removeItem(username+'_jwtToken');
+    localStorage.removeItem('stageUrl');
     this.authService.logout();
     this.router.navigate(['/dang-nhap']);
    }
