@@ -1,5 +1,9 @@
+*{
+    box-sizing: border-box;
+}
 body{
-    font-family: Inter, sans-serif;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
 }
 
 :root {
@@ -8,7 +12,6 @@ body{
     --light: #EFFDF5;
     --dark: #2B3940;
 }
-
 .back-to-top {
     position: fixed;
     display: none;
@@ -16,7 +19,6 @@ body{
     bottom: 45px;
     z-index: 99;
 }
-
 
 /*** Spinner ***/
 #spinner {

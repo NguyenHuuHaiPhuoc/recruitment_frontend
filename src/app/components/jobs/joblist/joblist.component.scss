@@ -1,0 +1,24 @@
+.search-job{
+    background-color: #2A6563;
+}
+.group-search{background-color: #fff;}
+.item-search input:focus, .item-city select:focus{outline: none;border: none;}
+.dropdown-toggle:hover{
+    background: #fff;
+    color: #000;
+}
+.col-button button:hover{
+    background: #fff;
+}
+.dropdown-menu{
+    width: 1206px;
+    height: 90px;
+    inset: 0px -23px auto auto !important;
+}
+.btnFilter{
+    height: 244px;
+    transition: height 1s ease-in;
+    .dropdown-menu{
+        overflow: hidden;
+    }
+}

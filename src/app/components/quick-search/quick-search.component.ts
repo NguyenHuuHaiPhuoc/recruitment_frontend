@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './quick-search.component.scss'
 })
 export class QuickSearchComponent {
-
+  
 }

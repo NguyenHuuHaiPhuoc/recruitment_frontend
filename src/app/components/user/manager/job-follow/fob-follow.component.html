@@ -1,0 +1,78 @@
+<div class="row mt-md-5">
+    <div class="job-follow row">
+        <h5 class="text-danger fw-bold mb-md-5">Việc đã theo dõi</h5>
+        @for (i of number; track $index) {
+            <div class="col-md-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 text-center mt-md-2">
+                            <img src="/assets/img/com-logo-3.jpg" class="img-fluid rounded-start" alt="Logo Company">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Game Developer (Unity/ Cocos)</h5>
+                                <p class="card-text">Quận Thanh Xuân, Thành phố Hà Nội</p>
+                                <p class="card-text text-danger d-md-flex justify-content-between">
+                                    <span>
+                                        <i class="bi bi-cash-stack"></i>
+                                        Thỏa thuận
+                                    </span>
+                                    <span role="button" class="unfollow"><i class="bi bi-bookmark-fill fs-5"></i></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <h5 >Đã hết hạn ứng tuyển</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <nav class="mt-md-3">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="job-watched row">
+        <h5 class="text-danger fw-bold mt-md-5 mb-md-5">Việc đã xem</h5>
+        @for (i of number; track $index) {
+            <div class="col-md-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4 text-center mt-md-2">
+                        <img src="/assets/img/com-logo-5.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Game Developer (Unity/ Cocos)</h5>
+                                <p class="card-text">Quận Thanh Xuân, Thành phố Hà Nội</p>
+                                <p class="card-text text-danger">
+                                    <i class="bi bi-cash-stack"></i>
+                                    Thỏa thuận
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center d-md-flex justify-content-around">
+                            <button class="btn btn-outline-secondary">Theo dõi</button>
+                            <button class="btn btn-danger">Ứng tuyển ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <nav class="mt-md-3">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

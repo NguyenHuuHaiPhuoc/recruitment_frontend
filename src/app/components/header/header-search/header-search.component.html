@@ -6,10 +6,16 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4 searchbox">
-                                <input type="text" class="form-control border-0" placeholder="Từ Khóa"  (click)="onInputClick()" #toggleButton />
-
+<input type="text" class="form-control border-0" 
+                                    placeholder="Từ Khóa" 
+                                    name="searchValue"
+                                    [(ngModel)]="searchValue"
+                                    (blur)="onInputClick()" 
+                                    (click)="onInputClick()" 
+                                    #toggleButton />
                                 <!-- gợi ý những từ khóa tìm kiếm -->
-                                <div class="popup" *ngIf="popupshow" #menu>
+                                <div class="popup" [hidden]="popupshow" >
+                                
                                   <div class="container mt-3">
                                     <div class="row">
                                       <div class="col-6">
@@ -20,10 +26,10 @@
                                       <div class="listHitorySearch">
                                         <ul>
                                           <li class="ItemHistory"><a href="#">intern java</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
-                                         <li class="ItemHistory"><a href="#">fresher java</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
-                                        <li class="ItemHistory"><a href="#">Thực tập sinh</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
-                                        <li class="ItemHistory"><a href="#">quản trị kinh doanh</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
-                                        <li class="ItemHistory"><a href="#">Data</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>                                   
+                                          <li class="ItemHistory"><a href="#">fresher java</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
+                                          <li class="ItemHistory"><a href="#">Thực tập sinh</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
+                                          <li class="ItemHistory"><a href="#">quản trị kinh doanh</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>
+                                          <li class="ItemHistory"><a href="#">Data</a> <a href="#"><i class="bi bi-x-lg"></i></a> </li>                                   
                                         </ul>
                                       </div>
                                         

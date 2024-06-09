@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-demo": {
+    "recruitment-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my-demo",
+            "outputPath": "dist/recruitment-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -33,14 +33,16 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
-              "node_modules/slick-carousel/slick/slick-theme.scss"
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": [
-               "node_modules/jquery/dist/jquery.min.js",
-               "node_modules/slick-carousel/slick/slick.min.js"
-            
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ],
             "server": "src/main.server.ts",
             "prerender": false,
@@ -66,7 +68,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": []
             }
           },
           "defaultConfiguration": "production"
@@ -75,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-demo:build:production"
+              "buildTarget": "recruitment-web:build:production"
             },
             "development": {
-              "buildTarget": "my-demo:build:development"
+              "buildTarget": "recruitment-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "my-demo:build"
+            "buildTarget": "recruitment-web:build"
           }
         },
         "test": {

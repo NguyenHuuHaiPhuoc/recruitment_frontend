@@ -5,9 +5,10 @@
 
 .companyBox_container {
   
-  margin-right: 1rem;
+  margin: 1rem;
   width: 200px;
   box-shadow: 0 0 4px 4px rgb(242, 241, 241);
+  
 }
 .companyBox_container a{
   text-decoration: none;
@@ -17,8 +18,10 @@
  
 }
 .companyBox_container:hover{
-  border: 2px solid gray;
-  transform: scale(1);
+  // border: 1px solid gray;
+    box-shadow: 0 0 4px 4px rgb(169, 168, 168);
+
+ 
 }
 
 .companyBox{

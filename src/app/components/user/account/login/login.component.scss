@@ -5,6 +5,8 @@
     right: 0;
     padding-right: 0;
     padding-left: 0;
+    background: rgba(255, 255, 255, 0.2); /* Màu nền với độ trong suốt */
+    backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
   }
 
   .container{

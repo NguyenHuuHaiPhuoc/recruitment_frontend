@@ -1,15 +1,18 @@
 import { Component,OnInit} from '@angular/core';
-import { QuickSearchComponent } from '../quick-search/quick-search.component';
-import { Http2ServerRequest } from 'http2';
 import { HttpClient } from '@angular/common/http';
-import { NgFor, NgIf } from '@angular/common';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CarouselslideComponent } from '../carouselslide/carouselslide.component';
+import { QuickSearchComponent } from '../quick-search/quick-search.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [QuickSearchComponent,NgFor,NgIf, SlickCarouselModule , CarouselslideComponent],
+  imports: [
+    QuickSearchComponent,
+    SlickCarouselModule,
+    CarouselslideComponent,
+     CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -25,7 +28,6 @@ export class HomeComponent implements OnInit{
     // hiển thị 5 công việc
     this.http.get(this.url).subscribe((data: any) =>{
     this.res = data.slice(0,limit);
-    console.log(this.res);
   });
 
   }
@@ -48,7 +50,6 @@ export class HomeComponent implements OnInit{
    this.limit +=5;
    this.http.get(this.url).subscribe((data: any) =>{
    this.res = data.slice(0,this.limit);
-    console.log(this.res);
  });
  this.loading = false;
  },700);
@@ -131,9 +132,6 @@ config_list_language = {
   },
     {logo: "assets/img/logo/company/logovin.webp",
     name:"vin"
-  },
-    {logo: "assets/img/logo/company/logochailease.png",
-    name:"chailease"
   },
     {logo: "assets/img/logo/company/yamahalogo.jpg",
     name:"Yamaha"

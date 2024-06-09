@@ -1,7 +1,60 @@
+.dropend .dropdown-menu{display: none;}
+.dropend:hover > .dropdown-menu{
+  display: block;
+  width: 750px;
+  max-height: 700px;
+  position: absolute;
+  top: 0;
+  left:100%;
+  margin-left: .125em;
+  li{
+    display: inline-table;
+    width: 125px;
+    background: #F1F1F1;
+    margin: 10px 5px 10px 20px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  li:hover{
+    background-color: #2A6563;
+    color: #fff
+  }
+}
+
 .img-logo img{
     width: 230px;
     height: 130px;
   }
+
+.info-account{
+  background-color: #F1F1F1;
+}
+
+.dropdown-action{padding: 10px;}
+.dropdown-action a{
+  background-color: #F1F2F6;
+  margin-bottom: 10px;
+  padding: 15px 0 15px 10px;
+  border-radius: 8px;
+}
+.dropdown_info{width: 250px;}
+.dropdown_info img{
+  height: 32px;
+}
+
+.dropdown_info p{
+  margin: 0 30px 5px 10px;
+  color: #6f7882;
+}
+
+.login{
+  background-color:  #2A6563;
+  color: #fff !important;
+}
+.register{
+  border: 1px solid #2A6563;
+  color: #2A6563;
+}
 .signin{
   background: linear-gradient(10deg,#5593dc,#66c5d9 80%,#69cada);
 }
