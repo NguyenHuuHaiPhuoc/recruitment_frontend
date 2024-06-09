@@ -6,6 +6,11 @@ import { HeaderCarouselstrartComponent } from './components/header/header-carous
 import { AuthService } from './service/auth/auth-service.service';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DashboardRecruiterComponent } from './components/dashboard-recruiter/layout/dashboard-recruiter.component';
+import { DashboardComponent } from './components/dashboard-recruiter/dashboard/dashboard.component';
+import { PostJobComponent } from './components/dashboard-recruiter/post-job/post-job.component';
+import { LayoutAdminComponent } from './components/dashboard-admin/layouts-admin/layout-admin.component';
+
 
 // import the cloundinaryModule
 // import the cloundinary classer
@@ -18,10 +23,17 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderMenustartComponent,
     HeaderCarouselstrartComponent,
     HeaderSearchComponent,
+    DashboardRecruiterComponent,
+    DashboardComponent,
+    PostJobComponent,
+    LayoutAdminComponent,
     FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  providers: [
+    AuthService
+  ]
 })
 export class AppComponent {
   account:any = {};
@@ -41,7 +53,7 @@ export class AppComponent {
   ];
    
 
-  constructor(private location: Location, private authService: AuthService){}
+  constructor(private location: Location){}
 
   ngOnInit() {
     
@@ -49,7 +61,8 @@ export class AppComponent {
 
   getURL() : string {
     const path: string = this.location.path();
-    return path;
+    const segments: string[] = path.split('/');
+    const lastSegment: string = segments[segments.length - 1];
+    return lastSegment;;
   }
-
 }

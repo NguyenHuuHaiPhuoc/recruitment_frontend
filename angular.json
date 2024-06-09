@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-demo": {
+    "recruitment-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my-demo",
+            "outputPath": "dist/recruitment-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -68,7 +68,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": []
             }
           },
           "defaultConfiguration": "production"
@@ -77,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-demo:build:production"
+              "buildTarget": "recruitment-web:build:production"
             },
             "development": {
-              "buildTarget": "my-demo:build:development"
+              "buildTarget": "recruitment-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "my-demo:build"
+            "buildTarget": "recruitment-web:build"
           }
         },
         "test": {

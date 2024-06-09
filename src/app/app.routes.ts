@@ -5,19 +5,18 @@ import { LoginComponent } from './components/user/account/login/login.component'
 import { SettingProfileComponent } from './components/user/manager/setting-profile/setting-profile.component';
 import { ManagerComponent } from './components/user/manager/manager.component';
 import { EditCvComponent } from './components/user/manager/edit-cv/edit-cv.component';
-import { Routes } from '@angular/router';
-import { AboutComponent } from './components/about/about.component';
-import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
+import { JoblistComponent } from './components/jobs/joblist/joblist.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { RegisterComponent } from './components/user/account/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/user/account/login/login.component';
+import { DashboardComponent } from './components/dashboard-recruiter/dashboard/dashboard.component';
+import { PostJobComponent } from './components/dashboard-recruiter/post-job/post-job.component';
+import { authGuard } from './service/auth/auth.guard';
+import { DashboardAdminContentComponent } from './components/dashboard-admin/dashboard-admin-content/dashboard-admin-content.component';
+import { ManagermentjobComponent } from './components/dashboard-admin/manager-job/manager-job.component';
+import { CodeAdminComponent } from './components/dashboard-admin/codes-admin/code-admin.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { JobdetailComponent } from './components/jobs/jobdetail/jobdetail.component';
 import { EmployerHomeComponent } from './components/employer/employer-home/employer-home.component';
 import { EmployerNewsComponent } from './components/employer/employer-news/employer-news.component';
-import path from 'node:path';
-import { Component } from '@angular/core';
 import { EmployerSettingaccountComponent } from './components/employer/employer-settingaccount/employer-settingaccount.component';
 import { ChangepassComponent } from './components/employer/employer-settingaccount/childitem/changepass/changepass.component';
 import { ImfomationUserComponent } from './components/employer/employer-settingaccount/childitem/imfomation-user/imfomation-user.component';
@@ -25,13 +24,62 @@ import { BusinesslicenseComponent } from './components/employer/employer-setting
 import { UpdatecompanyComponent } from './components/employer/employer-settingaccount/childitem/updatecompany/updatecompany.component';
 import { CampaignComponent } from './components/employer/employer-campaign/campaign.component';
 
+
 export const routes: Routes = [
-  
+  {
+    path: '', redirectTo: 'easyjob', pathMatch: 'full'
+  },
   {
     path: 'easyjob',
     title: 'Thế giới việc làm',
     component: HomeComponent
   },
+  {
+    path: 'dashboard-recruiter', redirectTo: 'dashboard-recruiter/dashboard', pathMatch: 'full'
+  },
+  {
+    path: 'dashboard-recruiter/dashboard',
+    title: 'Nhà tuyển dụng | Dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard-recruiter/cong-viec',
+    title: 'Nhà tuyển dụng | Đăng công việc',
+    component: PostJobComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard-admin', redirectTo: 'dashboard-admin/dashboard', pathMatch: 'full'
+  },
+  {
+    path: 'dashboard-admin/dashboard',
+    title: 'Nhà tuyển dụng | Dashboard',
+    component: DashboardAdminContentComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard-admin/code',
+    title: 'Nhà tuyển dụng | Tùy chỉnh',
+    component: CodeAdminComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard-admin/quan-ly-cong-viec',
+    title: 'Nhà tuyển dụng | Tùy chỉnh',
+    component: ManagermentjobComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'viec-lam',
+    title: 'Thế giới việc làm',
+    component: JoblistComponent
+  },
+  // {
+  //   path: 'testimonial',
+  //   title: 'Thế giới việc làm',
+  //   component: JoblistComponent
+  // },
   // {
   //   path: 'viec-lam/cong-ty',
   //   title: 'Công ty TNHH ABC',
@@ -56,6 +104,7 @@ export const routes: Routes = [
     path: 'u/cv',
     title: 'EasyJob - Việc làm hàng đầu',
     component: ManagerComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'u/cv/edit',
@@ -125,6 +174,7 @@ export const routes: Routes = [
       }
     ]
   },
+  
   {
     path: '**',
     component: NotFoundComponent,

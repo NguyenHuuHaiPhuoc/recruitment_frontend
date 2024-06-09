@@ -1,0 +1,240 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="searchBox">
+        <input class="searchInput" type="text" name="" placeholder="Nhập nội dung..." (input)="searchCodeOption($event)">
+        <button class="searchButton">
+          <i class="bi bi-search fs-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover tb-code-op">
+        <thead class="table-dark text-center">
+          <tr>
+            <th></th>
+            <th scope="col">ID</th>
+            <th scope="col">Loại CODE</th>
+            <th scope="col">Tên CODE</th>
+            <th scope="col">Tạo bởi</th>
+            <th scope="col">Ngày tạo</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          @if (codes.length > 0) {
+          <tr *ngFor="let c of filterCode">
+            <td class="text-center d-md-flex justify-content-center td-checked">
+              <div class="check-box-row" id="checked" (click)="rowOnlyChecked(c)"></div>
+              <div class="uncheck" id="uncheck"><i class="bi bi-check-square-fill text-primary"></i></div>
+            </td>
+            <th scope="row">{{c.id}}</th>
+            <td>{{c.optionType}}</td>
+            <td>{{c.optionName}}</td>
+            <td>{{c.createBy}}</td>
+            <td>{{c.createDate | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+          </tr>
+          } @else {
+          <tr>
+            <td scope="row" colspan="6" class="text-warning fst-italic text-center">Chưa có dữ liệu</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="row mt-md-3">
+      <div class="col-md-6">
+        <div class="action d-md-flex gap-md-3">
+          <button class="btn btn-success open-code-option-modal" data-bs-toggle="modal"
+            data-bs-target="#openCodeOption">Thêm mới</button>
+          <button class="btn btn-warning" (click)="openEditCodeOptionForm()">Cập nhật</button>
+          <button class="btn btn-danger" (click)="deleteCodeOption()">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-md-4">
+    <label class="form-label text-center fs-5 fw-bold">Danh sách Opntion Detail của {{opd_name?opd_name:'...'}}</label>
+    <table class="table table-bordered table-hover tb-op-detail">
+      <thead class="table-dark text-center">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tên</th>
+          <th scope="col">Tạo bởi</th>
+          <th scope="col">Ngày tạo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (option_details.length > 0) {
+        <tr *ngFor="let o of option_details | paginate: { itemsPerPage: 5, currentPage: p }"
+          (dblclick)="editOptionDetail(o)" id="{{o.id + o.option_name}}">
+          <th scope="row">{{o.id}}</th>
+          <td>{{o.option_name}}</td>
+          <td>{{o.create_by}}</td>
+          <td>{{o.create_date | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+        </tr>
+        } @else {
+        <tr>
+          <th scope="row" colspan="4" class="text-warning fst-italic text-center">Chưa có dữa liệu</th>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="row mt-md-3">
+      <div class="col-md-4">
+        <button class="btn btn-success" (click)="addOptionDetail()">Thêm mới</button>
+      </div>
+      <div class="col-md-8">
+        @if (option_details.length > 0) {
+        <div class="text-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="Lùi lại"
+            nextLabel="Tiếp theo"></pagination-controls>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="openCodeOption" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Thêm Code Option</h1>
+        <button type="button" class="btn-close close-addCodeOptionModal" data-bs-dismiss="modal" aria-label="Close"
+          (click)="resetCodeOptionForm()"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" [formGroup]="formAddCodeOption">
+          <div class="mb-3">
+            <label class="form-label">Loại CODE</label>
+            <input type="text" class="form-control uppercase-input" formControlName="optionType">
+
+            @if (formAddCodeOption.controls['optionType'].invalid
+            && (formAddCodeOption.controls['optionType'].touched || formAddCodeOption.controls['optionType'].dirty)) {
+            @if (formAddCodeOption.controls['optionType'].errors) {
+            <div class="form-text text-danger fst-italic">Không được để trống!</div>
+            }
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tên CODE</label>
+            <input type="text" class="form-control" formControlName="optionName">
+            @if (formAddCodeOption.controls['optionName'].invalid
+            && (formAddCodeOption.controls['optionName'].touched || formAddCodeOption.controls['optionName'].dirty)) {
+            @if (formAddCodeOption.controls['optionName'].errors) {
+            <div class="form-text text-danger fst-italic">Không được để trống!</div>
+            }
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="!formAddCodeOption.valid"
+          (click)="addCodeOption()">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" id="open-edit-code-option" data-bs-toggle="modal" data-bs-target="#editCodeOption"></button>
+<div class="modal fade" id="editCodeOption" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Cập nhật Option Detail</h1>
+        <button type="button" class="btn-close close-editCodeOptionModal" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formUpdateCodeOption">
+          <input type="text" class="form-control" formControlName="id" [hidden]="true">
+          <div class="mb-3">
+            <label class="form-label">Loại CODE</label>
+            <input type="text" class="form-control uppercase-input" formControlName="optionType">
+            @if (formUpdateCodeOption.controls['optionType'].invalid
+            && (formUpdateCodeOption.controls['optionType'].touched ||
+            formUpdateCodeOption.controls['optionType'].dirty)) {
+            @if (formUpdateCodeOption.controls['optionType'].errors) {
+            <div class="form-text text-danger fst-italic">Tên CODE không được để trống!</div>
+            }
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Loại CODE</label>
+            <input type="text" class="form-control" formControlName="optionName">
+            @if (formUpdateCodeOption.controls['optionName'].invalid
+            && (formUpdateCodeOption.controls['optionName'].touched ||
+            formUpdateCodeOption.controls['optionName'].dirty)) {
+            @if (formUpdateCodeOption.controls['optionName'].errors) {
+            <div class="form-text text-danger fst-italic">Loại CODE không được để trống!</div>
+            }
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tạo bởi</label>
+            <div class="form-control">{{formUpdateCodeOption.value.createBy}}</div>
+            <input type="text" class="form-control" formControlName="createBy" [hidden]="true">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ngày tạo</label>
+            <div class="form-control">{{formUpdateCodeOption.value.createDate | date : 'dd-MM-yyyy hh:mm:ss'}}</div>
+            <input type="date" class="form-control" formControlName="createDate" [hidden]="true">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="!formUpdateCodeOption.valid"
+          (click)="updateCodeOption()">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-success" id="open-eit-OPDetail" data-bs-toggle="modal" data-bs-target="#editOptionDetail"
+  [hidden]="true">
+  Edit OPDetail
+</button>
+<!-- Modal -->
+<div class="modal fade" id="editOptionDetail" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Cập nhật Option Detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" [formGroup]="formOPDetail">
+          <div class="mb-3">
+            <label class="form-label">Tên</label>
+            <input type="text" class="form-control" formControlName="option_name">
+            @if (formOPDetail.controls['option_name'].invalid
+            && (formOPDetail.controls['option_name'].touched || formOPDetail.controls['option_name'].dirty)) {
+            @if (formOPDetail.controls['option_name'].errors) {
+            <div class="form-text text-danger fst-italic">Tên OPTION không được để trống!</div>
+            }
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tạo bởi</label>
+            <label class="form-control">{{formOPDetail.value.create_by}}</label>
+            <input type="text" class="form-control" formControlName="create_by" [hidden]="true">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ngày tạo</label>
+            <div class="form-control">{{formOPDetail.value.create_date}}</div>
+            <input type="date" class="form-control" formControlName="create_date" [hidden]="true">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn fw-bold text-danger" (click)="deleteOPDetail()"
+          [disabled]="!formOPDetail.valid">Xóa</button>
+        <button type="button" class="btn btn-success" (click)="updateOPDetail()" [disabled]="!formOPDetail.valid">Cập
+          nhật</button>
+      </div>
+    </div>
+  </div>
+</div>

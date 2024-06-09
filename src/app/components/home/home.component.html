@@ -2,24 +2,26 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
-          <p style="font-size: 20px; font-weight: bold; color: rgb(47, 47, 231);">Top Ngôn Ngữ Thịnh Hành</p>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+          <p style="font-size: 20px; font-weight: bold; color: rgb(47, 47, 231);">Việc làm theo ngôn ngữ</p>
+           <ngx-slick-carousel [config]="config_list_language" class="slickSwiper ">
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp item_language" data-wow-delay="0.1s" ngxSlickItem>
                 <a class="cat-item rounded p-4" href="">
-                    <img class="img_js" src="./assets/img/logo/programming_language/python.svg.png" alt="">
+                   <img class="img_js" src="./assets/img/logo/programming_language/python.svg.png" alt="">
                     <h6 class="mb-3 mt-3">Python</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp item_language" data-wow-delay="0.3s" ngxSlickItem>
                 <a class="cat-item rounded p-4" href="">
-                    <img class="img_js" src="./assets/img/logo/programming_language/java.png" alt="">
+                  <img class="img_js" src="./assets/img/logo/programming_language/java.png" alt="">
                     <h6 class="mb-3 mt-3">Java</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp item_language" data-wow-delay="0.5s" ngxSlickItem>
                 <a class="cat-item rounded p-4" href="">
-                    <img class="img_js" src="./assets/img/logo/programming_language/js.png" alt="">
+                   <img class="img_js" src="./assets/img/logo/programming_language/js.png" alt="">
 
                     <h6 class="mb-3 mt-3">JavaScript</h6>
                     <p class="mb-0">123 Công Việc</p>
@@ -51,33 +53,32 @@
             </div>
               <div class="col-lg-3 col-sm-6 wow fadeInUp item_language" data-wow-delay="0.7s" ngxSlickItem>
                 <a class="cat-item rounded p-4" href="">
-                    <img class="img_js" src="./assets/img/logo/programming_language/c.jpg" alt="">
+                   <img class="img_js" src="./assets/img/logo/programming_language/c.jpg" alt="">
 
                     <h6 class="mb-3 mt-3">C/C++</h6>
                     <p class="mb-0">123 Công Việc</p>
                 </a>
             </div>
+            
+           </ngx-slick-carousel>
             </div>
              <div class="row g-4 mt-3 listTopCompany">
             <p style="font-size: 20px; font-weight: bold; color:  rgb(47, 47, 231);">Top Công Ty Hàng Đầu</p>
             <!-- auto slide start -->
 
- <ngx-slick-carousel [config]="config" class="slickSwiper ">
-            <div  *ngFor="let company of companys" class="companyBox_container" data-wow-delay="0.1s" >
-                <a class="rounded  p-4" href="" ngxSlickItem>
+ <div  *ngFor="let company of companys" class="companyBox_container col-md-2" data-wow-delay="0.1s" >
+                <a class="rounded  p-4" href="" >
                     <div class="companyBox">
                       <div class="companyLogo">
                         <img src="{{company.logo}}" alt="">
                       </div>
-                      
                       <div class="companyBox_name">
                         <div class="companyBlock__name is-uppercase mb-3">{{company.name}}</div>
                         <span class="companyBlock__tag">Việc mới</span>
                       </div>
                     </div>
                 </a>
-            </div> 
-  </ngx-slick-carousel>
+            </div>
 
         </div>
 

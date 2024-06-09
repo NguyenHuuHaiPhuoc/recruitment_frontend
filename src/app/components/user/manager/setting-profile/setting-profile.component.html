@@ -3,21 +3,21 @@
         <div class="col-md-8">
             <div class="info-group">
                 <h5 class="mt-3">Cập nhật thông tin cá nhân</h5>
-                <form class="row g-3">
+                <form [formGroup]="formUser" class="row g-3">
                     <div class="col-md-12">
                         <label for="full_name" class="form-label">Họ và tên</label>
-                        <input type="password" class="form-control" id="full_name" placeholder="Nguen Van A">
+                        <input type="text" class="form-control" id="full_name" formControlName="full_name">
                     </div>
                     <div class="col-md-12">
                         <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="phone" placeholder="012345678">
+                        <input type="text" class="form-control" id="phone" formControlName="phone">
                     </div>
                     <div class="col-md-12">
                       <label for="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="email" [disabled]="true" placeholder="anv@gmail.com">
+                      <div type="email" class="form-control" id="email"></div>
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-info text-light">Cập nhật</button>
+                      <button class="btn btn-success text-light">Cập nhật</button>
                     </div>
                   </form>
             </div>
@@ -37,13 +37,14 @@
                         </span>
                     </div>
                     <div class="info-header">
-                        <h4>{{user.username}}</h4>
+                        <h5>{{user.full_name}}</h5>
                         <div class="d-flex gap-3 text-secondary">
                             <span>Java Developer</span>
                             <span>Số năm kinh nghiệm</span>
                         </div>
                         <div class="mt-3">
-                            <span class="border-0 rounded-2 bg-secondary text-white p-1">Tài khoản đã xác thực</span>
+                            <span class="border-0 rounded-2 text-secondary p-1">Tài khoản đã xác thực</span>
+                            <i class="bi bi-check-circle-fill text-success ms-md-1 mt-md-2"></i>
                         </div>
                     </div>
                 </div>

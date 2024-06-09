@@ -4,6 +4,10 @@
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
+} @else if (getURL() && (getURL() === "/viec-lam")) {
+    <app-header-menustart></app-header-menustart>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
 } @else if (getURL() && (getURL() === "/u/cv")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
@@ -11,26 +15,37 @@
 } @else if (getURL() && (getURL() === "/u/cv/edit")) {
     <app-header-menustart></app-header-menustart>
     <router-outlet></router-outlet>
-} @else if(getURL() === "blog"){
+} @else if(getURL() === "/blog"){
   <app-header-menustart></app-header-menustart>
-  <app-header-carouselstrart [images]="images"></app-header-carouselstrart>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
-} @else if(getURL() === "testimonial"){
+<app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
+
+      <router-outlet></router-outlet>
+<app-footer></app-footer>
+
+} @else if(getURL() === "/testimonial"){
     <router-outlet></router-outlet>
-} @else if(getURL() === "employerHome" || getURL() === 'news' ||getURL() === 'settingaccount'||getURL() === 'changepassword'
+} @else if(getURL() === "/dashboard-recruiter/dashboard"
+        || getURL() === "/dashboard-recruiter/cong-viec"
+){
+    <app-dashboard-recruiter></app-dashboard-recruiter>
+} @else if(getURL() === "/dashboard-admin/dashboard"
+        || getURL() === "/dashboard-admin/quan-ly-cong-viec"
+        || getURL() === "/dashboard-admin/code"
+){
+    <app-layout-admin></app-layout-admin>
+}@else if(getURL() === "employerHome" || getURL() === 'news' ||getURL() === 'settingaccount'||getURL() === 'changepassword'
             ||getURL() === 'informationuser'|| getURL() === 'businesslicense' || getURL() === 'updatecompany' || getURL() === 'campaign'){
   <router-outlet></router-outlet>
 }
-
 @else {
 <app-header-menustart></app-header-menustart>
-   
+
     <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 
-    <app-header-search></app-header-search>
-    <router-outlet></router-outlet>
-    <!-- <app-feedback-clients></app-feedback-clients> -->
+<app-header-search></app-header-search>
+<router-outlet></router-outlet>
+<!-- <app-feedback-clients></app-feedback-clients> -->
 
-    <app-footer></app-footer>
+<app-footer></app-footer>
 }
+
