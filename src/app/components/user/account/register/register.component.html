@@ -37,9 +37,7 @@
 </div>
 
 <button type="button" id="openModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-  [hidden]="true">
-  Launch demo modal
-</button>
+  [hidden]="true"></button>
 
 @if (roles!= null && roles === 'applicant') {
 <div class="container-fluid full-screen-container">
@@ -119,7 +117,6 @@
 </div>
 
 } @else {
-
 <div class="container w-75">
   <a href="easyjob" class="img-logo">
     <img src="assets/img/logos/logo.png" alt="Logo EasyJob" />
@@ -129,323 +126,336 @@
     <p>Cùng tạo dựng lợi thế cho doanh nghiệp bằng trải nghiệm công nghệ tuyển dụng</p>
   </div>
   <div class="row">
-    <div class="col">
-      <div class="row mt-3">
-        <form [formGroup]="companyForm" enctype="multipart/form-data">
-
-          <h4>Thông tin tài khoản</h4>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <div class="input-group"> 
-              <div class="input-group-text"><i class="bi bi-envelope-fill" style="color: #00b14f;"></i></div>
-              <input type="email" class="form-control" id="email"
-                     placeholder="Nhập email" 
-                     name="email" formControlName="email"/>
+    <div class="mt-3">
+      <h4>Thông tin tài khoản</h4>
+      <form [formGroup]="companyForm" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <div class="input-group"> 
+            <div class="input-group-text"><i class="bi bi-envelope-fill" style="color: #00b14f;"></i></div>
+            <input type="email" class="form-control" id="email"
+                   placeholder="Nhập email" 
+                   name="email" formControlName="email"/>
+          </div>
+          <!-- validation -->
+          <div class="text-danger errorsNotification mt-2" *ngIf="companyForm.controls['email'].invalid 
+          &&
+          (companyForm.controls['email'].touched 
+          ||
+          companyForm.controls['email'].dirty)
+          ">
+            <small *ngIf="companyForm.controls['email'].errors?.['required']">Không được để trống!</small>
+            <small *ngIf="companyForm.controls['email'].errors?.['email']">Email không đúng định dạng!</small>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Họ và tên</label>
+          <div class="input-group"> 
+            <div class="input-group-text"><i class="bi bi-person-circle" style="color: #00b14f;"></i></div>
+            <input type="text" class="form-control" id="full_name"
+                   placeholder="Nhập họ và tên" 
+                   name="full-name" formControlName="full_name"/>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Số điện thoại</label>
+          <div class="input-group"> 
+            <div class="input-group-text"><i class="bi bi-telephone-fill" style="color: #00b14f;"></i></div>
+            <input type="text" class="form-control" id="phoneRecruiter"
+                   placeholder="Nhập số điện thoại" 
+                   name="phoneRecruiter" formControlName="phoneRecruiter"/>
+          </div>
+        </div>
+        <div class="mb-md-3">
+          <label class="form-label">Giới tính</label>
+          <div class="input-group"> 
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="nam" value="NAM" formControlName="gender">
+              <label class="form-check-label" for="nam">Nam</label>
             </div>
-            <!-- validation -->
-              <div class="text-danger errorsNotification mt-2" *ngIf="companyForm.controls['email'].invalid 
-              &&
-              (companyForm.controls['email'].touched 
-              ||
-              companyForm.controls['email'].dirty)
-              ">
-                <small *ngIf="companyForm.controls['email'].errors?.['required']">Không được để trống!</small>
-                <small *ngIf="companyForm.controls['email'].errors?.['email']">Email không đúng định dạng!</small>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="nu" value="NU" formControlName="gender">
+              <label class="form-check-label" for="nu">Nữ</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="khac" value="KHAC" formControlName="gender">
+              <label class="form-check-label" for="khac">Khác</label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mật khẩu</label>
+          <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
+            <input type="{{showPass ? 'text' : 'password'}}" class="form-control password" id="password" placeholder="Nhập mật khẩu"
+                   name="password" formControlName="password"  />
+                       <button type="button" class="btn_hide_show" (click)="hidePass(!showPass)">
+                        <i *ngIf="showPass" class="far fa-eye-slash"></i>
+                        <i *ngIf="!showPass" class="far fa-eye"></i>
+                       </button>
+
+          </div>
+            @if(companyForm.controls['password'].invalid 
+            &&
+            (companyForm.controls['password'].touched 
+            )){
+              <!-- Truớc tiên kiểm tra trống -->
+              <div class="errorsNotification mt-2">
+                    <small class="text-danger" *ngIf="companyForm.controls['password'].errors?.['required']">Không được để trống!</small>
               </div>
-
+                  <!-- sau đó kiểm tra mật khẩu hợp lệ -->
+                  @if(companyForm.controls['password'].dirty){
+                    <div class="mt-3  errorsNotification">
+                    <small class="d-block  text-danger" *ngIf="companyForm.controls['password'].errors?.['minlength']">Mật khẩu phải trên 8 ký tự!</small>
+                    <small class="d-block  text-danger" *ngIf="companyForm.controls['password'].errors?.['pattern']">Mật khẩu phải chứa 1 số, 1 ký tự đặc biệt!</small>
+                    </div>
+                  }
+            }
+            
+        </div>
+        <div class="mb-3">
+          <label for="confirm-password" class="form-label">Xác nhận mật khẩu</label>
+          <div class="input-group">
+            <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
+            <input type="{{showPassConfirm ? 'text' : 'password'}}" class="form-control" id="confirm-password"  placeholder="Nhập lại mật khẩu" 
+                   name="confirmPass" formControlName="confirmPass"
+                    />
+             <button type="button" class="btn_hide_show" (click)="hidePassConfirm(!showPassConfirm)">
+                        <i *ngIf="showPassConfirm" class="far fa-eye-slash"></i>
+                        <i *ngIf="!showPassConfirm" class="far fa-eye"></i>
+             </button>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Họ và tên</label>
-            <div class="input-group"> 
-              <div class="input-group-text"><i class="bi bi-person-circle" style="color: #00b14f;"></i></div>
-              <input type="text" class="form-control" id="full_name"
-                     placeholder="Nhập họ và tên" 
-                     name="full-name" formControlName="full_name"/>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Mật khẩu</label>
-            <div class="input-group">
-              <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
-              <input type="{{showPass ? 'text' : 'password'}}" class="form-control password" id="password" placeholder="Nhập mật khẩu"
-                     name="password" formControlName="password"  />
-                         <button type="button" class="btn_hide_show" (click)="hidePass(!showPass)">
-                          <i *ngIf="showPass" class="far fa-eye-slash"></i>
-                          <i *ngIf="!showPass" class="far fa-eye"></i>
-                         </button>
 
+          @if(companyForm.controls['confirmPass'].invalid 
+          &&
+          (companyForm.controls['confirmPass'].touched 
+          )){
+            <!-- Truớc tiên kiểm tra trống -->
+            <div class="errorsNotification mt-2">
+              <small class="text-danger" *ngIf="companyForm.controls['confirmPass'].errors?.['required']">Không được để trống!</small> 
             </div>
-              @if(companyForm.controls['password'].invalid 
-              &&
-              (companyForm.controls['password'].touched 
-              )){
-                <!-- Truớc tiên kiểm tra trống -->
-                <div class="errorsNotification mt-2">
-                      <small class="text-danger" *ngIf="companyForm.controls['password'].errors?.['required']">Không được để trống!</small>
-                </div>
-                    <!-- sau đó kiểm tra mật khẩu hợp lệ -->
-                    @if(companyForm.controls['password'].dirty){
-                      <div class="mt-3  errorsNotification">
-                      <small class="d-block  text-danger" *ngIf="companyForm.controls['password'].errors?.['minlength']">Mật khẩu phải trên 8 ký tự!</small>
-                      <small class="d-block  text-danger" *ngIf="companyForm.controls['password'].errors?.['pattern']">Mật khẩu phải chứa 1 số, 1 ký tự đặc biệt!</small>
-                      </div>
-                    }
-              }
-              
-          </div>
-          <div class="mb-3">
-            <label for="confirm-password" class="form-label">Xác nhận mật khẩu</label>
-            <div class="input-group">
-              <div class="input-group-text"><i class="bi bi-lock-fill" style="color: #00b14f;"></i></div>
-              <input type="{{showPassConfirm ? 'text' : 'password'}}" class="form-control" id="confirm-password"  placeholder="Nhập lại mật khẩu" 
-                     name="confirmPass" formControlName="confirmPass"
-                      />
-               <button type="button" class="btn_hide_show" (click)="hidePassConfirm(!showPassConfirm)">
-                          <i *ngIf="showPassConfirm" class="far fa-eye-slash"></i>
-                          <i *ngIf="!showPassConfirm" class="far fa-eye"></i>
-               </button>
-            </div>
+          }@else if (companyForm.hasError('passwordMismatch')) {
+              <div class="errorsNotification mt-3">
+                  <small class="text-danger">Mật khẩu không khớp!</small>
+              </div>
+          }
 
-              @if(companyForm.controls['confirmPass'].invalid 
-              &&
-              (companyForm.controls['confirmPass'].touched 
-              )){
-                <!-- Truớc tiên kiểm tra trống -->
-                <div class="errorsNotification mt-2">
-                  <small class="text-danger" *ngIf="companyForm.controls['confirmPass'].errors?.['required']">Không được để trống!</small> 
-                </div>
-              }@else if (companyForm.hasError('passwordMismatch')) {
-                  <div class="errorsNotification mt-3">
-                      <small class="text-danger">Mật khẩu không khớp!</small>
+        </div>
+        <h4 class="mt-4">Thông tin nhà tuyển dụng</h4>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="company_nm" class="form-label">Tên công ty</label>
+                <input type="text" class="form-control" id="company_nm"  placeholder="Tên công ty"
+                  name="nameCompany" formControlName="nameCompany" />
+              </div>
+              <div class="col-md-4 mt-md-4">
+                @if(companyForm.controls['nameCompany'].invalid   && companyForm.controls['nameCompany'].touched){
+                  <div class="errorsNotification mt-2">
+                    <small class="text-danger" *ngIf="companyForm.controls['nameCompany'].errors?.['required']">Không được để trống!</small>
                   </div>
-              }
-
-          </div>
-          <h4 class="mt-4">Thông tin nhà tuyển dụng</h4>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="company_nm" class="form-label">Tên công ty</label>
-                  <input type="text" class="form-control" id="company_nm"  placeholder="Tên công ty"
-                    name="nameCompany" formControlName="nameCompany" />
-                </div>
-                <div class="col-md-4 mt-md-4">
-                  @if(companyForm.controls['nameCompany'].invalid   && companyForm.controls['nameCompany'].touched){
-                    <div class="errorsNotification mt-2">
-                      <small class="text-danger" *ngIf="companyForm.controls['nameCompany'].errors?.['required']">Không được để trống!</small>
-                    </div>
-                  }
-                </div>
-              </div>
-            </div>
-           
-
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="tax_code" class="form-label">Mã số thuế</label>
-                  <input type="text" class="form-control" id="tax_code"  placeholder="Mã số thuế"
-                    name="taxCode" formControlName="taxCode" />
-                </div>
-                <div class="col-md-4 mt-md-3">
-                  @if(companyForm.controls['taxCode'].touched){
-                    <!-- Truớc tiên kiểm tra trống -->
-                    <div class="errorsNotification">
-                      <small class="text-danger" *ngIf="companyForm.controls['taxCode'].errors?.['required']">Không được để trống!</small>
-                    </div>
-                    @if(companyForm.hasError('taxCodeError')){
-                      <div class="errorsNotification mt-md-0">
-                        <small class="text-danger">Mã không hợp lệ!</small>
-                      </div>
-                    }
-                  } 
-
-                </div>
-              </div>
-            </div>
-          
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="field" class="form-label">Lĩnh vực</label>
-                  <input type="text" class="form-control" id="field"  placeholder="Lĩnh vực kinh doanh"
-                    name="typeBusiness" formControlName="typeBusiness" />
-                </div>
-                <div class="col-md-4  mt-md-3 lh-1">
-                  @if (companyForm.controls['typeBusiness'].invalid 
-                  &&
-                   (companyForm.controls['typeBusiness'].dirty 
-                  ||
-                   companyForm.controls['typeBusiness'].touched)) {
-                     <div class="errorsNotification mt-2">
-                       <small class="text-danger" *ngIf="companyForm.controls['typeBusiness'].errors?.['required']">Không được bỏ trống!</small>
-                       <small class="text-danger" *ngIf="companyForm.controls['typeBusiness'].errors?.['pattern']">Vui lòng nhập ngành hợp lệ!<div class=""></div></small>
-                     </div>
-                   }
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="url" class="form-label">Website công ty</label>
-                  <input type="text" class="form-control" id="url"  placeholder="http://abc"
-                    name="website" formControlName="website">
-                </div>
-                <div class="col-md-4 mt-md-2 lh-1">
-                  @if (companyForm.controls['website'].invalid 
-                  &&
-                   (companyForm.controls['website'].dirty 
-                  ||
-                   companyForm.controls['website'].touched)) {
-                     <div class="errorsNotification">
-                         <small class="text-danger" *ngIf="companyForm.controls['website'].errors?.['required']">Không được bỏ trống!</small>
-                         <small class="text-danger" *ngIf="companyForm.controls['website'].errors?.['pattern']">Website không hợp lệ<div class=""></div></small>
-                    </div>
-                   }
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="headquarter" class="form-label">Trụ sở</label>
-                  <input type="text" class="form-control" id="headquarter"  placeholder="Trụ sở chính"
-                         name="address" formControlName="address">
-                </div>
-                <div class="col-md-4 mt-md-4">
-                  @if (companyForm.controls['address'].invalid 
-                  &&
-                   (companyForm.controls['address'].dirty 
-                  ||
-                   companyForm.controls['address'].touched)) {
-                     <div *ngIf="" class="errorsNotification mt-2">
-                       <small class="text-danger" *ngIf="companyForm.controls['address'].errors?.['required']">Không được bỏ trống!</small>
-                     </div>
-                   }
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="establishment_date" class="form-label">Ngày thành lập</label>
-                  <input type="date" class="form-control" id="establishment_date"
-                         name="date" formControlName="date" >
-                </div>
-                <div class="col-md-4 mt-md-4">
-                  @if (companyForm.controls['date'].invalid 
-                  &&
-                   (companyForm.controls['date'].dirty 
-                  ||
-                   companyForm.controls['date'].touched)) {
-                    <div *ngIf="" class="errorsNotification mt-2">
-                      <small class="text-danger" *ngIf="companyForm.controls['date'].errors?.['required']">Không được bỏ trống!</small>
-                    </div>
-                  }
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-2">
-                  <img [src]="logoReview" class="logo-review border border-secondary border-opacity-50 rounded-2 d-block" alt=""
-                      (click)="fileUpload.click()" role="button"/>
-                </div>
-                <div class="col-md-6">
-                  <label for="logo" class="form-label">Logo công ty</label>
-                  <input type="file" class="form-control" id="logo" name="logo" accept="image/*" #fileUpload formControlName="logo" (change)="getImage($event)">
-                </div>
-                <div class="col-md-4 mt-md-4">
-                  @if (companyForm.controls['logo'].invalid 
-                  &&
-                   (companyForm.controls['logo'].dirty 
-                  ||
-                   companyForm.controls['logo'].touched)) {
-                     <div class="errorsNotification mt-2">
-                        <small class="text-danger" *ngIf="companyForm.controls['logo'].errors?.['required']">Không được bỏ trống!</small>
-                     </div>
-                   }
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-8">
-                  <label for="phone" class="form-label">Số điện thoại</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Số điện thoại"
-                          name="phone" formControlName="phone" >
-                </div>
-                <div class="col-md-4 mt-md-2 lh-1">
-                  @if (companyForm.controls['phone'].invalid 
-                  &&
-                   (companyForm.controls['phone'].dirty 
-                  ||
-                   companyForm.controls['phone'].touched)) {
-                     <div class="errorsNotification mt-2">
-                       <small class="text-danger" *ngIf="companyForm.controls['phone'].errors?.['required']">Không được bỏ trống!</small>
-                       <small class="text-danger" *ngIf="companyForm.controls['phone'].errors?.['minlength']">Số điện thoại gồm 10 số!<div></div></small>
-                       <small class="text-danger" *ngIf="companyForm.controls['phone'].errors?.['maxlength']">Số điện thoại gồm 10 số!<div></div></small>
-                       <small class="text-danger" *ngIf="companyForm.controls['phone'].errors?.['pattern']">Số không hợp lệ!</small>
-                     </div>
-                   }
-                </div>
-              </div>
-            </div>
-            <div class="col-12 select-skill">
-              <label for="skill" class="form-label">Kỹ năng yêu cầu</label>
-              <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()">
-                <div class="">
-                  <input type="search" class="search-skill" name="searchs"  (input)="searchSkill($event)" (focus)="searchSkill($event)" formControlName="searchs"  />
-                </div>
-              </span>
-              <select class="form-select" id="skills" size="" name="skill"  formControlName="skill"  #setSize
-                [hidden]="isHiddenSelect">
-                @for (item of listSkillFilter; track item.id) {
-                <option value="{{item.option_name}}" id="{{item.id}}" (click)="getOption()">{{item.option_name}}</option>
                 }
-              </select>
-              <div  class="errorsNotification mt-2" [hidden]="skillValid">
-                  <small class="text-danger">Không được bỏ trống!</small>
               </div>
             </div>
-            <div class="col-12">
-              <label for="sumary" class="form-label">Giới thiệu về công ty</label>
-              <textarea type="text" class="form-control" id="sumary"  placeholder="Công ty ..." rows="3" 
-                        name="sumary" formControlName="sumary"></textarea>
-                          <div *ngIf="companyForm.controls['sumary'].invalid 
-                            &&
-                             (companyForm.controls['sumary'].dirty 
-                            ||
-                             companyForm.controls['sumary'].touched)" class="errorsNotification mt-2">
-                     <small class="text-danger" *ngIf="companyForm.controls['sumary'].errors?.['required']">Không được bỏ trống!</small>
-                </div>
+          </div>
+         
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="tax_code" class="form-label">Mã số thuế</label>
+                <input type="text" class="form-control" id="tax_code"  placeholder="Mã số thuế"
+                  name="taxCode" formControlName="taxCode" />
+              </div>
+              <div class="col-md-4 mt-md-3">
+                @if(companyForm.controls['taxCode'].touched){
+                  <!-- Truớc tiên kiểm tra trống -->
+                  <div class="errorsNotification">
+                    <small class="text-danger" *ngIf="companyForm.controls['taxCode'].errors?.['required']">Không được để trống!</small>
+                  </div>
+                  @if(companyForm.hasError('taxCodeError')){
+                    <div class="errorsNotification mt-md-0">
+                      <small class="text-danger">Mã không hợp lệ!</small>
+                    </div>
+                  }
+                } 
+
+              </div>
             </div>
           </div>
-          <div class="mt-3">
-            <small class="text-danger" *ngIf="formValid">*Vui lòng điền đầy đủ thông tin!</small>
+        
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="field" class="form-label">Lĩnh vực</label>
+                <input type="text" class="form-control" id="field"  placeholder="Lĩnh vực kinh doanh"
+                  name="typeBusiness" formControlName="typeBusiness" />
+              </div>
+              <div class="col-md-4  mt-md-3 lh-1">
+                @if (companyForm.controls['typeBusiness'].invalid 
+                &&
+                 (companyForm.controls['typeBusiness'].dirty 
+                ||
+                 companyForm.controls['typeBusiness'].touched)) {
+                   <div class="errorsNotification mt-2">
+                     <small class="text-danger" *ngIf="companyForm.controls['typeBusiness'].errors?.['required']">Không được bỏ trống!</small>
+                     <small class="text-danger" *ngIf="companyForm.controls['typeBusiness'].errors?.['pattern']">Vui lòng nhập ngành hợp lệ!<div class=""></div></small>
+                   </div>
+                 }
+              </div>
+            </div>
           </div>
-          <button class="btn w-100 btn-register text-white mt-5"   (click)="registerRecruiter($event)">Đăng Ký</button>
 
-        </form>
-      </div>
-      <div class="row">
-        <p class="mt-3 text-center">
-          <span class="text-secondary">Bạn đã có tài khoản? </span>
-          <span><a href="dang-nhap" style="color: #00b14f;">Đăng nhập ngay</a></span>
-        </p>
-      </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="url" class="form-label">Website công ty</label>
+                <input type="text" class="form-control" id="url"  placeholder="http://abc"
+                  name="website" formControlName="website">
+              </div>
+              <div class="col-md-4 mt-md-2 lh-1">
+                @if (companyForm.controls['website'].invalid 
+                &&
+                 (companyForm.controls['website'].dirty 
+                ||
+                 companyForm.controls['website'].touched)) {
+                   <div class="errorsNotification">
+                       <small class="text-danger" *ngIf="companyForm.controls['website'].errors?.['required']">Không được bỏ trống!</small>
+                       <small class="text-danger" *ngIf="companyForm.controls['website'].errors?.['pattern']">Website không hợp lệ<div class=""></div></small>
+                  </div>
+                 }
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="headquarter" class="form-label">Trụ sở</label>
+                <input type="text" class="form-control" id="headquarter"  placeholder="Trụ sở chính"
+                       name="address" formControlName="address">
+              </div>
+              <div class="col-md-4 mt-md-4">
+                @if (companyForm.controls['address'].invalid 
+                &&
+                 (companyForm.controls['address'].dirty 
+                ||
+                 companyForm.controls['address'].touched)) {
+                   <div *ngIf="" class="errorsNotification mt-2">
+                     <small class="text-danger" *ngIf="companyForm.controls['address'].errors?.['required']">Không được bỏ trống!</small>
+                   </div>
+                 }
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="establishment_date" class="form-label">Ngày thành lập</label>
+                <input type="date" class="form-control" id="establishment_date"
+                       name="date" formControlName="date" >
+              </div>
+              <div class="col-md-4 mt-md-4">
+                @if (companyForm.controls['date'].invalid 
+                &&
+                 (companyForm.controls['date'].dirty 
+                ||
+                 companyForm.controls['date'].touched)) {
+                  <div *ngIf="" class="errorsNotification mt-2">
+                    <small class="text-danger" *ngIf="companyForm.controls['date'].errors?.['required']">Không được bỏ trống!</small>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-2">
+                <img [src]="logoReview" class="logo-review border border-secondary border-opacity-50 rounded-2 d-block" alt=""
+                    (click)="fileUpload.click()" role="button"/>
+              </div>
+              <div class="col-md-6">
+                <label for="logo" class="form-label">Logo công ty</label>
+                <input type="file" class="form-control" id="logo" name="logo" accept="image/*" #fileUpload formControlName="logo" (change)="getImage($event)">
+              </div>
+              <div class="col-md-4 mt-md-4">
+                @if (companyForm.controls['logo'].invalid 
+                &&
+                 (companyForm.controls['logo'].dirty 
+                ||
+                 companyForm.controls['logo'].touched)) {
+                   <div class="errorsNotification mt-2">
+                      <small class="text-danger" *ngIf="companyForm.controls['logo'].errors?.['required']">Không được bỏ trống!</small>
+                   </div>
+                 }
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="phoneCompany" class="form-label">Số điện thoại</label>
+                <input type="text" class="form-control" id="phoneCompany" placeholder="Số điện thoại"
+                        name="phoneCompany" formControlName="phoneCompany" >
+              </div>
+              <div class="col-md-4 mt-md-2 lh-1">
+                @if (companyForm.controls['phoneCompany'].invalid 
+                &&
+                 (companyForm.controls['phoneCompany'].dirty 
+                ||
+                 companyForm.controls['phoneCompany'].touched)) {
+                   <div class="errorsNotification mt-2">
+                     <small class="text-danger" *ngIf="companyForm.controls['phoneCompany'].errors?.['required']">Không được bỏ trống!</small>
+                     <small class="text-danger" *ngIf="companyForm.controls['phoneCompany'].errors?.['minlength']">Số điện thoại gồm 10 số!<div></div></small>
+                     <small class="text-danger" *ngIf="companyForm.controls['phoneCompany'].errors?.['maxlength']">Số điện thoại gồm 10 số!<div></div></small>
+                     <small class="text-danger" *ngIf="companyForm.controls['phoneCompany'].errors?.['pattern']">Số không hợp lệ!</small>
+                   </div>
+                 }
+              </div>
+            </div>
+          </div>
+          <div class="col-12 select-skill">
+            <label for="skill" class="form-label">Kỹ năng yêu cầu</label>
+            <span class="view-skills form-select" id="view-skills" (click)="showSelectSkill()">
+              <div class="">
+                <input type="search" class="search-skill" name="searchs"  (input)="searchSkill($event)" (focus)="searchSkill($event)"/>
+              </div>
+            </span>
+            <select class="form-select" id="skills" size="" name="skill"  formControlName="skill"  #setSize
+              [hidden]="isHiddenSelect">
+              @for (item of listSkillFilter; track item.id) {
+              <option value="{{item.option_name}}" id="{{item.id}}" (click)="getOption()">{{item.option_name}}</option>
+              }
+            </select>
+            <div  class="errorsNotification mt-2" [hidden]="skillValid">
+                <small class="text-danger">Không được bỏ trống!</small>
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="sumary" class="form-label">Giới thiệu về công ty</label>
+            <textarea type="text" class="form-control" id="sumary"  placeholder="Công ty ..." rows="3" 
+                      name="sumary" formControlName="sumary"></textarea>
+                        <div *ngIf="companyForm.controls['sumary'].invalid 
+                          &&
+                           (companyForm.controls['sumary'].dirty 
+                          ||
+                           companyForm.controls['sumary'].touched)" class="errorsNotification mt-2">
+                   <small class="text-danger" *ngIf="companyForm.controls['sumary'].errors?.['required']">Không được bỏ trống!</small>
+              </div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <small class="text-danger" *ngIf="formValid">*Vui lòng điền đầy đủ thông tin!</small>
+        </div>
+        <button class="btn w-100 btn-register text-white mt-5" [disabled]="!companyForm.valid" (click)="registerRecruiter($event)">Đăng Ký</button>
+      </form>
     </div>
-    <!-- <div class="col-8 position-relative">
-      </div>
-      <div class="col-4 bg-right">
-        <img src="assets/img/register/bg-right.jpg"/>
-      </div> -->
+  </div>
+  <div class="row">
+    <p class="mt-3 text-center">
+      <span class="text-secondary">Bạn đã có tài khoản? </span>
+      <span><a href="dang-nhap" style="color: #00b14f;">Đăng nhập ngay</a></span>
+    </p>
   </div>
 </div>
-
 }
-<!--  -->
-<!-- code notification -->

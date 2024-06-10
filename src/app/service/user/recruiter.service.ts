@@ -3,33 +3,33 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class AccountService {
-
-    private base_url = 'http://localhost:8080/recruitment';
-    private api_url = 'http://localhost:8080/api/recruitment';
+export class RecruiterService {
+    private base_url = 'http://localhost:8080';
 
     constructor (
         private http: HttpClient
     ) {}
 
-    public register (account:any):Observable<any> {
-        return this.http.post<any>(this.base_url + '/register', account);
+    public createRecruiter(recruiter:any):Observable<any> {
+        return this.http.post<any>(this.base_url + '/recruitment/create/recruiter', recruiter);
     }
 
-    public findAccountByUsername(username:any,password:any):Observable<any>{
-        return this.http.get<any>(this.base_url + '/login/username=' + username + "&" + 'password=' +password);
-    }
-
-    public changePassword(username:string,request:any):Observable<any> {
-        return this.http.patch<any>(this.api_url+ '/update/password/username=' + username, request, {
+    public updateRecruiter(recruiter:any):Observable<any> {
+        return this.http.put<any>(this.base_url + '/api/recruitment/update/recruiter', recruiter, {
             headers: this.createAuthorizationHeader()
-        })
+        });
     }
 
-    public updateFullname(id:any,request:any):Observable<any> {
-        return this.http.patch<any>(this.api_url+ '/update/full_name/id=' + id, request, {
+    public uploadAvatar(id:any, request:any):Observable<any> {
+        return this.http.patch<any>(this.base_url + '/api/recruitment/upload/img/id=' + id, request, {
             headers: this.createAuthorizationHeader()
-        })
+        });
+    }
+
+    public recruiterByAccountID(id:any):Observable<any> {
+        return this.http.get<any>(this.base_url + '/api/recruitment/recruiter/profile/id=' + id, {
+            headers: this.createAuthorizationHeader()
+        });
     }
 
     private createAuthorizationHeader() {

@@ -13,6 +13,7 @@ import { authGuard } from './service/auth/auth.guard';
 import { DashboardAdminContentComponent } from './components/dashboard-admin/dashboard-admin-content/dashboard-admin-content.component';
 import { ManagermentjobComponent } from './components/dashboard-admin/manager-job/manager-job.component';
 import { CodeAdminComponent } from './components/dashboard-admin/codes-admin/code-admin.component';
+import { ProfileRecruiterComponent } from './components/dashboard-recruiter/profile-recruiter/profile-recruiter.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,12 @@ export const routes: Routes = [
     path: 'dashboard-recruiter/cong-viec',
     title: 'Nhà tuyển dụng | Đăng công việc',
     component: PostJobComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard-recruiter/cap-nhat-thong-tin',
+    title: 'Nhà tuyển dụng | Cập nhật thông tin',
+    component: ProfileRecruiterComponent,
     canActivate: [authGuard]
   },
   {

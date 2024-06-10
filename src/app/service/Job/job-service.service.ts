@@ -5,19 +5,18 @@ import { Observable } from "rxjs";
 @Injectable()
 export class JobService{
     private api_url:any = 'http://localhost:8080/api/recruitment';
+    private base_url = 'http://localhost:8080/recruitment/jobs';
 
     constructor 
     (
         private http: HttpClient
     ) {}
 
-    public getAllJob (id:any):Observable<any> {
-        // let account = [];
-        // let item = localStorage.getItem('account');
-        // if (item != null) {
-        //     account = JSON.parse(item);
-        // }
-        // const token = localStorage.getItem(account.username+"_jwtToken");
+    public getAllJob():Observable<any> {
+        return this.http.get<any>(this.base_url);
+    }
+
+    public getAllJobByAccountID (id:any):Observable<any> {
         return this.http.get(this.api_url + '/jobs/account_id='+id,{
             headers: this.createAuthorizationHeader()
         });
@@ -30,7 +29,25 @@ export class JobService{
     }
 
     public createJob (job:any):Observable<any> {
-        return this.http.post<any>(this.api_url + '/jobs',job, {
+        return this.http.post<any>(this.api_url + '/create/jobs',job, {
+            headers: this.createAuthorizationHeader()
+        });
+    }
+
+    public updateJob (job:any):Observable<any> {
+        return this.http.put<any>(this.api_url + '/update/jobs',job, {
+            headers: this.createAuthorizationHeader()
+        });
+    }
+
+    public approvalJob (jobID:number,approval:any):Observable<any> {
+        return this.http.patch<any>(this.api_url + '/approve/jobs/id=' + jobID, approval, {
+            headers: this.createAuthorizationHeader()
+        });
+    }
+
+    public deleteJob (jobID:number,request:any):Observable<any> {
+        return this.http.patch<any>(this.api_url + '/delete/jobs/id=' + jobID, request, {
             headers: this.createAuthorizationHeader()
         });
     }

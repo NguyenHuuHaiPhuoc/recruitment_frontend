@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   AngularEditorConfig,
   AngularEditorModule,
@@ -46,12 +46,12 @@ export class PostJobComponent implements OnInit {
     private proService: ProcessService
   ) {
     this.form_job = this.fb.group({
-      position: [null],
+      position: [null, [Validators.required]],
       level: ['NO'],
-      tech_use: [null],
-      year_exp: [null],
-      salary: [null],
-      member: [null],
+      tech_use: [null, [Validators.required]],
+      year_exp: [null, [Validators.required]],
+      salary: [null, [Validators.required]],
+      member: [null, [Validators.required]],
       expiration_date: [moment().format('YYYY-MM-DD')],
       contract_type: ['NO'],
       working_form: ['NO'],
@@ -63,8 +63,8 @@ export class PostJobComponent implements OnInit {
       create_date: new Date(),
       create_by: this.user.id.split('_')[0],
       status: [false],
-      is_confirmed: ['Chưa xét duyệt'],
-      confirm_by: ['']
+      is_confirmed: 'Chưa xét duyệt',
+      confirm_by: ''
     });
   }
 
@@ -97,13 +97,15 @@ export class PostJobComponent implements OnInit {
   };
 
   private loadData() {
-    this.jobService.getAllJob(this.user.id.split('_')[0]).subscribe((data) => {
+    this.jobService.getAllJobByAccountID(this.user.id.split('_')[0]).subscribe((data) => {
       this.jobs= data.listResult;
     });
   }
 
+  private jobID:number = 0;
   public openEditJobModal(id: any) {
     $('.editJobModal').trigger('click');
+    this.jobID = id;
     try {
       this.jobService.getJobById(id).subscribe((resp) => {
         if (resp.status == 200) {
@@ -204,16 +206,98 @@ export class PostJobComponent implements OnInit {
     }
   }
 
+  public updateJob() {
+    let job = {
+      id: this.jobID,
+      position: this.form_job.value.position,
+      level: this.form_job.value.level,
+      tech_use: this.form_job.value.tech_use,
+      year_exp: this.form_job.value.year_exp,
+      salary: this.form_job.value.salary,
+      member: this.form_job.value.member,
+      expiration_date: this.form_job.value.expiration_date,
+      contract_type: this.form_job.value.contract_type,
+      working_form: this.form_job.value.working_form,
+      job_desc: this.form_job.value.job_desc,
+      require: this.form_job.value.require,
+      welfare: this.form_job.value.welfare,
+      time_work: this.form_job.value.time_work,
+      address_work: this.form_job.value.address_work,
+      create_date: this.form_job.value.create_date,
+      create_by: this.form_job.value.create_by,
+      status: this.form_job.value.status,
+      is_confirmed: 'Chưa xét duyệt',
+      confirm_by: ''
+    }
+    this.jobService.updateJob(job).subscribe({
+      next: (resp) => {
+        if (resp.status == 405){
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: resp.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        if (resp.status = 200){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: resp.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          
+          if(this.isEditProcess){
+            if(this.processByJob.length > 0) {
+              this.processByJob.forEach((p:any) => {
+                this.proService.deleteProcess(p.id).subscribe();
+              });
+            }
+      
+            const step = $('#step-input-edit').val();
+            const processInterview = [];
+            for (let i = 0; i < step; i++) {
+              let contentInterview = {
+                step: $('#step_label_' + (i + 1)).text(),
+                process_content: $('#content_interview_' + (i + 1)).val(),
+                create_date: new Date(),
+                jobs: {
+                  id: resp.result.id,
+                }
+              };
+              processInterview.push(contentInterview);
+            }
+            
+            for (let i = 0; i < processInterview.length; i++) {
+              this.proService.createProcess(processInterview[i]).subscribe();
+            }
+
+            $('.editJobModal').trigger('click');
+            this.isEditProcess = false;
+            $("#step-input-edit").val(0);
+            this.loadData();
+          }
+        }
+      },
+      error(err) {
+          console.error(err);
+      },
+    });
+
+  }
+  // fix again stepInterview, validation, search
   public stepInterview() {
-    const step = $('#step-input').val();
+    const step = $('#step-input-edit').val();
     const stepItem = document.querySelectorAll('step-item');
 
     if (stepItem.length <= 0) {
-      $('#step').empty();
+      $('#step-edit').empty();
     }
 
     for (let i = 0; i < step; i++) {
-      $('#step').append(
+      $('#step-edit').append(
         '<div class="mb-3 step-item">' +
           '<label class="form-label" id="step_label_' + (i + 1) + '">Bước ' +
           (i + 1) +
@@ -243,10 +327,10 @@ export class PostJobComponent implements OnInit {
       time_work: [null],
       address_work: [null],
       create_date: new Date(),
-      create_by: 1,
+      create_by: this.user.id.split('_')[0],
       status: false,
-      is_confirmed: ['Chưa xét duyệt'],
-      confirm_by: ['']
+      is_confirmed: 'Chưa xét duyệt',
+      confirm_by: ''
     });
   }
   // design edit process

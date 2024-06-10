@@ -32,6 +32,10 @@ export class OptionDetailService{
         return this.http.get<any>(this.base_url + '/working_forms');
     }
 
+    public getOptionDetailApproval ():Observable<any> {
+        return this.http.get<any>(this.base_url + '/approval');
+    }
+
     public getoptioDetailByCodeOptionID(id:any):Observable<any> {
        return this.http.get<any>(this.api_url+'/option_detail_by_code_option/id=' + id, {
         headers: this.createAuthorizationHeader()

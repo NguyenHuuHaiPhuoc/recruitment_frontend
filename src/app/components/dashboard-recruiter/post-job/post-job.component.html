@@ -40,7 +40,6 @@
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postJobModal" (click)="resetForm()">
                 <i class="bi bi-plus-square me-md-3"></i>Đăng công việc
             </button>
-            <button type="button" class="btn btn-danger"><i class="bi bi-trash me-md-3"></i>Xóa công việc</button>
             <button type="button" class="btn btn-secondary"><i class="bi bi-arrow-clockwise me-md-3"></i>Quay lại</button>
             <button type="button" class="btn btn-success"><i class="bi bi-filetype-exe me-md-3"></i>Xuất file Excel</button>
         </div>
@@ -90,7 +89,7 @@
                         }@else if (j.is_confirmed == 'Đang xét duyệt') {
                             <td class="bg-warning">{{j.is_confirmed}}</td>
                         }@else if (j.is_confirmed == 'Đã xét duyệt') {
-                            <td class="bg-cuccess">{{j.is_confirmed}}</td>
+                            <td class="bg-success">{{j.is_confirmed}}</td>
                         }
                     </tr>
 
@@ -126,6 +125,12 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Vị trí công việc:</label>
                                 <input type="text" class="form-control" formControlName="position"/>
+                                @if (form_job.controls['position'].invalid 
+                                    && (form_job.controls['position'].touched || form_job.controls['position'].dirty)) {
+                                    <div class="form-text text-danger fst-italic">
+                                        @if (form_job.controls['position'].errors) {<span>Hãy nhập vị trí công việc.</span>}
+                                    </div>
+                                }
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Cấp bậc:</label>
@@ -141,10 +146,22 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Công nghệ sử dụng:</label>
                                 <input type="text" class="form-control" placeholder="Nhập cách nhau bởi dấu phẩy" formControlName="tech_use"/>
+                                @if (form_job.controls['tech_use'].invalid 
+                                    && (form_job.controls['tech_use'].touched || form_job.controls['tech_use'].dirty)) {
+                                    <div class="form-text text-danger fst-italic">
+                                        @if (form_job.controls['tech_use'].errors) {<span>Hãy nhập công nghệ sử dụng.</span>}
+                                    </div>
+                                }
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Kinh nghiệm:</label>
                                 <input type="text" class="form-control" placeholder="Nhập số năm cụ thể hoặc 'Không yêu cầu'" formControlName="year_exp"/>
+                                @if (form_job.controls['year_exp'].invalid 
+                                    && (form_job.controls['year_exp'].touched || form_job.controls['year_exp'].dirty)) {
+                                    <div class="form-text text-danger fst-italic">
+                                        @if (form_job.controls['year_exp'].errors) {<span>Hãy nhập kinh nghiệm.</span>}
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div class="row mb-md-4">
@@ -154,6 +171,12 @@
                                     <input type="text" class="form-control" formControlName="salary"/>
                                     <span class="input-group-text" id="basic-addon2">Triệu</span>
                                 </div>
+                                @if (form_job.controls['salary'].invalid 
+                                    && (form_job.controls['salary'].touched || form_job.controls['salary'].dirty)) {
+                                    <div class="form-text text-danger fst-italic">
+                                        @if (form_job.controls['salary'].errors) {<span>Hãy nhập mức lương.</span>}
+                                    </div>
+                                }
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Số lượng:</label>
@@ -161,6 +184,12 @@
                                     <input type="number" class="form-control" formControlName="member"/>
                                     <span class="input-group-text" id="basic-addon2">Người</span>
                                 </div>
+                                @if (form_job.controls['member'].invalid 
+                                    && (form_job.controls['member'].touched || form_job.controls['member'].dirty)) {
+                                    <div class="form-text text-danger fst-italic">
+                                        @if (form_job.controls['member'].errors) {<span>Hãy nhập số lượng.</span>}
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div class="row mb-md-4">
@@ -239,7 +268,7 @@
             </div>
         </div>
         <div class="modal-footer text-center">
-          <button type="button" class="btn btn-danger fs-5 fw-bold" (click)="createJob($event)">Đăng</button>
+          <button type="button" class="btn btn-danger fs-5 fw-bold" (click)="createJob($event)" [disabled]="!form_job.valid">Đăng</button>
         </div>
       </div>
     </div>
@@ -358,48 +387,47 @@
                             <label class="form-label fw-bold">Người xét duyệt:</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" formControlName="confirm_by" [hidden]="true"/>
-                                <div class="form-control">{{form_job.value.confirm_by}}</div>
+                                <div class="form-control">{{form_job.value.confirm_by?form_job.value.confirm_by:'Chưa xét duyệt'}}</div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    @if (!isEditProcess) {
+                @if (!isEditProcess) {
+                    <div class="col-md-6">
                         <div class="d-md-flex justify-content-between">
                             <label class="form-label fw-bold">Quy trình phỏng vấn:</label>
                             <button class="btn btn-danger" (click)="openEditProcess()">Chỉnh sửa</button>
                         </div>
                         <hr>
                         <form method="post">
-                            <div class="row" id="step">
-                                <div class="col-md-6">
-                                    @for (p of processByJob; track $index) {
-                                        <div class="d-md-flex gap-md-2 position-relative mb-md-4">
-                                            @if ($index == processByJob.length - 1) {
-                                                <div class="step-item-tail position-absolute d-none"></div>
-                                            } @else {
-                                                <div class="step-item-tail position-absolute"></div>
-                                            }
-                                            <div><i class="bi bi-arrow-down-circle-fill text-success"></i></div>
-                                            <div>
-                                                <b>{{p.step}}</b>
-                                                <span>{{p.process_content}}</span>
-                                            </div>
+                            <div id="step">
+                                @for (p of processByJob; track $index) {
+                                    <div class="d-md-flex gap-md-2 position-relative mb-md-4">
+                                        @if ($index == processByJob.length - 1) {
+                                            <div class="step-item-tail position-absolute d-none"></div>
+                                        } @else {
+                                            <div class="step-item-tail position-absolute"></div>
+                                        }
+                                        <div><i class="bi bi-arrow-down-circle-fill text-success"></i></div>
+                                        <div>
+                                            <b>{{p.step}}</b>
+                                            <span>{{p.process_content}}</span>
                                         </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
                             </div>
                         </form>
-                    }
-                </div>
-                <div class="col-md-6">
-                    @if (isEditProcess) {
+                    </div>
+                }@else {
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="d-md-flex justify-content-between">
                                 <label class="form-label fw-bold">Quy trình phỏng vấn:</label>
-                                <button class="btn btn-secondary" (click)="cancleEditProcess()">Hủy</button>
+                                @if (processByJob.length > 0) {
+                                    <button class="btn btn-secondary" (click)="cancleEditProcess()">Hủy</button>
+                                }
                             </div>
                             <hr>
                             <form method="post">
@@ -407,22 +435,23 @@
                                     <div class="col-auto">
                                         <label class="form-label fw-bold">Quy trình phỏng vấn gồm:</label>
                                     </div>
-                                    <div class="input-group col-auto w-25">
-                                        <input type="number" class="form-control" id="step-input" (input)="stepInterview()"/>
+                                    <div class="input-group col-auto w-50">
+                                        <input type="number" class="form-control" id="step-input-edit" (input)="stepInterview()"/>
                                         <div class="input-group-text">Bước</div>
                                     </div>
                                 </div>
-                                <div class="row" id="step">
+                                <div class="row" id="step-edit">
                                     
                                 </div>
                             </form>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
         <div class="modal-footer mx-auto">
-          <button type="button" class="btn btn-success fs-5 fw-bold">Cập nhật</button>
+            <button type="button" class="btn text-danger fs-5 fw-bold me-md-4"><i class="bi bi-trash me-md-3"></i>Xóa công việc</button>
+          <button type="button" class="btn btn-success fs-5 fw-bold" (click)="updateJob()">Cập nhật</button>
         </div>
       </div>
     </div>

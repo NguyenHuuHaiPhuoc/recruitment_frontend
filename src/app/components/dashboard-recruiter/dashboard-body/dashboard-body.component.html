@@ -4,12 +4,12 @@
             @if (isLogin) {
                 <div class="dropdown">
                     <div class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/assets/img/users/icon-user-male-default.png" class="me-md-3" alt="avatar">
-                        <span class="me-md-3">{{user.username}}</span>
+                        <img [src]="avatar?avatar:'/assets/img/users/icon-user-male-default.png'" class="me-md-3" alt="avatar">
+                        <span>{{account.username}}</span>
                     </div>
                     <ul class="dropdown-menu border-opacity-10">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="dashboard-recruiter/cap-nhat-thong-tin">
                                 <i class="bi bi-pencil-square me-md-3"></i>
                                 Cập nhật thông tin cá nhân
                             </a>

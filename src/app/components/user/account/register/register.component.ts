@@ -12,7 +12,7 @@ import { AuthorityService } from '../../../../service/auth/authority.service';
 import { ApplicantService } from '../../../../service/user/applicant.service';
 import { CompanyService } from '../../../../service/user/company.service';
 import { finalize } from 'rxjs/operators';
-import moment from 'moment';
+import { RecruiterService } from '../../../../service/user/recruiter.service';
 
 declare var $: any;
 @Component({
@@ -31,6 +31,7 @@ declare var $: any;
     AccountService,
     AuthorityService,
     ApplicantService,
+    RecruiterService,
     CompanyService,
   ]
 })
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit {
   public roles = '';
   public searchs = '';
   public logoReview:string = '/assets/img/logos/logo-company-review.png';
+  public imgRecruiterReview:string = '/assets/img/users/icon-customer.png';
   public showPass: boolean = false;
   showPassConfirm: boolean = false;
   formValid: boolean = false;
@@ -62,12 +64,15 @@ export class RegisterComponent implements OnInit {
     private authorityService: AuthorityService,
     private applicantService: ApplicantService,
     private companyService: CompanyService,
+    private recruiterService: RecruiterService,
     private fireStorage: AngularFireStorage
   ) {
     this.companyForm = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        full_name: ['', [Validators.required]],
+        full_name: [null, [Validators.required]],
+        phoneRecruiter: [null, [Validators.required]],
+        gender: [null, [Validators.required]],
         password: [
           '',
           [
@@ -97,7 +102,7 @@ export class RegisterComponent implements OnInit {
         address: ['', Validators.required],
         date: ['', Validators.required],
         logo: ['', Validators.required],
-        phone: [
+        phoneCompany: [
           '',
           [
             Validators.required,
@@ -107,8 +112,7 @@ export class RegisterComponent implements OnInit {
           ],
         ],
         sumary: ['', Validators.required],
-        skill: [''],
-        searchs: ['', Validators.required],
+        skill: ['']
       },
       {
         validators: [this.passwordMatchValidator, this.taxCodeValidator],
@@ -263,27 +267,7 @@ export class RegisterComponent implements OnInit {
 
   registerRecruiter(event: Event) {
     event.preventDefault();
-    if (
-      this.companyForm.get('email')?.valid &&
-      this.companyForm.get('password')?.valid &&
-      this.companyForm.get('confirmPass')?.valid &&
-      this.companyForm.get('nameCompany')?.valid &&
-      this.companyForm.get('taxCode')?.valid &&
-      this.companyForm.get('typeBusiness')?.valid &&
-      this.companyForm.get('website')?.valid &&
-      this.companyForm.get('address')?.valid &&
-      this.companyForm.get('date')?.valid &&
-      this.companyForm.get('logo')?.valid &&
-      this.companyForm.get('phone')?.valid &&
-      this.companyForm.get('skill')?.valid &&
-      this.companyForm.get('sumary')?.valid
-    ) {
-      let mySkill:any = [];
-      const skillItem = document.querySelectorAll('.skill_item');
-      skillItem.forEach(e => {
-        mySkill.push(e.id);
-      });
-
+    if (this.companyForm.valid) {
       const account = {
         username: this.companyForm.value.email,
         password: this.companyForm.value.password,
@@ -291,75 +275,140 @@ export class RegisterComponent implements OnInit {
         is_del: false,
         full_name: this.companyForm.value.full_name
       }
-      try {
-        // luu image vaof firebase va tra ve url image
-        if (this.logoCompany == null) {
-          this.logoCompany = 'logo-company-review.png';
-        }
-
-        let filePath = `images/recruiter/${this.logoCompany.name.split('.').slice(0,-1).join('.')}_${new Date().getTime()}`;
-        const fileRef = this.fireStorage.ref(filePath);
-        this.fireStorage.upload(filePath, this.logoCompany).snapshotChanges().pipe(
-          finalize(()=>{
-            fileRef.getDownloadURL().subscribe((url)=>{
-              let imgUrl = url;
-              if(account != null) {
-                this.accountService.register(account).subscribe((resp) => {
-                  if(resp.result != null){
-                    const authorityData = {
-                      create_date: new Date(),
-                      account: {
-                        id: resp.result.id
-                      },
-                      role: {
-                        id: 3
-                      }
-                    };
-                    
-                    const company = {
-                      name: this.companyForm.value.nameCompany,
-                      tax_code: this.companyForm.value.taxCode,
-                      image: imgUrl,
-                      business_type: this.companyForm.value.typeBusiness,
-                      skill: mySkill.join(),
-                      headquarter: this.companyForm.value.address,
-                      establishment_date: this.companyForm.value.date,
-                      sumary: this.companyForm.value.sumary,
-                      web_url: this.companyForm.value.website,
-                      email: this.companyForm.value.email,
-                      phone: this.companyForm.value.phone,
-                      create_date: new Date(),
-                      account: {
-                        id: resp.result.id
-                      }
-                    };
-                    this.authorityService.createAuthority(authorityData).subscribe();
-                    this.companyService.createCompany(company).subscribe((resp) => {
-                      this.resetCompanyForm();
-                      const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                          toast.onmouseenter = Swal.stopTimer;
-                          toast.onmouseleave = Swal.resumeTimer;
-                        }
-                      });
-                      Toast.fire({
-                        icon: "success",
-                        title: resp.message
-                      });
-                      this.router.navigateByUrl('/dang-nhap');
-                    });
       
-                  }
-                });
+      try {
+        if(account != null) {
+          this.accountService.register(account).subscribe((resp) => {
+            if(resp.status == 400){
+              console.log('acc 400');
+              Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: resp.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+              return;
+            }
+
+            if(resp.status == 403){
+              console.log('acc 403');
+              Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: resp.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+              return;
+            }
+
+            if(resp.status == 200){
+              const authorityData = {
+                create_date: new Date(),
+                account: {
+                  id: resp.result.id
+                },
+                role: {
+                  id: 3
+                }
+              };
+              const recruiter = {
+                email: resp.result.username,
+                phone: this.companyForm.value.phoneRecruiter,
+                gender: this.companyForm.value.gender,
+                img: null,
+                create_date: new Date(),
+                update_date: null,
+                account: {
+                  id: resp.result.id
+                }
               }
-            })
-          })
-        ).subscribe();
+
+              this.authorityService.createAuthority(authorityData).subscribe();
+              
+              this.recruiterService.createRecruiter(recruiter).subscribe({
+                next: (respone) => {
+                  if(respone.status == 403){
+                    console.log('rec 403');
+                    Swal.fire({
+                      position: "center",
+                      icon: "warning",
+                      title: respone.message,
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  }
+                  if(respone.status == 200){
+                    let mySkill:any = [];
+                    const skillItem = document.querySelectorAll('.skill_item');
+                    skillItem.forEach(e => {
+                      mySkill.push(e.id);
+                    });
+
+                    // luu image vaof firebase va tra ve url image
+                    if (this.logoCompany == null) {
+                      this.logoCompany = 'logo-company-review.png';
+                    }
+
+                    let filePath = `images/recruiter/company/${this.logoCompany.name.split('.').slice(0,-1).join('.')}_${new Date().getTime()}`;
+                    const fileRef = this.fireStorage.ref(filePath);
+                    this.fireStorage.upload(filePath, this.logoCompany).snapshotChanges().pipe(
+                      finalize(()=>{
+                        fileRef.getDownloadURL().subscribe((url)=>{
+                          let imgUrl = url;
+                          const company = {
+                            name: this.companyForm.value.nameCompany,
+                            tax_code: this.companyForm.value.taxCode,
+                            image: imgUrl,
+                            business_type: this.companyForm.value.typeBusiness,
+                            skill: mySkill.join(),
+                            headquarter: this.companyForm.value.address,
+                            establishment_date: this.companyForm.value.date,
+                            sumary: this.companyForm.value.sumary,
+                            web_url: this.companyForm.value.website,
+                            email: this.companyForm.value.email,
+                            phone: this.companyForm.value.phoneCompany,
+                            create_date: new Date(),
+                            recruiter: {
+                              id: respone.result.id
+                            }
+                          };
+
+                          this.companyService.createCompany(company).subscribe((data) => {
+                            this.resetCompanyForm();
+                            const Toast = Swal.mixin({
+                              toast: true,
+                              position: "top-end",
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                              didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                              }
+                            });
+                            Toast.fire({
+                              icon: "success",
+                              title: data.message
+                            });
+                            this.router.navigateByUrl('/dang-nhap');
+                          });
+                          
+                        })
+                      })
+                    ).subscribe();
+                  }
+  
+                },
+                error(err) {
+                    console.error(err);
+                },
+              })
+  
+            }
+          });
+        }
       } catch (error) {
         console.log(error);
       }
@@ -438,7 +487,8 @@ export class RegisterComponent implements OnInit {
   hidePassConfirm(showPassConfirm: boolean) {
     this.showPassConfirm = showPassConfirm;
   }
-  getImage(event: any) {
+
+  public getImage(event: any) {
     const file = event.target.files;
     if(file && file[0]){
       const reader = new FileReader();
@@ -463,8 +513,10 @@ export class RegisterComponent implements OnInit {
   private resetCompanyForm():void {
     this.companyForm.setValue(
       {
-      email: [''],
+        email: [''],
         full_name: [''],
+        phoneRecruiter: [''],
+        gender: [''],
         password: [''],
         confirmPass: [''],
         nameCompany: [''],
@@ -474,10 +526,9 @@ export class RegisterComponent implements OnInit {
         address: [''],
         date: [''],
         logo: [''],
-        phone: [''],
+        phoneCompany: [''],
         sumary: [''],
-        skill: [''],
-        searchs: ['']
+        skill: ['']
       }
     );
   }

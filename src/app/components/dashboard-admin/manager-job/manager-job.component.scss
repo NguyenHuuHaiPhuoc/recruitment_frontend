@@ -1,1 +1,32 @@
-thead{background-color: #2A6563 !important;}
+.table {
+  thead {
+    tr {
+      th {
+        background-color: #2a6563;
+        border-color: #2a6563;
+        color: #fff;
+      }
+    }
+  }
+}
+.filter-job{
+    padding: 1.35rem;
+    border: 0.5px solid #2a6563;
+}
+.label-filter{
+    position: absolute;
+    background-color: #FFFFFF;
+    top: -13px;
+    left: 1rem;
+    padding: 0 10px;
+    font-weight: bold;
+    color: #2a6563;
+}
+
+.step-item-tail{
+  width: 0;
+  height: 1.65rem;
+  border: 0.5px solid #05ad5e;
+  left: 6px;
+  top: 1.4rem;
+}

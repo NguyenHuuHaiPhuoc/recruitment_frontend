@@ -16,7 +16,13 @@ export class ProcessService{
         });
     }
     public createProcess (process:any):Observable<any> {
-        return this.http.post<any>(this.api_url+ '/process', process,{
+        return this.http.post<any>(this.api_url+ '/create/process', process,{
+            headers: this.createAuthorizationHeader()
+        });
+    }
+
+    public deleteProcess (id:any):Observable<any> {
+        return this.http.delete<any>(this.api_url+ '/delete/process/id=' + id,{
             headers: this.createAuthorizationHeader()
         });
     }
