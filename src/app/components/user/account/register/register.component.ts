@@ -1,6 +1,7 @@
-import { Component, Renderer2, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule,FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, Renderer2, ElementRef, input, OnInit } from '@angular/core';
+import {  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
+import { Company } from './Company';
+import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestuploadComponent } from '../../../testupload/testupload.component';
 import { OptionDetailService } from '../../../../service/option-detail/option-detail-service.service';
@@ -35,14 +36,22 @@ declare var $: any;
     CompanyService,
   ]
 })
-export class RegisterComponent implements OnInit {
-  public roles = '';
-  public searchs = '';
+export class RegisterComponent implements OnInit{
+  public roles  = '';
+  public searchs  = '';
   public logoReview:string = '/assets/img/logos/logo-company-review.png';
+<<<<<<< HEAD
   public imgRecruiterReview:string = '/assets/img/users/icon-customer.png';
   public showPass: boolean = false;
   showPassConfirm: boolean = false;
   formValid: boolean = false;
+=======
+
+  showPass:boolean=false;
+  showPassConfirm:boolean=false;
+  formValid:boolean= false;
+  imageFile: any ;
+>>>>>>> test
   // List skill (danh sách này sẽ được thay khi gọi api)
   public skills = [];
   public skill = '';
@@ -52,11 +61,12 @@ export class RegisterComponent implements OnInit {
   private listSkillChoose: any[] = [];
   private size = 0;
   private logoCompany:any = null;
+  
 
+  
   public companyForm: FormGroup;
   public applicantForm: FormGroup;
-  constructor(
-    private renderer: Renderer2,
+   constructor(private renderer: Renderer2,
     private formBuilder: FormBuilder,
     private router: Router,
     private opDetialService: OptionDetailService,
@@ -64,10 +74,15 @@ export class RegisterComponent implements OnInit {
     private authorityService: AuthorityService,
     private applicantService: ApplicantService,
     private companyService: CompanyService,
+<<<<<<< HEAD
     private recruiterService: RecruiterService,
     private fireStorage: AngularFireStorage
   ) {
     this.companyForm = this.formBuilder.group(
+=======
+    private fireStorage: AngularFireStorage) {
+      this.companyForm = this.formBuilder.group(
+>>>>>>> test
       {
         email: ['', [Validators.required, Validators.email]],
         full_name: [null, [Validators.required]],
@@ -127,7 +142,6 @@ export class RegisterComponent implements OnInit {
       full_name: [null]
     });
   }
-
   ngOnInit() {
     this.openPopup();
     this.opDetialService.getOptionDetailTechnologiesUsing().subscribe((resp) => {
@@ -264,7 +278,6 @@ export class RegisterComponent implements OnInit {
     });
     selectElement.size = this.listSkillFilter.length+1;
   }
-
   registerRecruiter(event: Event) {
     event.preventDefault();
     if (this.companyForm.valid) {
@@ -510,6 +523,7 @@ export class RegisterComponent implements OnInit {
       full_name: [null]
     });
   }
+
   private resetCompanyForm():void {
     this.companyForm.setValue(
       {

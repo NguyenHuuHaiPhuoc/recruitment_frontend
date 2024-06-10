@@ -18,11 +18,10 @@ export class HeaderSearchComponent {
   public popupshow:boolean =  true;
   
   constructor(private renderer: Renderer2) {
-    
+  
   }
   
   onInputClick(){
     this.popupshow= !this.popupshow;
   }
-
 }

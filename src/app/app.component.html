@@ -34,14 +34,19 @@
         || getURL() === "/dashboard-admin/code"
 ){
     <app-layout-admin></app-layout-admin>
+}@else if(getURL() === "employerHome" || getURL() === 'news' ||getURL() === 'settingaccount'||getURL() === 'changepassword'
+            ||getURL() === 'informationuser'|| getURL() === 'businesslicense' || getURL() === 'updatecompany' || getURL() === 'campaign'){
+  <router-outlet></router-outlet>
 }
 @else {
 <app-header-menustart></app-header-menustart>
 
     <app-header-carouselstrart [images]="images"  ></app-header-carouselstrart>
 
-    <app-header-search></app-header-search>
-    <router-outlet></router-outlet>
-    
-    <app-footer></app-footer>
+<app-header-search></app-header-search>
+<router-outlet></router-outlet>
+<!-- <app-feedback-clients></app-feedback-clients> -->
+
+<app-footer></app-footer>
 }
+

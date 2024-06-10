@@ -9,7 +9,7 @@ export class CodeService {
   private item = localStorage.getItem('account');
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   public getAllCodeoption():Observable<any> {
     return this.http.get<any>(this.api_url + '/code-option', {

@@ -15,7 +15,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Cấp bậc
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu m-2">
                           @for (i of levels; track i.id) {
                             <li class="text-center" role="button">{{i.option_name}}</li>
                           }
@@ -25,7 +25,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Kỹ năng
                         </a>
-                        <ul class="dropdown-menu ">
+                        <ul class="dropdown-menu m-2">
                             @for (i of technologiesUsing; track i.id) {
                                 <li class="text-center" role="button">{{i.option_name}}</li>
                             }
@@ -35,7 +35,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Loại hình
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu m-2">
                           <li><a class="dropdown-item" href="#">On Office</a></li>
                           <li><a class="dropdown-item" href="#">Hybrid</a></li>
                           <li><a class="dropdown-item" href="#">Remote</a></li>
@@ -46,7 +46,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Địa điểm
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu m-2">
                           <li><a class="dropdown-item" href="#">Hà Nội</a></li>
                           <li><a class="dropdown-item" href="#">Hồ Chí Minh</a></li>
                           <li><a class="dropdown-item" href="#">Đà nẵng</a></li>
@@ -63,12 +63,12 @@
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sự Nghiệp</a>
-                <div class="dropdown-menu p-md-2">
-                    <a href="body-job-category" class="dropdown-item">Định Hướng Nghề Nghiệp</a>
+               <div class="dropdown-menu p-md-2">
+                    <a href="blog" class="dropdown-item">Định Hướng Nghề Nghiệp</a>
                     <a href="testimonial" class="dropdown-item">Bí kíp tìm việc</a>
                     <a href="body-error-404" class="dropdown-item">Tính lương Gross-net</a>
                     <a href="body-error-404" class="dropdown-item">Thị trường xu hướng tuyển dụng</a>
-                </div>
+               </div>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Pages</a>

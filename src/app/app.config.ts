@@ -2,13 +2,13 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-// import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideHttpClient ,withInterceptors } from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/compat/database';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 const firebaseConfig = {
   apiKey: "AIzaSyAkOSr2JjJoDqwsX2Pe1nWocEUjfxM1TzQ",
   authDomain: "recruitmentweb-b9ddb.firebaseapp.com",
@@ -28,6 +28,7 @@ export const appConfig: ApplicationConfig = {
       AngularFireModule.initializeApp(firebaseConfig)
       ,AngularFireStorageModule
       ,AngularFireDatabaseModule
+      ,BrowserAnimationsModule
     )
   ]
 };

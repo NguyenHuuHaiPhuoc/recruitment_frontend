@@ -1,0 +1,22 @@
+label{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 300
+}
+input, select, textarea{
+  border: 1px solid rgb(212, 207, 207);
+  background-color: rgb(223, 222, 222);
+}
+form{
+  background-color: #ffff;
+}
+.function_handle{
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 10%;
+  font-size: 13px;
+}
+th{
+  text-transform: uppercase;
+  font-weight: 700;
+}

@@ -11,6 +11,10 @@ import { DashboardComponent } from './components/dashboard-recruiter/dashboard/d
 import { PostJobComponent } from './components/dashboard-recruiter/post-job/post-job.component';
 import { LayoutAdminComponent } from './components/dashboard-admin/layouts-admin/layout-admin.component';
 
+
+// import the cloundinaryModule
+// import the cloundinary classer
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -57,6 +61,8 @@ export class AppComponent {
 
   getURL() : string {
     const path: string = this.location.path();
-    return path;
+    const segments: string[] = path.split('/');
+    const lastSegment: string = segments[segments.length - 1];
+    return lastSegment;;
   }
 }

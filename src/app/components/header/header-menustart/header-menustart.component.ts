@@ -1,14 +1,16 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component,OnInit,AfterViewInit  } from '@angular/core';
 import { AuthService } from '../../../service/auth/auth-service.service';
 import { Router } from '@angular/router';
 import { OptionDetailService } from '../../../service/option-detail/option-detail-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-header-menustart',
   standalone: true,
   imports: [
-    HttpClientModule
+    HttpClientModule,MatButtonModule, MatMenuModule
   ],
   templateUrl: './header-menustart.component.html',
   styleUrl: './header-menustart.component.scss',
@@ -48,4 +50,5 @@ export class HeaderMenustartComponent implements OnInit{
     this.authService.logout();
     this.router.navigate(['/dang-nhap']);
    }
+    
 }

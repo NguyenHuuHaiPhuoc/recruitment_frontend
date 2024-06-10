@@ -1,0 +1,136 @@
+
+.img_news img{
+  width: 100%;
+  height: 100%;
+}
+
+.carousel{
+  padding: 0;
+}
+.recruit_efficiency{
+  background-color: #ffff;
+  padding: 10px;
+}
+
+.eficiency_item{
+  display: grid;
+  gap: 10px 10px;
+  grid-template-columns: repeat(2,auto);
+  grid-template-rows: repeat(2,auto);
+}
+
+.container_efficiency{
+   display: flex;
+   justify-content: space-between;
+   padding: 10px;
+}
+
+.page-content{
+ padding: 1rem;
+}
+
+.content_left{
+  background-color: #ffff;
+  padding: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+
+}
+
+@media screen and (min-width: 769px) {
+    /* STYLES HERE */
+  .content_left{
+  background-color: #ffff;
+  margin-bottom: 1rem;
+
+}
+}
+
+.item_carousel{
+  margin-right: 1.5rem ;
+}
+
+.menu_function{
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2,47%);
+  gap: 3rem;
+}
+
+.function_item{
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  grid-template-rows: repeat(2,auto);
+  gap: 1rem;
+} 
+
+.function_item_child{
+  display: grid;
+  gap: 3rem;
+}
+
+.function_item_child_image img{
+  width: 200px;
+  height: 100px;
+}
+
+.function_item_child_image{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 2rem;
+}
+.maneger_campaign{
+  border-top: 1px solid rgb(146, 144, 144);
+}
+
+.function_item_child:nth-child(1){
+background: #b0caf1 !important;
+color: rgb(0, 0, 255);
+}
+.function_item_child:nth-child(2){
+background: #99ffc2 !important;
+color: green;
+}
+.function_item_child:nth-child(3){
+background: #ffe694 !important;
+color:orange;
+}
+.function_item_child:nth-child(4){
+    background: #ff9a91 !important;
+    color: red;
+}
+
+.information_user_img img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.information_user_img{
+ height: 56px;
+ width: 75px;
+}
+
+.information_user{
+  background-color: rgb(232, 231, 231);
+}
+.progress-container {
+  width: 100%;
+  text-align: center;
+}
+
+.progress-label {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+.recruitment_ai a{
+  text-decoration: none;
+  color: black;
+}
+.recruitment_ai{
+  margin-top: 1rem;
+  background-color: rgb(117, 255, 255);
+  height: 100px;
+  padding: 1rem;
+}

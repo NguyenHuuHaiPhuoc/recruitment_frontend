@@ -1,0 +1,89 @@
+
+<div class="container_fluid container-fluid">
+
+<div class="row menustart d-flex align-items-center p-2">
+    <div class="col-sm-4 d-flex flex-wrap align-content-center">
+      <a  (click)="openSlideBar()" style="font-size: 20px; font-weight: 700;" ><mat-icon>menu</mat-icon></a>
+     <a routerLink="news" style="color: white;"><h5 class="ml-5">Easy Jobs</h5></a>
+    </div>
+      <div  class="col-sm-8 d-flex flex-wrap align-items-center justify-content-evenly
+" >
+      <a href="#" class="quick_tag" >Tải báo cáo thị trường 2023-2024</a>
+      <a href="#" class="quick_tag" >hr inside</a>
+      <a href="#" class="quick_tag" >Tìm cv</a>
+      <a href="#" class="quick_tag" >Đăng tin</a>
+      <a href="#" class="quick_tag" >Connect</a>
+      <a href="#" class="quick_tag" >Trợ giúp</a>
+      <a href="#" class="quick_tag" ><i class="bi bi-bell-fill"></i></a>
+   <button  class="quick_tag"  mat-button [matMenuTriggerFor]="account"><i class="bi bi-person-circle text-light" style="font-size: 20px;"></i><i class="bi bi-caret-down-fill"></i></button>
+   <mat-menu #account="matMenu">
+    <a href="#" mat-menu-item>đăng xuất</a>
+    <a href="#" mat-menu-item>đăng xuất</a>
+    <a href="#" mat-menu-item>đăng xuất</a>
+   </mat-menu>
+    </div>
+</div>
+
+<div class="row">
+ 
+ <div  class="menubar col-sm-2 " [hidden]="showslidebar" >
+    <div class="row">
+      <div class="d-flex">
+        <a href="employerHome/settingaccount" class="col-sm-4 img_user">
+          <img src="./assets/img/logo/user/user1.jpeg" alt="">
+        </a>
+        <div class="col-sm-8 ">
+          <span class="name">nguyen dinh thang</span><br>
+          <span class="role">empolyer</span><br>
+          <span class="level">tai khoan xac thuc</span>
+        </div>
+      </div>
+    </div>
+<hr>
+    <div class="row content_slidebar">
+      <ul>
+        <li class="row"><a href="employerHome/news"><i class="bi bi-columns-gap"></i> <span class="m-4 title_menu_left">Bản tin</span></a></li>
+        <li class="row"><a ><i class="bi bi-star"></i> <span class="m-4 title_menu_left">Cv đề xuất</span></a></li>
+        <li class="row"><a routerLink="campaign"><i class="bi bi-handbag "></i> <span class="m-4 title_menu_left">Chiến dịch tuyển dụng</span></a></li>
+        <li class="row"><a href=""><i class="bi bi-file-earmark-text "></i> <span class="m-4 title_menu_left">Tin tuyển dụng</span></a></li>
+        <li class="row"><a routerLink="settingaccount"><i class="bi bi-gear"></i> <span class="m-4 title_menu_left">Cài đặt tài khoản</span></a></li>
+      </ul>
+    </div>
+<hr>
+    </div>
+
+    <div class="col-sm-10" #contentright style="height: 650px; overflow: scroll;">
+      @if(getURL() ==='employerHome'){
+   <div class="row m-3">
+   <div class="col-sm-6 "> 
+      <h3>chao mung ban den voi recruitment platform</h3>
+      <p>nen tang cong nghe tien phong su dung al</p>
+      <div class="quickView d-flex justify-content-evenly border-box mb-3">
+        <div class=" id_quickView"> <span>1</span></div>
+        <span>truy cap trung tam tro giup de tim hieu thong tin vaf huong dan can thiet de su dung recruitment platform hieu qua </span>
+        <a href="#" class="quickLink" >Xem ngay</a>
+      </div>
+         <div class="quickView d-flex justify-content-evenly border-box mb-3">
+        <div class=" id_quickView"> <span>1</span></div>
+        <span>truy cap trung tam tro giup de tim hieu thong tin vaf huong dan can thiet de su dung recruitment platform hieu qua </span>
+        <a href="#" class="quickLink" >Xem ngay</a>
+      </div>
+         <div class="quickView d-flex justify-content-evenly border-box mb-3">
+        <div class=" id_quickView"> <span>1</span></div>
+        <span>truy cap trung tam tro giup de tim hieu thong tin vaf huong dan can thiet de su dung recruitment platform hieu qua </span>
+        <a href="#" class="quickLink" >Xem ngay</a>
+      </div>
+   </div>
+    <div class="col-sm-6">
+     <img src="./assets/img/about-1.jpg" alt="">
+   </div>
+   </div>
+   }
+     <router-outlet ></router-outlet>
+   
+</div>
+
+</div>
+
+</div>
+

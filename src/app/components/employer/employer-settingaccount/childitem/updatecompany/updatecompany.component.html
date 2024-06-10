@@ -1,0 +1,74 @@
+  <div class="headerRight m-2">
+        <span>Cập nhật thông tin công ty</span>
+      </div>
+      <div class="contentRight mb-3 border m-2 p-3">
+        <form>
+          <div class="row">
+          <div class="col-sm-6">
+            <label for="">Mã số thuế</label>
+            <input type="text" class="w-100">
+          </div>
+          <div class="col-sm-6">
+            <label for="">Tên Công ty</label>
+            <input type="text" class="w-100" disabled>
+          </div>
+          </div>
+
+          <div class="row mt-3">
+          <div class="col-sm-6">
+            <label for="">Website</label>
+            <input type="text" class="w-100" placeholder="https://">
+          </div>
+          <div class="col-sm-6">
+            <label for="">Lĩnh vực hoạt động</label>
+            <select name="" id="" class="w-100">
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+            </select>
+          </div>
+          </div>
+
+             <div class="row mt-3">
+          <div class="col-sm-6">
+            <label for="">
+              Quy mô
+            </label>
+            <select name="" id="" class="w-100">
+              <option value="">thang</option>
+              <option value="">long</option>
+              <option value="">hihii</option>
+              <option value="">ádfasdf</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="">Địa chỉ</label>
+            <input type="text" class="w-100">
+          </div>
+          </div>
+
+             <div class="row mt-3">
+          <div class="col-sm-6">
+            <label for="">Email</label>
+            <input type="text" class="w-100">
+          </div>
+          <div class="col-sm-6">
+            <label for="">Số điện thoại</label>
+            <input type="text" class="w-100">
+          </div>
+          </div>
+
+          <div class="row mt-3">
+            <label for="">Mô tả về công ty</label>
+            <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+          </div>
+           
+           <div class="d-flex justify-content-end mt-3">
+<button type="button" class="btn btn-secondary ">Secondary</button>
+
+<button type="button" class="btn btn-success " style="margin-left: 1rem;">Success</button>
+           </div>
+
+        </form>
+      </div>

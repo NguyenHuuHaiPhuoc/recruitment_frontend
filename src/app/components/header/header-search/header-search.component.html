@@ -6,17 +6,15 @@
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4 searchbox">
-                                <input type="text" class="form-control border-0" 
+<input type="text" class="form-control border-0" 
                                     placeholder="Từ Khóa" 
                                     name="searchValue"
                                     [(ngModel)]="searchValue"
                                     (blur)="onInputClick()" 
                                     (click)="onInputClick()" 
                                     #toggleButton />
-
                                 <!-- gợi ý những từ khóa tìm kiếm -->
                                 <div class="popup" [hidden]="popupshow" >
-                                
                                   <div class="container mt-3">
                                     <div class="row">
                                       <div class="col-6">
