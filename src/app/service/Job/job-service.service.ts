@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class JobService{
     private api_url:any = 'http://localhost:8080/api/recruitment';
-    private base_url = 'http://localhost:8080/recruitment/jobs';
+    private base_url = 'http://localhost:8080/recruitment';
 
     constructor 
     (
@@ -13,7 +13,11 @@ export class JobService{
     ) {}
 
     public getAllJob():Observable<any> {
-        return this.http.get<any>(this.base_url);
+        return this.http.get<any>(this.base_url+'/jobs');
+    }
+
+    public getNewJob():Observable<any> {
+        return this.http.get<any>(this.base_url+'/new/jobs');
     }
 
     public getAllJobByAccountID (id:any):Observable<any> {

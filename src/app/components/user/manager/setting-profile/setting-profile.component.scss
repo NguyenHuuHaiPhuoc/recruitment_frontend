@@ -24,5 +24,12 @@
     border-radius: 50%;
     background-color: #A1A1A1;
 }
-
 #email{cursor: no-drop;}
+.btn-update-cv{
+    border: 1px solid #2A6563;
+    color: #2A6563;
+}
+.btn-update-cv:hover{
+    background-color: #2A6563;
+    color: #FFFFFF;
+}

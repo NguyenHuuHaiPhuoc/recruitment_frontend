@@ -10,7 +10,7 @@
       <div class="list-skill d-md-flex gap-md-3 p-md-2 rounded-3 flex-grow-1">
         @for (s of listMySkill; track s.id) {
           <span id="{{s.id}}" class="skil-item p-md-2 border rounded-3">
-              {{s.code}}
+              {{s.skill_name}}
             <i class="bi bi-trash text-danger" role="button" (click)="deleteSkill(s.id)"></i>
           </span>
         }
@@ -55,10 +55,9 @@
                 <input type="search" class="search-skill" id="search-skill" (input)="searchSkill($event)"/>
               </div>
             </span>
-            <select class="form-select" id="skills" size="" name="option" #setSize
-              [hidden]="isHiddenSelect">
+            <select class="form-select" id="skills" size="" [hidden]="isHiddenSelect">
               @for (item of listSkillFilter; track item.id) {
-              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
+              <option value="{{item.option_name}}" (click)="choseOptionSkill(item.id,item.option_name)">{{item.option_name}}</option>
               }
             </select>
             <div class="btn-save mt-md-3 text-center">
@@ -98,7 +97,7 @@
             <select class="form-select" id="skills" size="" name="option" #setSize
               [hidden]="isHiddenSelect">
               @for (item of listSkillFilter; track item.id) {
-              <option value="{{item.id}}" (click)="choseOptionSkill(item.id,item.code)">{{item.code}}</option>
+              <option value="{{item.option_name}}" (click)="choseOptionSkill(item.id,item.option_name)">{{item.option_name}}</option>
               }
             </select>
             <div class="btn-save mt-md-3 text-center">

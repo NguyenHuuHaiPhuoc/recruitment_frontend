@@ -239,7 +239,7 @@ export class ManagermentjobComponent implements OnInit{
     const approval = $('#approval').val();
     const createDate = moment($('#createDateValue').val()).format('YYYYMMDD');
     const expirationDate = moment($('#expirationDateValue').val()).format('YYYYMMDD');
-    console.log(approval)
+    
     this.filterJob = this.jobs.filter((job:any) => {
       if (techUse != '' && createDate == 'Invalid date' && expirationDate == 'Invalid date' && approval == 'NO') {
         if(job.tech_use.toLowerCase().includes(techUse.toLowerCase())){

@@ -59,10 +59,8 @@ export class AppComponent {
     
   }
 
-  getURL() : string {
+  public getURL() : string {
     const path: string = this.location.path();
-    const segments: string[] = path.split('/');
-    const lastSegment: string = segments[segments.length - 1];
-    return lastSegment;;
+    return path;
   }
 }

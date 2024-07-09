@@ -1,8 +1,9 @@
 .container_fluid{
   background-color: rgb(234, 234, 234);
+  height: 810px;
 }
 .quick_tag{
-      background-color: #30445b !important;
+  background-color: #30445b !important;
   font-size: 12px;
   padding: 0.5rem;
   font-weight: 700;
@@ -11,10 +12,9 @@
 }
 
 .menustart{
-  // height: 50px;
+  
   overflow: hidden;
-  // background: linear-gradient(#6ad1f5, rgb(61 219 255), #6dd3f8);
-    background-color: #161e28 !important;
+  background-color: #212F3F !important;
   color: #ffff;
 }
 
@@ -71,7 +71,7 @@ a{
   justify-content: center;
   margin-right: 0.5rem;
   padding: 0.3rem;
-    border-radius: 50%;
+  border-radius: 50%;
   background-color: rgb(121, 186, 246);
   width: 20px;
   height: 20px;
@@ -99,19 +99,57 @@ a{
 .role{
   font-weight: 400;
 }
-.menubar{
+.sidenav{
+  width: 5rem;
+  height: 730px;
   background-color: #ffffff;
-  animation: menubar 0.3s ease-out;
-}
+  position: fixed;
+  transition: all .5s ease;
+  z-index: 2;
+  top: 4.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  .img_user img{
+    width: 50px;
+    height: 50px;
 
+  }
+}
+.sidenav-collapsed{
+  background-color: #ffffff;
+  width: 16.5625rem;
+}
+.dashboard-body{
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+  z-index: 0;
+  transition: all .5s ease;
+}
+.body-trimmed{
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+.body-md-screen{
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
 .content_slidebar{
   font-size: 13px;
   font-weight: 400;
 }
-
+.content_slidebar li{
+  margin-top: 1.65rem;
+}
 .icon_slide{
   color: rgb(0, 110, 255);
 }
 .title_menu_left{
   font-weight: 500;
+}
+
+@media only screen and (max-width: 1600px) {
+  .container_fluid{
+    height: 742px;
+    overflow: hidden;
+  }
 }

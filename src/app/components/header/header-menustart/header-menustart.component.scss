@@ -27,10 +27,18 @@
   }
 
 .info-account{
+  position: absolute;
+  top: -1.75rem;
+  right: -1.75rem;
   background-color: #F1F1F1;
 }
-
-.dropdown-action{padding: 10px;}
+ // css lai
+.dropdown-action{
+  position: absolute;
+  top: 1.75rem !important;
+  left: -17rem;
+  padding: 10px;
+}
 .dropdown-action a{
   background-color: #F1F2F6;
   margin-bottom: 10px;
@@ -63,13 +71,6 @@
 }
 .menu a:hover{
   color: #69cada;
-}
-.dropdown_right:hover{
- 
-}
-
-.childrent{
- 
 }
 .parent:hover{
   border-right: 2px solid rgb(244, 238, 238);

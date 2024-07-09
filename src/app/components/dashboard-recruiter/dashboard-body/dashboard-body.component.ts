@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth-service.service';
-import { RecruiterService } from '../../../service/user/recruiter.service';
+import { RecruiterService } from '../../../service/user/recruiter/recruiter.service';
 
 @Component({
   selector: 'app-dashboard-body',

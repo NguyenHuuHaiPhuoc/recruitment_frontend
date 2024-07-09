@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../service/auth/auth-service.service';
 import { AccountService } from '../../../service/user/account.service';
-import Swal from 'sweetalert2'
-import { RecruiterService } from '../../../service/user/recruiter.service';
+import Swal from 'sweetalert2';
+import { RecruiterService } from '../../../service/user/recruiter/recruiter.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({

@@ -1,7 +1,7 @@
-import { Component, Renderer2, ElementRef, input, OnInit } from '@angular/core';
-import {  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder ,ValidatorFn ,ValidationErrors } from '@angular/forms';
-import { Company } from './Company';
-import { CommonModule, DatePipe, NgIf } from '@angular/common';
+import { Component, Renderer2, OnInit } from '@angular/core';
+import {  FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestuploadComponent } from '../../../testupload/testupload.component';
 import { OptionDetailService } from '../../../../service/option-detail/option-detail-service.service';
@@ -10,10 +10,10 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import Swal from 'sweetalert2';
 import { AccountService } from '../../../../service/user/account.service';
 import { AuthorityService } from '../../../../service/auth/authority.service';
-import { ApplicantService } from '../../../../service/user/applicant.service';
-import { CompanyService } from '../../../../service/user/company.service';
+import { ApplicantService } from '../../../../service/user/applicant/applicant.service';
+import { CompanyService } from '../../../../service/user/recruiter/company.service';
 import { finalize } from 'rxjs/operators';
-import { RecruiterService } from '../../../../service/user/recruiter.service';
+import { RecruiterService } from '../../../../service/user/recruiter/recruiter.service';
 
 declare var $: any;
 @Component({
@@ -40,18 +40,10 @@ export class RegisterComponent implements OnInit{
   public roles  = '';
   public searchs  = '';
   public logoReview:string = '/assets/img/logos/logo-company-review.png';
-<<<<<<< HEAD
   public imgRecruiterReview:string = '/assets/img/users/icon-customer.png';
   public showPass: boolean = false;
   showPassConfirm: boolean = false;
   formValid: boolean = false;
-=======
-
-  showPass:boolean=false;
-  showPassConfirm:boolean=false;
-  formValid:boolean= false;
-  imageFile: any ;
->>>>>>> test
   // List skill (danh sách này sẽ được thay khi gọi api)
   public skills = [];
   public skill = '';
@@ -74,15 +66,10 @@ export class RegisterComponent implements OnInit{
     private authorityService: AuthorityService,
     private applicantService: ApplicantService,
     private companyService: CompanyService,
-<<<<<<< HEAD
     private recruiterService: RecruiterService,
     private fireStorage: AngularFireStorage
   ) {
     this.companyForm = this.formBuilder.group(
-=======
-    private fireStorage: AngularFireStorage) {
-      this.companyForm = this.formBuilder.group(
->>>>>>> test
       {
         email: ['', [Validators.required, Validators.email]],
         full_name: [null, [Validators.required]],

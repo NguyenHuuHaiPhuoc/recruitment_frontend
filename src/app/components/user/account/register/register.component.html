@@ -1,5 +1,4 @@
 
-<!-- end document-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -8,7 +7,6 @@
           <b class="fs-5">Chào bạn đến với Easy Job,</b><br />Bạn hãy dành ra vài giây để xác nhận thông tin dưới đây
           nhé.
         </p>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
         <div class="row mt-5">
@@ -17,7 +15,7 @@
               <img src="assets/img/register/applicant.png" alt="Applicant">
             </div>
             <button type="button" data-bs-dismiss="modal" aria-label="Close"
-              class="btn btn-success opacity-75 btn-applicant rounded-pill mt-5" (click)="chosseApplicantRole()">
+              class="btn btn-success btn-applicant rounded-pill mt-5" (click)="chosseApplicantRole()">
               <input type="radio" id="applicant" [(ngModel)]="roles" name="role" value="applicant" [hidden]="true" />
               Tôi là ứng viên
             </button>
@@ -25,7 +23,7 @@
           <div class="col-6 text-center">
             <img class="company mx-auto" src="assets/img/register/company.png" alt="Bussiness">
             <button type="button" data-bs-dismiss="modal" aria-label="Close"
-              class="btn btn-success opacity-75 btn-company rounded-pill mt-5" (click)="chosseCompanyRole()">
+              class="btn btn-success btn-company rounded-pill mt-5" (click)="chosseCompanyRole()">
               <input type="radio" id="company" [(ngModel)]="roles" name="role" value="company" [hidden]="true" />
               Tôi là nhà tuyển dụng
             </button>
@@ -37,7 +35,7 @@
 </div>
 
 <button type="button" id="openModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-  [hidden]="true"></button>
+  [hidden]="true">a</button>
 
 @if (roles!= null && roles === 'applicant') {
 <div class="container-fluid ">
@@ -47,7 +45,7 @@
         <div class="row">
           <form [formGroup]="applicantForm">
             <div class="mt-5 mb-3">
-              <h3 class="text-primary opacity-75">Chào bạn đến với EasyJob</h3>
+              <h3 style="color: #2A6563;">Chào bạn đến với <a href="easyjob" class="text-decoration-none">EasyJob</a></h3>
               <p>Hãy cùng xây dựng một hồ sơ lý tưởng dành cho riêng bạn nào</p>
             </div>
             <div class="mb-3">
@@ -110,24 +108,19 @@
         </p>
       </div>
     </div>
-    <div class="col-4 bg-rightt">
-      <img src="assets/img/register/bg-rightt.jpg" />
+    <div class="col-4 bg-right">
+      <img src="/assets/img/register-banner-applicant.jpg" />
     </div>
   </div>
 </div>
 
 } @else {
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> test
 <div class="container w-75">
   <a href="easyjob" class="img-logo">
     <img src="assets/img/logos/logo.png" alt="Logo EasyJob" />
   </a>
   <div class="row">
-    <h3 style="color: #00b14f;">Đăng ký tài khoản nhà tuyển dụng</h3>
+    <h3 style="color: #2A6563;">Đăng ký tài khoản nhà tuyển dụng</h3>
     <p>Cùng tạo dựng lợi thế cho doanh nghiệp bằng trải nghiệm công nghệ tuyển dụng</p>
   </div>
   <div class="row">
@@ -175,15 +168,15 @@
           <label class="form-label">Giới tính</label>
           <div class="input-group"> 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" id="nam" value="NAM" formControlName="gender">
+              <input class="form-check-input" type="radio" name="gender" id="nam" value="Nam" formControlName="gender">
               <label class="form-check-label" for="nam">Nam</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" id="nu" value="NU" formControlName="gender">
+              <input class="form-check-input" type="radio" name="gender" id="nu" value="Nữ" formControlName="gender">
               <label class="form-check-label" for="nu">Nữ</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" id="khac" value="KHAC" formControlName="gender">
+              <input class="form-check-input" type="radio" name="gender" id="khac" value="Khác" formControlName="gender">
               <label class="form-check-label" for="khac">Khác</label>
             </div>
           </div>

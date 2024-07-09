@@ -9,7 +9,7 @@ import { JoblistComponent } from './components/jobs/joblist/joblist.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
 import { DashboardComponent } from './components/dashboard-recruiter/dashboard/dashboard.component';
 import { PostJobComponent } from './components/dashboard-recruiter/post-job/post-job.component';
-import { authGuard } from './service/auth/auth.guard';
+import { authGuard } from './service/guard/auth.guard';
 import { DashboardAdminContentComponent } from './components/dashboard-admin/dashboard-admin-content/dashboard-admin-content.component';
 import { ManagermentjobComponent } from './components/dashboard-admin/manager-job/manager-job.component';
 import { CodeAdminComponent } from './components/dashboard-admin/codes-admin/code-admin.component';
@@ -20,10 +20,11 @@ import { EmployerHomeComponent } from './components/employer/employer-home/emplo
 import { EmployerNewsComponent } from './components/employer/employer-news/employer-news.component';
 import { EmployerSettingaccountComponent } from './components/employer/employer-settingaccount/employer-settingaccount.component';
 import { ChangepassComponent } from './components/employer/employer-settingaccount/childitem/changepass/changepass.component';
-import { ImfomationUserComponent } from './components/employer/employer-settingaccount/childitem/imfomation-user/imfomation-user.component';
+import { InfomationUserComponent } from './components/employer/employer-settingaccount/childitem/imfomation-user/imfomation-user.component';
 import { BusinesslicenseComponent } from './components/employer/employer-settingaccount/childitem/businesslicense/businesslicense.component';
 import { UpdatecompanyComponent } from './components/employer/employer-settingaccount/childitem/updatecompany/updatecompany.component';
 import { CampaignComponent } from './components/employer/employer-campaign/campaign.component';
+import { PhoneVerifyComponent } from './components/employer/employer-verify/phone-verify/phone-verify.component';
 
 
 export const routes: Routes = [
@@ -82,26 +83,6 @@ export const routes: Routes = [
     title: 'Thế giới việc làm',
     component: JoblistComponent
   },
-  // {
-  //   path: 'testimonial',
-  //   title: 'Thế giới việc làm',
-  //   component: JoblistComponent
-  // },
-  // {
-  //   path: 'viec-lam/cong-ty',
-  //   title: 'Công ty TNHH ABC',
-  //   component: JobdetailComponent,
-  // },
-  // {
-  //   path: 'about',
-  //   title: 'Về chúng tôi',
-  //   component: AboutComponent,
-  // },
-  // {
-  //   path: 'contact',
-  //   title: 'Liên hệ',
-  //   component: ContactComponent,
-  // },
   {
     path: 'u/cap-nhat-thong-tin-ca-nhan',
     title: 'Cài đặt thông tin cá nhân | EasyJob',
@@ -111,7 +92,7 @@ export const routes: Routes = [
     path: 'u/cv',
     title: 'EasyJob - Việc làm hàng đầu',
     component: ManagerComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'u/cv/edit',
@@ -139,19 +120,29 @@ export const routes: Routes = [
     component: JobdetailComponent
   },
   {
-    path: 'employerHome',
+    path: 'employer-dashboard', redirectTo: 'employer-dashboard/news', pathMatch: 'full'
+  },
+  {
+    path: 'employer-dashboard',
     title:'Nhà tuyển dụng | Dashboard',
     component: EmployerHomeComponent,
+    canActivate: [authGuard],
     children:[
       {
         path: 'news',  // child route path,
-        title: 'news',
+        title: 'Nhà tuyển dụng | Dashboard',
         component: EmployerNewsComponent
-      },{
+      },
+      {
         path: 'settingaccount',
         title: 'setting account',
         component: EmployerSettingaccountComponent,
         children:[
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'changepassword'
+          },
           {
           path: 'changepassword',
           title: 'Thay đổi mật khẩu',
@@ -160,7 +151,7 @@ export const routes: Routes = [
           {
             path: 'informationuser',
             title: 'Thông tin cá nhân',
-            component: ImfomationUserComponent,
+            component: InfomationUserComponent,
           },
           {
             path: 'businesslicense',
@@ -178,7 +169,12 @@ export const routes: Routes = [
         path: 'campaign',
         title: 'Chiến dịch tuyển dụng',
         component: CampaignComponent
-      }
+      },
+      {
+        path: 'phone-verify',
+        title: 'Nhà tuyển dụng | Cập nhật & Xác thực',
+        component: PhoneVerifyComponent
+      },
     ]
   },
   

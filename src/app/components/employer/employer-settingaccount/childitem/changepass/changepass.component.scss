@@ -1,6 +1,16 @@
-
+.headerRight{
+  top: -14px;
+  left: 2rem;
+}
+.label-form{
+  color: #2A6563;
+  font-weight: 700;
+  background-color: #F8F9FA;
+  padding: 0 10px;
+}
 .contentRight{
-  border: 1px solid rgb(204, 203, 203);
+  margin-top: 1.55rem;
+  border: 1px solid #2A6563;
 }
 .item_contentright{
   margin: 1rem;
@@ -24,18 +34,4 @@
 }
 .item_contentright_func_btn{
   margin-top: 1rem;
-}
-.item_contentright_func_btn button{
-  margin-right: 1rem;
-  border: none;
-  width: 100px;
-}
-.item_contentright_func_btn :nth-child(1){
-  background-color: gray;
-  font-weight: 500;
-}
-.item_contentright_func_btn :nth-child(2){
-  background-color: green;
-    font-weight: 500;
-    color: #ffff;
 }

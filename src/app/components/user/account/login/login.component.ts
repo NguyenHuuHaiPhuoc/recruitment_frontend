@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 declare var $:any;
 @Component({
-  selector: 'app-popup',
+  selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule
@@ -37,9 +37,13 @@ export class LoginComponent {
     }
 
   public login(){
-    const username = this.form_login.value.username;
-    const password = this.form_login.value.password;
-    this.accountService.findAccountByUsername(username,password).subscribe((resp) => {
+    const userName = this.form_login.value.username;
+    const passWord = this.form_login.value.password;
+    const request = {
+      username: userName,
+      password: passWord
+    }
+    this.accountService.findAccountByUsername(request).subscribe((resp) => {
       
       if(resp.status === 500){
         const Toast = Swal.mixin({
@@ -75,27 +79,38 @@ export class LoginComponent {
           create_date: resp.result.create_date,
           is_del: resp.result.is_del,
           full_name: resp.result.full_name,
-          roles: resp.role
+          roles: resp.role[0],
+          type_user: resp.role[1]
         };
         this.authService.login(account);
         
         const stageUrl = localStorage.getItem('stageUrl');
         if (resp.role.length > 0) {
-          if(resp.role == 1) {
+          if(resp.role[0] == 1) {
             if(stageUrl != null)
                 this.router.navigate([stageUrl]);
             else
               this.router.navigate(['dashboard-admin/dashboard']);
-          } else if (resp.role == 2) {
+
+            return;
+          }
+          
+          if (resp.role[0] == 2) {
             if(stageUrl != null)
                 this.router.navigate([stageUrl]);
             else
               this.router.navigate(['easyjob']);
-          } else if(resp.role == 3) {
+
+            return;
+          }
+          
+          if(resp.role[0] == 3) {
             if(stageUrl != null)
                 this.router.navigate([stageUrl]);
             else
-              this.router.navigate(['dashboard-recruiter/dashboard']);
+              this.router.navigate(['employer-dashboard/news']);
+
+            return;
           } 
         }
       }

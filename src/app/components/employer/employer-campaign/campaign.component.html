@@ -2,159 +2,385 @@
 
   <mat-tab class="bg-primary w-100 h-100" label="Tuyển dụng"> 
     <div class="mt-3 border bg-light">
-    <form  [formGroup]="userForm" class="p-2">
-      <h5 class="m-2">Đăng tuyển nhân tài</h5>
-      <div class="p-3">
-        <div class=" d-flex align-items-center justify-content-between p-2">
-          <div class="col-sm-5">
-            <label for="" style="margin-right: 0.5rem;">Vị trí tuyển dụng</label>
-            <div>
-               <input type="text" class="w-100" formControlName="location_recruitment"> 
+      <form  [formGroup]="formJob" class="p-2">
+        <h5 class="m-2 text-center">Đăng tuyển nhân tài</h5>
+        <div class="p-3">
+          <div class=" d-flex align-items-center justify-content-between p-2">
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Vị trí tuyển dụng</label>
+              <div>
+                <input type="text" class="w-100" formControlName="position"> 
+              </div>
+            
             </div>
-           
-          </div>
-          <div class="col-sm-5">
-            <label for="">Mức lương chi trả : </label>
-            <div class="mt-1">
-            <input type="text" formControlName="minSalary">
-            Đến
-            <input type="text" formControlName="maxSalary">
-            </div>
-          </div>
-        </div>
-           <div class="d-flex align-items-center justify-content-between p-2">
-          <div class="col-sm-5">
-            <label for="" style="margin-right: 0.5rem;">Kinh nghiệm </label>
-            <div>
-              <input type="text" class="w-100" formControlName="experience">
+            <div class="col-sm-5">
+              <label for="">Cấp bậc : </label>
+              <div class="mt-1">
+                <select class="w-100" formControlName="level">
+                  <option value="NO">Chọn cấp bậc</option>
+                  @for (l of levels; track $index) {
+                    <option value="{{l.option_name}}">{{l.option_name}}</option>
+                  }
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col-sm-5">
-            <label for="">Hạn ứng tuyển: </label>
-            <div class="mt-1">
-            <input type="date" name="" id="" formControlName="limitDateRecruitment">
+          <div class="d-flex align-items-center justify-content-between p-2">
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Công nghệ sử dụng: </label>
+              <div>
+                <input type="text" class="w-100" formControlName="tech_use">
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="">Kinh nghiệm: </label>
+              <div class="mt-1">
+              <input type="text" class="w-100" formControlName="year_exp">
+              </div>
             </div>
           </div>
-        </div>
-
-         
-
           <div class="  d-flex align-items-center justify-content-between p-2">
-          <div class="col-sm-5">
-            <label for="" style="margin-right: 0.5rem;">Địa Chỉ </label>
-            <div>
-              <select name="" id="" class="w-100" formControlName="location">
-                <option value="">hà nội</option>
-                <option value="">Hà tĩnh</option>
-                <option value="">vũng tàu</option>
-                <option value="">hải phòng</option>
-                <option value="">nghệ an</option>
-              </select>
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Mức lương </label>
+              <div>
+                <input type="text" class="w-100" formControlName="salary">
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="">Số lượng: </label>
+              <div class="mt-1">
+              <input type="text" class="w-100" formControlName="member">
+              </div>
             </div>
           </div>
-          <div class="col-sm-5">
-            <label for="">Nhập chi tiết địa chỉ: </label>
-            <div class="mt-1">
-            <input type="text" name="" id="" class="w-75" formControlName="locationDetail">
-            </div>
-          </div>
-        </div>
 
-         <div class="  d-flex align-items-center justify-content-between p-2">
-          <div class="col-sm-5">
-            <label for="" style="margin-right: 0.5rem;">Thời gian làm việc </label>
-            <div>
-             <input type="text" class="w-100" formControlName="timeWork">
+          <div class="d-flex align-items-center justify-content-between p-2">
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Ngày hết hạn</label>
+              <div>
+              <input type="date" class="w-100" formControlName="expiration_date">
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Hình thức làm việc:</label>
+              <div>
+                <select class="w-100" formControlName="contract_type">
+                  <option value="NO">Chọn hình thức làm việc</option>
+                  @for (c of contractTypes; track $index) {
+                    <option value="{{c.option_name}}">{{c.option_name}}</option>
+                  }
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col-sm-5"></div>
-        </div>
-        <div class=" d-flex p-2">
-          
-          <div class="w-75">
-            <label for="">Mô tả công việc</label>
-            <textarea name="" id="" class="w-100" formControlName="descriptionJob"></textarea>
+          <div class="d-flex justify-content-between p-2">
+            <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Loại hình làm việc:</label>
+              <div>
+                <select class="w-100" formControlName="working_form">
+                  <option value="NO">Chọn loại hình làm việc</option>
+                  @for (w of workingForms; track $index) {
+                    <option value="{{w.option_name}}">{{w.option_name}}</option>
+                  }
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Mô tả công việc:</label>
+              <div>
+                <angular-editor [config]="configEditor" formControlName="job_desc"></angular-editor>
+              </div>
+            </div>
           </div>
-         </div>
-           <div class="p-2">
-          
-          <div class="w-75">
-            <label for="">Yêu cầu ứng viên</label>
-            <textarea name="" id="" class="w-100" formControlName="candidateRequirement"></textarea>
+          <div class=" d-flex align-items-center justify-content-between p-2">
+            <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Yêu cầu công việc:</label>
+              <div>
+                <angular-editor [config]="configEditor" formControlName="require"></angular-editor>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Quyền lợi công việc:</label>
+              <div>
+                <angular-editor [config]="configEditor" formControlName="welfare"></angular-editor>
+              </div>
+            </div>
           </div>
-         </div>
-        
-          <div class=" p-2">
-          <div class="w-75">
-            <label for="">
-              Quyền lợi nhận được
-            </label>
-            <textarea name="" id="" class="w-100" formControlName="benefit"></textarea>
+          <div class=" d-flex align-items-center justify-content-between p-2">
+            <div class="col-sm-5">
+            <label for="" style="margin-right: 0.5rem;">Thời gian làm việc:</label>
+              <div>
+                <angular-editor [config]="configEditor" formControlName="time_work"></angular-editor>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Địa điểm làm việc:</label>
+              <div>
+                <angular-editor [config]="configEditor" formControlName="address_work"></angular-editor>
+              </div>
+            </div>
           </div>
-         </div>
-         <div class="d-flex justify-content-center m-2">
-           @if(error) {
+          <div class="mt-md-3">
+            <div class="row">
+              <div class="col-auto">
+                  <label class="form-label fw-bold" for="inlineFormInputProcess">Quy trình phỏng vấn gồm:</label>
+              </div>
+              <div class="input-group col-auto w-25">
+                  <input type="number" id="step-input" (input)="stepInterview()"/>
+                  <div class="input-group-text">Bước</div>
+              </div>
+            </div>
+            <div class="row flex-column" id="step"></div>
+          </div>
+          <div class="d-flex justify-content-center m-2">
+            @if(error) {
             <span class="text-danger">Vui lòng nhập đầy đủ tất cả các trường thông tin!</span>
           }
-         </div>
-        <div class="d-flex justify-content-center m-2">
-         
-          <button class="btn btn-success" (click)="submitForm()">Đăng tuyển</button>
+          </div>
+          <div class="d-flex justify-content-center mb-md-4 add-job">
+          
+            <button class="btn btn-success" (click)="createJob()" [disabled]="!formJob.valid">Đăng tuyển</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
     </div>
   </mat-tab>
 
   <mat-tab label="Quản lý bài đăng">
     <div class="mt-3">
-      <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">stt</th>
-      <th scope="col">Vị trí ứng tuyển</th>
-      <th scope="col">Lượt ứng tuyển</th>
-      <th scope="col">lượt xem</th>
-      <th scope="col">ngày đăng</th>
-      <th scope="col">Thao tác</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-       <td>Thorntondgfhcfhjdfhjfhjfhjfhjfhjfhjfhjhj</td>
-      <td class="d-flex justify-content-around">
-        <a class="function_handle bg-success" href="">sửa</a>
-        <a class="function_handle bg-danger" href="">xóa</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>fat</td>
-       <td>Thornton</td>
-       <td class="d-flex justify-content-around">
-        <a class="function_handle bg-success" href="">sửa</a>
-        <a class="function_handle bg-danger" href="">xóa</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>twitter</td>
-       <td>Thornton</td>
-       <td class="d-flex justify-content-around">
-        <a class="function_handle bg-success" href="">sửa</a>
-        <a class="function_handle bg-danger" href="">xóa</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      @if (!isEditJob){
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Vị trí tuyển dụng</th>
+              <th scope="col">Cấp bậc</th>
+              <th scope="col">Ngày đăng</th>
+              <th scope="col">Ngày hết hạn</th>
+              <th scope="col">Người đăng</th>
+              <th scope="col">Thời hạn</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col">Tùy chỉnh</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (jobs.length > 0) {
+              <tr *ngFor="let j of jobs | paginate: { itemsPerPage: 6, currentPage: page }">
+                <td>{{j.id}}</td>
+                <td>{{j.position | uppercase}}</td>
+                <td>{{j.level}}</td>
+                <td>{{j.create_date | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                <td>{{j.expiration_date | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                <td>{{j.create_by}}</td>
+                <td>{{j.startus ? 'Hết hạn' : 'Còn hạn'}}</td>
+                @if (j.is_confirmed == 'Chưa xét duyệt') {
+                  <td class="bg-danger">{{j.is_confirmed}}</td>
+                }@else if (j.is_confirmed == 'Đang xét duyệt') {
+                    <td class="bg-warning text-center">{{j.is_confirmed}}</td>
+                }@else if (j.is_confirmed == 'Đã xét duyệt') {
+                    <td class="bg-success text-center">{{j.is_confirmed}}</td>
+                }
+                <td class="d-md-flex gap-md-1 justify-content-center">
+                  <button class="btn btn-success" [disabled]="j.is_confirmed === 'Đã xét duyệt'" 
+                    (click)="editJob(j)"><i class="bi bi-pencil-square"></i></button>
+                  <button class="btn btn-danger" (click)="deleteJob(j.id)"><i class="bi bi-trash-fill"></i></button>
+                </td>
+              </tr>
+            } @else {
+              <tr>
+                <td colspan="17" class="text-warning fs-5 fw-bold fst-italic text-center p-md-3">Chưa có dữ liệu</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <p (click)="backToList()" role="button" class="text-decoration-underline"><i class="bi bi-arrow-left-circle"></i> Quay lại danh sách</p>
+        <form  [formGroup]="formEditJob" class="p-2">
+          <h5 class="m-2 text-center">Đăng tuyển nhân tài</h5>
+          <div class="p-3">
+            <div class=" d-flex align-items-center justify-content-between p-2">
+              <input type="text" formControlName="id" [hidden]="true"/>
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Vị trí tuyển dụng</label>
+                <div>
+                   <input type="text" class="w-100" formControlName="position"> 
+                </div>
+               
+              </div>
+              <div class="col-sm-5">
+                <label for="">Cấp bậc : </label>
+                <div class="mt-1">
+                  <select class="w-100" formControlName="level">
+                    <option value="NO">Chọn cấp bậc</option>
+                    @for (l of levels; track $index) {
+                      <option value="{{l.option_name}}">{{l.option_name}}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between p-2">
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Công nghệ sử dụng: </label>
+                <div>
+                  <input type="text" class="w-100" formControlName="tech_use">
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="">Kinh nghiệm: </label>
+                <div class="mt-1">
+                <input type="text" class="w-100" formControlName="year_exp">
+                </div>
+              </div>
+            </div>
+            <div class="  d-flex align-items-center justify-content-between p-2">
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Mức lương </label>
+                <div>
+                  <input type="text" class="w-100" formControlName="salary">
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="">Số lượng: </label>
+                <div class="mt-1">
+                <input type="text" class="w-100" formControlName="member">
+                </div>
+              </div>
+            </div>
+    
+            <div class="d-flex align-items-center justify-content-between p-2">
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Ngày hết hạn</label>
+                <div>
+                 <input type="date" class="w-100" formControlName="expiration_date">
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Hình thức làm việc:</label>
+                <div>
+                  <select class="w-100" formControlName="contract_type">
+                    <option value="NO">Chọn hình thức làm việc</option>
+                    @for (c of contractTypes; track $index) {
+                      <option value="{{c.option_name}}">{{c.option_name}}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between p-2">
+              <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Loại hình làm việc:</label>
+                <div>
+                  <select class="w-100" formControlName="working_form">
+                    <option value="NO">Chọn loại hình làm việc</option>
+                    @for (w of workingForms; track $index) {
+                      <option value="{{w.option_name}}">{{w.option_name}}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Mô tả công việc:</label>
+                <div>
+                  <angular-editor [config]="configEditor" formControlName="job_desc"></angular-editor>
+                </div>
+              </div>
+            </div>
+            <div class=" d-flex align-items-center justify-content-between p-2">
+              <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Yêu cầu công việc:</label>
+                <div>
+                  <angular-editor [config]="configEditor" formControlName="require"></angular-editor>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Quyền lợi công việc:</label>
+                <div>
+                  <angular-editor [config]="configEditor" formControlName="welfare"></angular-editor>
+                </div>
+              </div>
+            </div>
+            <div class=" d-flex align-items-center justify-content-between p-2">
+              <div class="col-sm-5">
+              <label for="" style="margin-right: 0.5rem;">Thời gian làm việc:</label>
+                <div>
+                  <angular-editor [config]="configEditor" formControlName="time_work"></angular-editor>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="" style="margin-right: 0.5rem;">Địa điểm làm việc:</label>
+                <div>
+                  <angular-editor [config]="configEditor" formControlName="address_work"></angular-editor>
+                </div>
+              </div>
+            </div>
+            <div class="mt-md-3">
+              @if (!isEditProcess) {
+                <div class="col-md-6">
+                    <div class="d-md-flex justify-content-between">
+                        <label class="form-label fw-bold">Quy trình phỏng vấn:</label>
+                        <button class="btn btn-danger" (click)="openEditProcess()">Chỉnh sửa</button>
+                    </div>
+                    <hr>
+                    <form method="post">
+                        <div id="step">
+                            @for (p of processByJob; track $index) {
+                                <div class="d-md-flex gap-md-2 position-relative mb-md-4">
+                                    @if ($index == processByJob.length - 1) {
+                                        <div class="step-item-tail position-absolute d-none"></div>
+                                    } @else {
+                                        <div class="step-item-tail position-absolute"></div>
+                                    }
+                                    <div><i class="bi bi-arrow-down-circle-fill text-success"></i></div>
+                                    <div>
+                                        <b>{{p.step}}</b>
+                                        <span>{{p.process_content}}</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </form>
+                </div>
+            }@else {
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="d-md-flex justify-content-between">
+                            <label class="form-label fw-bold">Quy trình phỏng vấn:</label>
+                            @if (processByJob.length > 0) {
+                                <button class="btn btn-secondary" (click)="cancleEditProcess()">Hủy</button>
+                            }
+                        </div>
+                        <hr>
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label class="form-label fw-bold">Quy trình phỏng vấn gồm:</label>
+                                </div>
+                                <div class="input-group col-auto w-50">
+                                    <input type="number" class="form-control" id="step-input-edit" (input)="stepInterview()"/>
+                                    <div class="input-group-text">Bước</div>
+                                </div>
+                            </div>
+                            <div class="row flex-column" id="step-edit">
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="d-flex justify-content-center m-2">
+              @if(error) {
+              <span class="text-danger">Vui lòng nhập đầy đủ tất cả các trường thông tin!</span>
+            }
+            </div>
+            <div class="d-flex justify-content-center m-2">
+             
+              <button class="btn btn-success" (click)="updateJob()" [disabled]="!formEditJob.valid">Cập nhật</button>
+            </div>
+          </div>
+        </form>
+      }
     </div>
   </mat-tab>
   <mat-tab label="Quản lý CV">
@@ -225,12 +451,3 @@
     </div>
   </mat-tab>
 </mat-tab-group>
-
-<!-- Modal xem cv-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content p-4">
-     <img src="./assets/img/about-1.jpg" alt="">
-    </div>
-  </div>
-</div>

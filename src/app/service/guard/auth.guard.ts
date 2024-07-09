@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -20,9 +21,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     }
     if(
       (
-        state.url.includes('dashboard-recruiter/dashboard')
+        state.url.includes('employer-dashboard/news')
         ||
-        state.url.includes('dashboard-recruiter/cong-viec')
+        state.url.includes('employer-dashboard/settingaccount/changepassword')
       )
       && roles[0] == 2)
     {
@@ -40,7 +41,21 @@ export const authGuard: CanActivateFn = (route, state) => {
       ) 
       && (roles[0] == 2 || roles[0] == 3)) 
     {
-      console.error("Ban khong co quyen truy cap vao trang nay")
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "warning",
+        title: 'Bạn không được phép vào trang này'
+      });
       return false;
     }
   }

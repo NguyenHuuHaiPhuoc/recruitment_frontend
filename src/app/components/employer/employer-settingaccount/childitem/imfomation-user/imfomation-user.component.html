@@ -1,64 +1,52 @@
-
-      <div class="border m-2">
-        <form [formGroup]="userForm">
-      <div class="headerRight m-2">
-        <span>Cập nhật thông tin cá nhân</span>
+<div class="m-2 position-relative">
+  <div class="headerRight m-2 position-absolute">
+    <span class="fw-bold">Cập nhật thông tin cá nhân</span>
+  </div>
+  <form [formGroup]="formRecruiter" class="border mt-md-4 p-md-3">
+    <div class="d-flex justify-content-between m-2 p-2 " style="background-color: rgb(181, 218, 246);">
+      <div class=""><i class="bi bi-shield-shaded m-1"></i><span class="cssSpan">Xác thực tài khoản điện tử eKYC</span>
+      </div> <button class="btn bg-primary" style="font-size: 13px;">Xác thực ngay</button>
+    </div>
+    <div class="row m-1 mt-4">
+      <div class="col-sm-6 d-flex justify-content-start">
+        <div class="d-flex">
+          <span class="cssSpan">Avatar</span>
+          <img [src]="avatarReview?avatarReview:'/assets/img/users/icon-customer.png'" alt="Avatar" class="img_account">
+          <input id="fileInput" type="file" (change)="imageReview($event)">
+        </div>
       </div>
-      <div class="d-flex justify-content-between m-2 p-2 " style="background-color: rgb(181, 218, 246);">
-        <div class=""><i class="bi bi-shield-shaded m-1"></i><span class="cssSpan">Xác thực tài khoản điện tử eKYC</span></div> <button class="btn bg-primary" style="font-size: 13px;">Xác thực ngay</button>
-      </div>
-      <div class="row m-1 mt-4">
-        <div class="col-sm-6 d-flex justify-content-start">
-          <div class="d-flex"><span class="cssSpan">Avatar</span><img src="./assets/img/about-1.jpg" alt="" class="img_account"><input id="fileinput" type="file" style="padding: 0.1rem; font-size: 12px; height: 80%; border: none;"></div>
-        </div>
-        <div class="col-sm-6 d-flex justify-content-start">
-          <div class=""><span class="cssSpan"> Email:xixiaol#&agmail.com </span></div>
+      <div class="col-sm-6 d-flex justify-content-start">
+        <div class="">
+          <span class="cssSpan"> Email: </span>
+          <span>{{formRecruiter.value.email}}</span>
+          <input type="text" formControlName="email" [hidden]="true">
         </div>
       </div>
+    </div>
 
-      <div class="row mt-2 m-1" >
-        <div class="col-sm-6 mb-3">
-          <label for="" class="cssSpan">Họ và Tên</label>
-          <input type="text" class="w-100" style="height: 50%;" formControlName="name" name="name">
-        </div>
-        <div class="col-sm-6 mb-3">
-          <label for="" class="cssSpan">Giới Tính</label>
-          <select name="gender" id="" class="w-100" style="height: 50%;">
-            <option value="gender">nam</option>
-            <option value="gender">nữ</option>
-            <option value="gender">bê đê</option>
-          </select>
-        </div>
-
-         <div class="col-sm-6 mb-3">
-          <label for="" class="d-flex justify-content-between"><span class="cssSpan"> Số điện thoại</span> <div><a href="#" class="cssSpan">Cập nhật</a> | <a href="#" class="cssSpan">Xác thực</a></div></label>
-          <input type="text" class="w-100" style="height: 50%;" disabled>
-        </div>
-        <div class="col-sm-6 mb-3">
-          <label for="" class="cssSpan">Vị Trí</label>
-          <select name="gender" id="" class="w-100" style="height: 50%;">
-            <option value="gender">Nhân viên</option>
-            <option value="gender">Giám đốc</option>
-            <option value="gender">Lao công</option>
-          </select>
-        </div>
+    <div class="row mt-2 m-1">
+      <div class="col-sm-6 mb-3">
+        <label for="" class="cssSpan">Họ và Tên</label>
+        <input type="text" class="form-control w-100" id="fullName"/>
+      </div>
+      <div class="col-sm-6 mb-3">
+        <label class="cssSpan">Giới Tính</label>
+        <select class="form-control w-100" formControlName="gender">
+          <option value="NO">Chọn giới tính</option>
+          @for (g of optionGender; track $index) {
+            <option value="{{g.option_name}}">{{g.option_name}}</option>
+          }
+        </select>
       </div>
 
-      <hr class="w-90 m-2">
-      <div class="headerRight m-3">
-        <span class="cssSpan">Thông tin thêm</span>
+      <div class="col-sm-6 mb-3">
+        <label for="" class="d-flex justify-content-between"><span class="cssSpan"> Số điện thoại</span>
+          <div role="button"><a class="cssSpan text-success" (click)="verifyPhone()">Cập nhật</a></div>
+        </label>
+        <div [ngClass]="formRecruiter.value.phone?'form-control':''">{{formRecruiter.value.phone}}</div>
       </div>
-      <div class="m-3">
-        <label for="" class="cssSpan">Skype</label>
-        <input type="text" class="w-100 cssSpan" placeholder="Nhập tài khoản skype">
-      </div>
-     
-      <div class="row d-flex justify-content-end m-3">
-         @if(userForm.controls["name"].invalid){
-        
-            <small class="text-danger">* vui lòng nhập tên!</small>
-      }
-        <button class="w-10" style="width:100px; border: none; background-color:green; color: #ffff; padding: 0.7rem; border-radius: 5%;">Cập nhật</button>
-      </div>
-      </form>
-      </div>
+    </div>
+
+    <button type="button" class="w-10 btn btn-success" (click)="updateRecruiter()">Cập nhật</button>
+  </form>
+</div>

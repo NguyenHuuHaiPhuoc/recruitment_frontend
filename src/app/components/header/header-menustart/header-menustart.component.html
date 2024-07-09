@@ -91,18 +91,17 @@
                 } @else {
                     <li class="nav-item dropdown position-relative">
                         <a href="#" class="nav-link dropdown-toggle border rounded-4 p-2 info-account" role="button" data-bs-toggle="dropdown">
-                            <span class="mx-2"><img src="/assets/img/users/icon-user-male-default.png" alt="avatar"></span>
-                            <span>{{user.full_name}}</span>
+                            <i class="bi bi-person-circle fs-4"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-action border-light rounded-2 m-0 position-absolute" style="left: -70px;">
+                        <div class="dropdown-menu dropdown-action border-light">
                             <div class="dropdown_info d-flex border-bottom">
-                                <img src="/assets/img/users/icon-user-male-default.png" alt="avatar">
+                                <img [src]="avatar?avatar:'/assets/img/users/icon-user-male-default.png'" alt="avatar">
                                 <div class="caption mb-3">
                                     <p class="info_name text-info">{{user.full_name}}</p>
                                     <p class="info_code">
                                         Mã ứng viên: #2348762
                                     </p>
-                                    <p>{{user.username}}</p>
+                                    <p>{{applicant.email}}</p>
                                 </div>
                             </div>
                             <a href="u/cv" class="dropdown-item mt-md-3 text-info">

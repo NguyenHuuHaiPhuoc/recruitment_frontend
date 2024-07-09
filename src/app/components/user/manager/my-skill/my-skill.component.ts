@@ -1,6 +1,9 @@
 import { Component, Renderer2 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../service/auth/auth-service.service';
+import { OptionDetailService } from '../../../../service/option-detail/option-detail-service.service';
+import { SkillService } from '../../../../service/user/applicant/skill.service';
 
 declare var $:any;
 @Component({
@@ -8,34 +11,60 @@ declare var $:any;
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './my-skill.component.html',
-  styleUrl: './my-skill.component.scss'
+  styleUrl: './my-skill.component.scss',
+  providers: [
+    AuthService,
+    OptionDetailService,
+    SkillService
+  ]
 })
 export class MySkillComponent{
   /** Danh sach skil lay tu db cho nguoi dung chon*/
-  public skills = [
-    {id:1, code:'Java'},
-    {id:2, code:'PHP'},
-    {id:3, code:'C#'},
-    {id:4, code:'HTML/CSS'},
-    {id:5, code:'Python'},
-    {id:6, code:'.Net'},
-    {id:7, code:'My SQL'},
-    {id:8, code:'JavaScript'},
-    {id:9, code:'MS SQL Server'}
-  ];
+  public skills = [];
   public searchs:any = '';
   public isHiddenSelect:boolean = true; /** xu ly lai voi bien nay (khi focus voi input) */
   public disabledSubmitAddSkill:boolean = true;
   public listSkillFilter:any = [];
   public listMySkill:any = [];/** Danh sach skill cua nguoi dung lay tu db */
   private listSkillChoose: any[] = [];
-  private size:any = 0;
+
+  private account = this.authService.getAccount();
 
   constructor(
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private authService: AuthService,
+    private skillService: SkillService,
+    private opDetailService: OptionDetailService
   ) {}
+  // CRUD Skill
+  ngOnInit ():void {
+    this.opDetailService.optionDetailByOptionType('TECH').subscribe({
+      next : (resp) => {
+        if(resp.status == 200) {
+          this.skills = resp.listResult;
+          this.listSkillFilter = resp.listResult;
+        }
+      },
+      error(err) {
+        console.error(err);
+      },
+    });
 
-  ngOnInit ():void {}
+    this.loadData();
+  }
+
+  private loadData(){
+    this.skillService.findAllSkill(this.account.type_user).subscribe({
+      next: (resp) => {
+        if(resp.status == 200) {
+          this.listMySkill = resp.listResult;
+        }
+      },
+      error(err) {
+        console.error(err);
+      },
+    })
+  }
 
   openAddSkillModal () {
     $('#btn-add-skill').trigger('click');
@@ -49,19 +78,9 @@ export class MySkillComponent{
   }
 
   showSelectSkill() {
-    const selectElement = document.getElementById('skills');
-    
-    if(selectElement){
-      if(this.size === 0){
-        this.size = 4;
-      }else{
-        this.size = 0;
-      }
-    }
     this.isHiddenSelect = !this.isHiddenSelect;
     this.listSkillFilter = this.skills;
-    
-    selectElement?.setAttribute('size',this.size.toString());
+    $('#skills').attr('size', 4);
   }
 
   closeAddSkillModal(){
@@ -81,13 +100,13 @@ export class MySkillComponent{
 
   choseOptionSkill(id:number,value:any){
     // Kiểm tra khi chọn 1 option 2 lần
-    const isValueInlistMySkill = this.listMySkill.filter((item:any) => item.id === id);
+    const isValueInlistMySkill = this.listMySkill.filter((item:any) => item.skill_name === value);
     const isValueInlistSkillChoose = this.listSkillChoose.filter((item:any) => item.id === id);
     
     if (isValueInlistSkillChoose.length <=0 && isValueInlistMySkill.length <= 0) {
       this.listSkillChoose.push({
         id: id,
-        code: value
+        name: value
       });
       this.addSkillElement(id,value);
       this.showSelectSkill();
@@ -101,7 +120,7 @@ export class MySkillComponent{
   }
 
   // Add option được chọn vào danh sách và hiển thị ra giao diện
-  addSkillElement(id:any,value:any){
+  private addSkillElement(id:any,value:any){
     const span_view_skills = document.getElementById('view-skills');
     
     // create and style <div>
@@ -124,10 +143,6 @@ export class MySkillComponent{
       span_selection_remove.setAttribute('role', 'button');
       span_selection_remove.innerText = 'x';
 
-      span_selection_remove.addEventListener('click', (event) =>{
-        this.removeSkillElement(event);
-      });
-
       skill_item.appendChild(span_selection_remove);
       
       const skill_text = document.createTextNode(value);
@@ -137,51 +152,52 @@ export class MySkillComponent{
       span_view_skills.insertBefore(skill_item, firstChild);
     }
   }
-
-  // Xóa selecttion
-  removeSkillElement(event: MouseEvent){
-    const selectedElement = event.target as HTMLElement;
-    const parentElement = selectedElement.parentNode as HTMLElement;
-    const parentId = parseInt(parentElement.id);
-    
-    this.listSkillChoose = this.listSkillChoose.filter((item) => item.id !== parentId); // Xóa phần tử skill trong mảng
-    this.renderer.removeChild(parentElement.parentNode, parentElement); // Xóa phần tử option
-    // Kiem tra listSkillChose rong thi disabled nut cap nhat
-    if (this.listSkillChoose.length <= 0) 
-      this.disabledSubmitAddSkill = true;
-    else
-      this.disabledSubmitAddSkill = false;
-  }
   
   // Filter input search skills
-  searchSkill(event: Event) {
+  public searchSkill(event: Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
-    const selectElement = document.getElementById('skills') as HTMLSelectElement;
 
     if ($('.search-skill').val() != '')
       this.isHiddenSelect = false;
 
-    this.listSkillFilter = this.skills.filter(item => {
-      return JSON.stringify(item.code).toLowerCase().includes(searchTerm);
+    this.listSkillFilter = this.skills.filter((item:any) => {
+      return JSON.stringify(item.option_name.toLowerCase()).includes(searchTerm.toLowerCase());
     });
-    
-    if (this.listSkillFilter.length == 1)
-      selectElement.size = (this.listSkillFilter.length + 1);
-    else
-      selectElement.size = this.listSkillFilter.length;
+    $('#skills').attr('size',this.listSkillFilter.length + 1);
   }
 
   // Create skill in db
-  addSkill () {
-    this.listSkillChoose.forEach((skill:any) =>{
-      this.listMySkill.push(skill);
+  public addSkill () {
+    // console.log(this.listSkillChoose);
+    let listSkill = [];
+    for (let i = 0; i < this.listSkillChoose.length; i++) {
+      const skill = {
+        skill_key: 'specializes_skill',
+        skill_name: this.listSkillChoose[i].name,
+        applicant: {
+          id: this.account.type_user
+        }
+      }
+      listSkill.push(skill);
+    }
+    
+    this.skillService.createSkill(listSkill).subscribe({
+      next: (resp) => {
+        if(resp.status == 200) {
+          this.closeAddSkillModal();
+          this.message('success',resp.message);
+          this.loadData()
+        }
+      },
+      error(err) {
+        console.error(err);
+      },
     });
-    this.closeAddSkillModal();
-    this.messageSuccess('Cập nhật thành công!'); 
+
   }
 
   // Delele skill in db
-  deleteSkill(id:any){
+  public deleteSkill(id:any){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success mx-md-2",
@@ -191,7 +207,6 @@ export class MySkillComponent{
     });
     swalWithBootstrapButtons.fire({
       title: "Bạn chắc chắn muốn xóa?",
-      text: "Bạn sẽ không thể hoàn tác!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Xóa",
@@ -199,29 +214,26 @@ export class MySkillComponent{
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
-          title: "Xóa thành công!",
-          showConfirmButton: false,
-          icon: "success",
-          timer: 1500
-        });
-        this.listMySkill = this.listMySkill.filter((item:any) => item.id !== id);
-      } 
-      /* Read more about handling dismissals below */
-      else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire({
-          title: "Đã hủy!",
-          showConfirmButton: false,
-          icon: "error",
-          timer: 1500
+        this.skillService.deleteSkill(id).subscribe({
+          next: (resp) => {
+            if(resp.status == 200) {
+              this.message('success',resp.message);
+              this.loadData()
+            }
+          },
+          error:(err) => {
+            this.message('warning','Xóa thất bại');
+            console.error(err);
+          },
         });
       }
     });
   }
-  messageSuccess (message:any) {
+
+  private message (status:any,message:any) {
     Swal.fire({
       position: "center",
-      icon: "success",
+      icon: status,
       title: message,
       showConfirmButton: false,
       timer: 1500

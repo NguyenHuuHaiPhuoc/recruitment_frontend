@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerCvComponent } from './manager.component';
+import { ManagerComponent } from './manager.component';
 
-describe('ManagerCvComponent', () => {
-  let component: ManagerCvComponent;
-  let fixture: ComponentFixture<ManagerCvComponent>;
+describe('ManagerComponent', () => {
+  let component: ManagerComponent;
+  let fixture: ComponentFixture<ManagerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ManagerCvComponent]
+      imports: [ManagerComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ManagerCvComponent);
+    fixture = TestBed.createComponent(ManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
