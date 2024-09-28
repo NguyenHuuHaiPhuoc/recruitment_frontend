@@ -1,0 +1,73 @@
+<div class="container position-relative">
+    
+    @if (!verifyOTP) {
+        <div class="banner mt-md-3 position-absolute">
+            <img src="/assets/img/users/banner-business.png" alt="Banner">
+        </div>
+        <!-- Cap nhat so dien thoai -->
+        <div class="row form-phone-verity p-md-3 position-absolute">
+            <label class="form-label fs-3">Cập nhật số điện thoại</label>
+            <form [formGroup]="formPhoneVerify">
+                <div class="mt-md-2 d-md-flex gap-md-4">
+                    <input type="text" class="form-control w-50" formControlName="phone"/>
+                    @if(formPhoneVerify.controls['phone'].invalid
+                        && formPhoneVerify.controls['phone'].touched){
+                            @if (formPhoneVerify.controls['phone'].errors?.['required']) {
+                                <div class="text-danger fst-italic">Vui lòng nhập số điện thoại</div>
+                            }
+                        }
+                    <button type="button" class="btn btn-success" (click)="sendSMS()" [disabled]="!formPhoneVerify.valid">Gửi mã xác thực</button>
+                </div>
+            </form>
+            <label class="form-label mt-md-3 fs-5">Lợi ích khi xác thực số điện thoại:</label>
+            <div class="row mt-md-3">
+                <div class="col-md-6 d-md-flex gap-md-3">
+                    <img src="/assets/img/icons/icon-protect.png" alt="Icon Protect" style="width: 50px;height: 50px;">
+                    <p class="fw-semibold">Tăng cường bảo mật tài khoản nhà tuyển dụng, chống kẻ xấu giả mạo và lợi dụng tài khoản.</p>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+            <div class="row mt-md-4">
+                <div class="col-md-6 d-md-flex gap-md-3">
+                    <img src="/assets/img/icons/icon-chart.png" alt="Icon Protect" style="width: 50px;height: 50px;">
+                    <p class="fw-semibold">Nâng cao mức độ uy tín của thương hiệu tuyển dụng,
+                        tăng khả năng hiển thị tin tuyển dụng với ứng viên phù hợp,
+                        tăng tỷ lệ hồ sơ ứng tuyển
+                    </p>
+                </div>
+                <div class="col-md-6 d-md-flex gap-md-3">
+                    <img src="/assets/img/icons/icon-protect.png" alt="Icon Protect" style="width: 50px;height: 50px;">
+                    <p class="fw-semibold">Được đội ngũ Easy Job hỗ trợ nhanh chóng qua số điện thoại đã xác thực
+                        khi có vấn đề phát sinh, rút ngắn tối đa thời gian xử lý thắc mắc, khiếu nại.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row position-absolute w-100" style="top: 56.5rem; background-color: #EAEAEA;height: 5rem;"></div>
+    } @else {
+        <div class="verify-otp mt-md-5">
+            <div class="otp-form text-center">
+                <label class="fs-4 form-label fw-bold" style="color: #2a6563;">Nhập mã OTP</label>
+                <form class="mt-md-3">
+                    <input type="text" class="otp-input fs-1 text-center" (input)="focusNextInput($event)"/>
+                    <input type="text" class="otp-input fs-1 text-center" (input)="focusNextInput($event)"/>
+                    <input type="text" class="otp-input fs-1 text-center" (input)="focusNextInput($event)"/>
+                    <input type="text" class="otp-input fs-1 text-center" (input)="focusNextInput($event)"/>
+                </form>
+                <div class="mt-md-5">
+                    <i class="text-danger">
+                        <span class="fw-bold">Lưu ý:</span> 
+                        Mã xác thực sẽ mất hiệu lực sau: @if (second > 0) {
+                                                            {{second}} giây
+                                                        }@else {
+                                                            <span class="text-decoration-underline fw-bold" role="button"(click)="sendSMS()">Gửi lại mã</span>
+                                                        }
+                    </i>
+                </div>
+                <div class="action mt-md-3 d-md-flex gap-md-3 justify-content-center">
+                    <button class="btn btn-secondary fs-5" (click)="back()">Quay lại</button>
+                    <button class="btn btn-success fs-5" (click)="confirmOTP()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

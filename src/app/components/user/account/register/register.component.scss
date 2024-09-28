@@ -1,0 +1,115 @@
+
+.full-screen-container{
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.company-form{
+  margin-top: -120px;
+}
+
+.applicant, .company{
+    display: block;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    -webkit-border-radius: 180px;
+    -moz-border-radius: 180px;
+    -ms-border-radius: 180px;
+    -o-border-radius: 180px;
+    border-radius: 180px;
+    /* the rest */
+    // position: relative; /* for the overlay later */
+    // margin: 0px auto;
+    // text-align: center;
+    // margin-bottom: 10px;
+    // border: 3px solid #FFF;
+    // -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),inset 0px 3px 8px rgba(0, 0, 0, 0.3);
+    // -moz-box-shadow: 0px 1px 2px rgba(0,0,0,0.3),inset 0px 3px 8px rgba(0,0,0,0.3);
+    // box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),inset 0px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.applicant img,
+.company img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-logo img{
+  width: 250px;
+  height: 150px;
+}
+
+.btn-applicant, .btn-company{
+    width: 200px;
+}
+.bg-rightt{
+  position: relative;
+}
+.bg-rightt img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-register{
+  background-color: #00b14f;
+}
+
+.bg-right{
+  position: relative;
+}
+
+.bg-right img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 810px;
+}
+
+.view-skills{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skill-item {
+  flex: 0 0 auto;
+  margin-right: 2px; 
+  margin-bottom: 5px; 
+}
+
+.search-skill{
+  border: none;
+}
+.search-skill:focus{
+  outline: none;
+  border: none;
+}
+.errorsNotification{
+  margin-left: 40px;
+  margin-bottom: 1rem;
+}
+// css btn show hide password
+.btn_hide_show{
+  border: none;
+  background-color: rgb(229, 229, 229);
+}
+.logo-review{
+  width: 100px;
+  height: 100px;
+}
+
+.image-recruiter{
+  margin-left: 5rem;
+  margin-top: 1.5rem;
+  width: 200px;
+  height: 200px;
+  background-color: #E5E5E5;
+  cursor: pointer;
+}

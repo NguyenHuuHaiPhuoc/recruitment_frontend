@@ -1,0 +1,18 @@
+
+<ngx-slick-carousel [config]="config" class="slickSwiper">
+  @for (c of companys; track $index) {
+  <div>
+    <div class="col-lg-3 col-sm-6 wow fadeInUp companyBox_container mr-2" data-wow-delay="0.1s" ngxSlickItem>
+      <a class="cat-item rounded p-4" href="">
+        <div class="companyBox">
+          <img src="{{c.logo}}" alt="">
+          <div class="companyBox_name">
+            <div class="companyBlock__name is-uppercase mb-3">{{c.name}}</div>
+            <span class="companyBlock__tag">Việc mới</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  }
+</ngx-slick-carousel>

@@ -1,0 +1,216 @@
+@if(edus.length <= 0){ <div class="card-title p-md-4 d-md-flex gap-md-5">
+    <div>
+        <h5>Học vấn</h5>
+        <div class="text-secondary">Thêm thông tin học vấn vào hồ sơ giúp tóm tắt nền tảng và giá
+            trị mà bạn đã đạt được và có thể hỗ trợ cho công việc.</div>
+    </div>
+    <div><img src="/assets/img/users/icon-education.png" alt="Education"></div>
+    <div (click)="openAddEdu()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+</div>
+}@else {
+<div class="card-body">
+    <div class="d-md-flex mx-md-3 pb-md-3">
+        <h5 class="flex-grow-1">Học vấn</h5>
+        <div (click)="openAddEdu()" role="button"><i class="bi bi-plus-circle fs-3"></i></div>
+    </div>
+    @for (e of edus; track e.id) {
+    <div class="mb-md-3">
+        <div class="mx-md-3 p-md-3 d-md-flex rounded-3 card-education">
+            <div class="icon-education"><img src="/assets/img/users/icon-university.png"
+                    alt="Icon Education"></div>
+            <div class="flex-grow-1 mx-md-4 w-50">
+                <h5>{{e.university_name}}</h5>
+                <div class="text-secondary">{{e.major}}</div>
+                <div>
+                    <span class="text-secondary">{{e.start_date}}</span>
+                    <span class="text-secondary mx-md-3">-</span>
+                    <span class="text-secondary">{{(e.completion_date != '')?e.completion_date:'Hiện tại'}}</span>
+                </div>
+                <div class="mt-md-2">{{e.description}}</div>
+            </div>
+            <div class="text-md-center" role="button">
+                <span class="mx-md-3" (click)="openEditEdu(e)"><i class="bi bi-pencil fs-5"></i></span>
+                <span (click)="deleteEducation(e.id)"><i class="bi bi-trash fs-5"></i></span>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+}
+
+
+<!-- Button trigger Add Education -->
+<button type="button" id="btn-add-edu-modal" class="btn btn-primary" data-bs-toggle="modal"
+data-bs-target="#add" [hidden]="true">
+Add Education modal
+</button>
+
+<!-- Modal Add Education-->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="add-education-modal-title">Học vấn</h1>
+                <button type="button" id="btn-add-edu-close" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEducation" (submit)="activeEducation()">
+                    <div class="mb-md-3">
+                        <label for="university-name" class="form-label">Trường<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="university_name"/>
+                        @if (formEducation.controls['university_name'].invalid 
+                            && (formEducation.controls['university_name'].touched || formEducation.controls['university_name'].dirty)) {
+                                @if (formEducation.controls['university_name'].errors) {
+                                    <div class="form-text text-danger fst-italic">Hãy nhập tên trường!</div>
+                                }
+                        }
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="major" class="form-label">Chuyên ngành<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="major" />
+                        @if (formEducation.controls['major'].invalid 
+                            && (formEducation.controls['major'].touched || formEducation.controls['major'].dirty)) {
+                                @if (formEducation.controls['major'].errors) {
+                                    <div class="form-text text-danger fst-italic">Hãy nhập chuyên ngành</div>
+                                }
+                        }
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="study-now" class="form-label">Thời gian</label>
+                        <div class="mb-md-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="study-now" (click)="isStudyNowChecked()"/>
+                            <label class="form-check-label" for="study-now">Tôi đang học ở đây</label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="start-date" class="form-label">Ngày bắt đầu</label>
+                                <div class="star-date d-md-flex gap-md-3">
+                                    <select class="form-select" aria-label="Start month select" id="start_month">
+                                        <option value="NO">Chọn tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="Start year select" id="start_year">
+                                        <option value="NO">Chọn năm</option>
+                                        @for (y of list_year; track y.id) {
+                                            <option value="{{y.id}}">{{y.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                                <!-- <input type="text" [hidden]="true"> -->
+                            </div>
+                            <div class="col">
+                                <div>
+                                    <label for="end-date" class="form-label">Ngày kết thúc</label>
+                                    <div class="end-date d-md-flex gap-md-3" >
+                                        <select class="form-select" aria-label="End month select" [disabled]="isHiddenEndDate" id="end_month">
+                                            <option value="NO">Chọn tháng</option>
+                                            @for (m of list_month; track m.id) {
+                                                <option value="{{m.id}}">{{m.name}}</option>
+                                            }
+                                        </select>
+                                        <select class="form-select" aria-label="End year select" [disabled]="isHiddenEndDate" id="end_year">
+                                            <option value="NO">Chọn năm</option>
+                                            @for (y of list_year; track y.id) {
+                                                <option value="{{y.id}}">{{y.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="description" class="form-label">Mô tả chi tiết</label>
+                        <textarea class="form-control" formControlName="description" rows="4" placeholder="Mô tả chi tiết quá trình học tập của bạn để nhà tuyển dụng hiểu rõ hơn"></textarea>
+                      </div>
+                    <div class="mt-md-5 text-center">
+                        <button type="submit" class="btn btn-success fs-5" [disabled]="!formEducation.valid">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Education-->
+<button type="button" id="btn-edit-edu-modal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"
+    [hidden]="true">
+    Launch demo modal
+</button>
+
+<!--Edit Education Modal -->
+<!-- <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="edit-education-modal-title">Học vấn</h1>
+                <button type="button" id="btn-edit-edu-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form_infoEdu" method="post" (submit)="updateEducation()">
+                    <div class="mb-md-3">
+                        <label for="university-name" class="form-label">Trường<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="university-name" formControlName="university_name"/>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="major" class="form-label">Chuyên ngành<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="major" formControlName="major"/>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="study-now" class="form-label">Thời gian</label>
+                        <div class="mb-md-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="study-now" (click)="isStudyNowChecked()"/>
+                            <label class="form-check-label" for="study-now">Tôi đang học ở đây</label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="start-date" class="form-label">Ngày bắt đầu</label>
+                                <div class="star-date d-md-flex gap-md-3">
+                                    <select class="form-select" aria-label="Start month select" formControlName="start_month">
+                                        <option value="selected">Chọn tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="Start year select" formControlName="start_year">
+                                        <option value="selected">Chọn năm</option>
+                                        @for (m of list_year; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col" [hidden]="isHiddenEndDate">
+                                <label for="end-date" class="form-label">Ngày kết thúc</label>
+                                <div class="end-date d-md-flex gap-md-3" >
+                                    <select class="form-select" aria-label="End month select" formControlName="end_month">
+                                        <option value="selected">Chọn tháng</option>
+                                        @for (m of list_month; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                    <select class="form-select" aria-label="End year select" formControlName="end_year">
+                                        <option value="selected">Chọn năm</option>
+                                        @for (m of list_year; track m.id) {
+                                            <option value="{{m.id}}">{{m.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-md-3">
+                        <label for="description" class="form-label">Mô tả chi tiết</label>
+                        <textarea class="form-control" id="description" formControlName="description" rows="4" placeholder="Mô tả chi tiết quá trình học tập của bạn để nhà tuyển dụng hiểu rõ hơn"></textarea>
+                      </div>
+                    <div class="mt-md-5 text-center">
+                        <button type="submit" class="btn btn-success fs-5">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->

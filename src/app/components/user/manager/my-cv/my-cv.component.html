@@ -1,0 +1,169 @@
+<main>
+    <div class="my-cv">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body d-flex gap-3 justify-content-around">
+                        <div class="avatar">
+                            <img [src]="avatarReview?avatarReview:'/assets/img/users/icon-user-male-default.png'" alt="avatar" />
+                        </div>
+                        <div class="info-user flex-fill px-5">
+                            <div class="fs-2 fw-bold text-dark mt-md-2">{{account.full_name}}</div>
+                            <div class="d-md-flex gap-md-4 mt-md-2">
+                                <div class="text-secondary">{{applicant.positions?applicant.positions:'Vị trí công việc'}}</div>
+                                <div class="text-secondary">{{applicant.experience?(applicant.experience + ' (Năm)'):'Số năm kinh nghiệm'}}</div>
+                            </div>
+                            <div class="text-secondary mt-md-2">{{applicant.address?applicant.address:'Địa chỉ hiện tại'}}</div>
+                            <div class="d-flex gap-md-4 mt-md-2">
+                                <div class="text-secondary">{{applicant.email?applicant.email:'Email'}}</div>
+                                <div class="text-secondary">{{applicant.phone?applicant.phone:'Số điện thoại'}}</div>
+                            </div>
+                            <div class="border-top mt-md-4"></div>
+                            <div class="mt-md-4">
+                                <button class="btn btn-share text-white fs-5"><i class="bi bi-share"></i>&ensp;Chia sẻ hồ
+                                    sơ</button>
+                                <button class="btn btn-download fs-5 mx-md-4"><i
+                                        class="bi bi-box-arrow-down"></i>&ensp;Tải xuống</button>
+                            </div>
+                        </div>
+                        <div class="update-info" role="button" (click)="openUpdateModal()">
+                            <i class="bi bi-pencil fs-5"></i>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" id="btn-modal-updateInfoUser" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#update-info-user" [hidden]="true"></button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="update-info-user" tabindex="-1"
+                            aria-labelledby="updateInfoUserModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="title  title-form-updateinfouser">
+                                            <h1 class="modal-title fs-5" id="updateInfoUserModalLabel">Thông tin cá nhân
+                                            </h1>
+                                            <p>Điền đầy đủ thông tin giúp bạn tiếp cận với nhà
+                                                tuyển dụng một cách dễ dàng</p>
+                                        </div>
+                                        <button type="button" id="form-applicant-close" class="btn-close align-items-start"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="formApplicant" (submit)="updateApplicant()">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="position" class="col-form-label">Vị trí công
+                                                        việc:</label>
+                                                    <input class="form-control" id="position" formControlName="positions"/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="experience" class="col-form-label">Kinh nghiệm:</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" id="experience" formControlName="experience"/>
+                                                        <span class="input-group-text">Năm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gender" class="col-form-label">Giới tính:</label>
+                                                <div class="raidio-gender">
+                                                    <label role="button" class="mx-md-3">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" value="Nam" formControlName="gender">
+                                                        Nam
+                                                    </label>
+                                                    <label role="button" class="mx-md-3">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" value="Nữ" formControlName="gender"/>
+                                                        Nữ
+                                                    </label>
+                                                    <label role="button">
+                                                        <input type="radio" class="form-check-input" id="full-name"
+                                                            name="gender" value="Khác" formControlName="gender"/>
+                                                        Khác
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="col-form-label">Email:</label>
+                                                <input class="form-control" id="email" formControlName="email"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="col-form-label">Số điện thoại:</label>
+                                                <input class="form-control" id="phone" formControlName="phone"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="col-form-label">Địa chỉ hiện tại:</label>
+                                                <input class="form-control" id="address" formControlName="address"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sumary" class="col-form-label">Giới thiệu bản thân:</label>
+                                                <angular-editor [config]="configEditor" formControlName="sumary"
+                                                    name="sumary" formControlName="sumary"></angular-editor>
+                                            </div>
+                                            <div class="mt-md-5 text-center">
+                                                <button class="btn btn-success text-white fs-5">Cập nhật</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-education></app-my-education>
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-skill></app-my-skill>
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-exp></app-my-exp>
+                </div>
+                <div class="card mt-md-4">
+                    <app-my-project></app-my-project>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body mx-auto">
+                        <h5 class="card-title  text-center">Thống kê số lượt xem từ NTD</h5>
+                        <p class="card-text text-center"><i class="text-danger">Phần này chỉ hiển thị với riêng bạn</i>
+                        </p>
+                        <div class="card card-follow" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong tuần</p>
+                            </div>
+                        </div>
+
+                        <div class="card card-follow mt-md-4" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong tháng</p>
+                            </div>
+                        </div>
+
+                        <div class="card card-follow mt-md-4" style="width: 18rem;">
+                            <div class="card-body px-md-4">
+                                <h3 class="card-title">0</h3>
+                                <p class="card-text text-secondary">Lượt xem trong năm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divide-y mt-md-5 mb-md-5">
+                    <div>
+                        <div>Mẹo hay cho CV chuyên nghiệp của Developer</div>
+                        <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+                    <div class="border-bottom border-secondary border-opacity-25 mt-md-3 mb-md-3"></div>
+                    <div class="boder-top border-secondary-subtle mt-md-3">
+                        <div>Kết nối nhà tuyển dụng lý tưởng với bài Kiểm tra tính cách công việc của EasyJob</div>
+                        <div><a href="#" class="text-info">Khám phá ngay <i class="bi bi-arrow-right"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

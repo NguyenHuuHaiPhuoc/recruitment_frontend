@@ -1,0 +1,325 @@
+<div class="container">
+  <div class="position-relative">
+    <label class="label-filter">Lọc dự liệu</label>
+  </div>
+  <div class="row filter-job">
+    <div class="col-md-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Công nghệ sử dụng</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="techUseValue"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Ngày đăng</label>
+        </div>
+        <div class="col-auto">
+          <input type="date" class="form-control" id="createDateValue"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Ngày hết hạn</label>
+        </div>
+        <div class="col-auto">
+          <input type="date" class="form-control" id="expirationDateValue"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row mt-md-3 g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Trạng thái xét duyệt</label>
+        </div>
+        <div class="col-auto">
+          <select class="form-select" id="approval">
+            <option value="NO">Chọn trạng thái xét duyệt</option>
+            @for (a of approvals; track $index) {
+              <option value="{{a.option_name}}">{{a.option_name}}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-md-4">
+    <button class="btn btn-primary" (click)="searchJob()">Tìm kiếm<i class="bi bi-search ms-md-3"></i></button>
+  </div>
+  <div class="row mt-md-4">
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+                    <th scope="col">Vị trí tuyển dụng</th>
+                    <th scope="col">Cấp bậc</th>
+                    <!-- <th scope="col">Số lượng</th>
+                    <th scope="col">Kinh nghiệm</th>
+                    <th scope="col">Hình thức làm việc</th>
+                    <th scope="col">Loại hình làm việc</th>
+                    <th scope="col">Công nghệ</th>
+                    <th scope="col">Lương</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Yêu cầu</th>
+                    <th scope="col">Quyền lợi</th> -->
+                    <th scope="col">Ngày đăng</th>
+                    <th scope="col">Ngày hết hạn</th>
+                    <th scope="col">Người đăng</th>
+                    <th scope="col">Thời hạn</th>
+                    <th scope="col">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (filterJob.length > 0) {
+              <tr *ngFor="let j of filterJob | paginate: { itemsPerPage: 8, currentPage: p }" (dblclick) = "openEditJob(j)">
+                  <td>{{j.id}}</td>
+                  <td>{{j.position | uppercase}}</td>
+                  <td>{{j.level}}</td>
+                  <!-- <td>{{j.member}}</td>
+                  <td>{{j.year_exp}}</td>
+                  <td>{{j.contract_type}}</td>
+                  <td>{{j.working_form}}</td>
+                  <td [innerHTML]="j.job_desc"></td>
+                  <td [innerHTML]="j.require"></td>
+                  <td [innerHTML]="j.welfare"></td> -->
+                  <td>{{j.create_date | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                  <td>{{j.expiration_date | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                  <td>{{responseFullnameCreateBy(j.create_by)[1]}}</td>
+                  <td>{{j.startus ? 'Hết hạn' : 'Còn hạn'}}</td>
+                  @if (j.is_confirmed == 'Chưa xét duyệt') {
+                      <td class="bg-danger">{{j.is_confirmed}}</td>
+                  }@else if (j.is_confirmed == 'Đang xét duyệt') {
+                      <td class="bg-warning">{{j.is_confirmed}}</td>
+                  }@else if (j.is_confirmed == 'Đã xét duyệt') {
+                      <td class="bg-success text-light">{{j.is_confirmed}}</td>
+                  }
+                  <td [hidden]="true">
+                    <select class="form-select">
+                      <option value="Chưa xét duyệt"></option>
+                      <option value="Đang xét duyệt"></option>
+                      <option value="Đã xét duyệt"></option>
+                    </select>
+                  </td>
+              </tr>
+
+          } @else {
+              <tr>
+                  <td colspan="16" class="text-warning fs-5 fw-bold fst-italic text-center p-md-3">Chưa có dữ liệu</td>
+              </tr>
+          }
+          </tbody>
+        </table>
+        @if (filterJob.length > 0) {
+          <div class="row mt-md-3 text-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="Lùi lại"
+              nextLabel="Tiếp theo"></pagination-controls>
+          </div>
+      }
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary edit-job-modal" data-bs-toggle="modal" data-bs-target="#editJobModal" [hidden]="true">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editJobModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-danger">Cập nhật công việc</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup] = "formJob">
+          <div class="row mb-md-4">
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Vị trí công việc:</label>
+                  <input type="text" class="form-control" formControlName="position"/>
+                  @if (formJob.controls['position'].invalid 
+                      && (formJob.controls['position'].touched || formJob.controls['position'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                          @if (formJob.controls['position'].errors) {<span>Hãy nhập vị trí công việc.</span>}
+                      </div>
+                  }
+              </div>
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Cấp bậc:</label>
+                  <select class="form-select" formControlName="level">
+                      <option value="NO" selected>Chọn cấp bậc</option>
+                      @for (l of levels; track l.id) {
+                          <option value="{{l.option_name}}">{{l.option_name}}</option>
+                      }
+                  </select>
+              </div>
+          </div>
+          <div class="row mb-md-4">
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Công nghệ sử dụng:</label>
+                  <input type="text" class="form-control" placeholder="Nhập cách nhau bởi dấu phẩy" formControlName="tech_use"/>
+                  @if (formJob.controls['tech_use'].invalid 
+                      && (formJob.controls['tech_use'].touched || formJob.controls['tech_use'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                          @if (formJob.controls['tech_use'].errors) {<span>Hãy nhập công nghệ sử dụng.</span>}
+                      </div>
+                  }
+              </div>
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Kinh nghiệm:</label>
+                  <input type="text" class="form-control" placeholder="Nhập số năm cụ thể hoặc 'Không yêu cầu'" formControlName="year_exp"/>
+                  @if (formJob.controls['year_exp'].invalid 
+                      && (formJob.controls['year_exp'].touched || formJob.controls['year_exp'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                          @if (formJob.controls['year_exp'].errors) {<span>Hãy nhập kinh nghiệm.</span>}
+                      </div>
+                  }
+              </div>
+          </div>
+          <div class="row mb-md-4">
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Mức lương:</label>
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" formControlName="salary"/>
+                      <span class="input-group-text" id="basic-addon2">Triệu</span>
+                  </div>
+                  @if (formJob.controls['salary'].invalid 
+                      && (formJob.controls['salary'].touched || formJob.controls['salary'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                          @if (formJob.controls['salary'].errors) {<span>Hãy nhập mức lương.</span>}
+                      </div>
+                  }
+              </div>
+              <div class="col-md-6">
+                  <label class="form-label fw-bold">Số lượng:</label>
+                  <div class="input-group mb-3">
+                      <input type="number" class="form-control" formControlName="member"/>
+                      <span class="input-group-text" id="basic-addon2">Người</span>
+                  </div>
+                  @if (formJob.controls['member'].invalid 
+                      && (formJob.controls['member'].touched || formJob.controls['member'].dirty)) {
+                      <div class="form-text text-danger fst-italic">
+                          @if (formJob.controls['member'].errors) {<span>Hãy nhập số lượng.</span>}
+                      </div>
+                  }
+              </div>
+          </div>
+          <div class="row mb-md-4">
+              <div class="col-md-4">
+                  <label class="form-label fw-bold">Ngày hết hạn:</label>
+                  <input type="date" class="form-control" placeholder="Nhập lương cụ thể hoặc 'Thỏa thuận'" formControlName="expiration_date"/>
+              </div>
+              <div class="col-md-4">
+                  <label class="form-label fw-bold">Hình thức làm việc:</label>
+                  <select class="form-select" formControlName="contract_type">
+                      <option value="NO" selected>Chọn hình thức</option>
+                      @for (ct of contractTypes; track ct.id) {
+                          <option value="{{ct.option_name}}">{{ct.option_name}}</option>
+                      }
+                  </select>
+              </div>
+              <div class="col-md-4">
+                  <label class="form-label fw-bold">Loại hình công việc:</label>
+                  <select class="form-select" formControlName="working_form">
+                    <option value="NO" selected>Chọn loại hình</option>
+                    @for (wf of workingForms; track wf.id) {
+                        <option value="{{wf.option_name}}">{{wf.option_name}}</option>
+                    }
+                  </select>
+              </div>
+          </div>
+          <div class="row mb-md-4">
+              <label class="form-label fw-bold">Mô tả công việc:</label>
+              <angular-editor [config]="configEditor" formControlName="job_desc"></angular-editor>
+          </div>
+          <!-- {{form_job.value.job_desc}} -->
+          <div class="row mb-md-4">
+              <label class="form-label fw-bold">Yêu cầu công việc:</label>
+              <angular-editor [config]="configEditor" formControlName="require"></angular-editor>
+          </div>
+          <div class="row mb-md-4">
+              <label class="form-label fw-bold">Quyền lợi việc làm:</label>
+              <angular-editor [config]="configEditor" formControlName="welfare"></angular-editor>
+          </div>
+          <div class="row mb-md-4">
+              <label class="form-label fw-bold">Thời gian làm việc:</label>
+              <angular-editor [config]="configEditor" formControlName="time_work"></angular-editor>
+          </div>
+          <div class="row mb-md-4">
+              <label class="form-label fw-bold">Địa điểm việc làm:</label>
+              <angular-editor [config]="configEditor" formControlName="address_work"></angular-editor>
+          </div>
+          <div class="row mb-md-4">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Trạng thái xét duyệt:</label>
+                <div class="input-group mb-3">
+                    <select class="form-select" formControlName="is_confirmed">
+                      <option value="NO" selected>Chọn trạng thái bài đăng</option>
+                      @for (wf of approvals; track wf.id) {
+                          <option value="{{wf.option_name}}">{{wf.option_name}}</option>
+                      }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Người xét duyệt:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" formControlName="confirm_by" [hidden]="true"/>
+                    <div class="form-control">{{formJob.value.confirm_by?formJob.value.confirm_by:'Chưa có người xét duyệt'}}</div>
+                </div>
+            </div>
+        </div>
+          <div class="row mb-md-4">
+            @if (!isEditProcess) {
+              <div class="d-md-flex justify-content-between">
+                  <label class="form-label fw-bold">Quy trình phỏng vấn:</label>
+                  <button class="btn btn-danger mb-md-3" (click)="openEditProcess()">Chỉnh sửa</button>
+              </div>
+              <hr>
+              <form method="post">
+                  <div class="row" id="step">
+                      <div class="col-md-6">
+                          @for (p of processByJob; track $index) {
+                            <div class="d-md-flex gap-md-2 position-relative mb-md-4">
+                                @if ($index == processByJob.length - 1) {
+                                    <div class="step-item-tail position-absolute d-none"></div>
+                                } @else {
+                                    <div class="step-item-tail position-absolute"></div>
+                                }
+                                <div><i class="bi bi-arrow-down-circle-fill text-success"></i></div>
+                                <div>
+                                    <b>{{p.step}}</b>
+                                    <span>{{p.process_content}}</span>
+                                </div>
+                            </div>
+                          }
+                      </div>
+                  </div>
+              </form>
+            } @else {
+              <div class="col-auto">
+                  <label class="form-label fw-bold" for="inlineFormInputProcess">Quy trình phỏng vấn gồm:</label>
+              </div>
+              @if (processByJob.length > 0) {
+                <div class="col-auto">
+                  <button class="btn btn-danger" (click)="cancleEditProcess()">Hủy</button>
+                </div>
+              }
+              <div id="step"></div>
+            }
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn text-danger" (click)="deleteJob()">Xóa</button>
+        <button type="button" class="btn btn-success" (click)="approvalJob()">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.login{
+  display: flex;
+}
+.login-form{
+  width: 55%;
+  padding: 2rem 10rem;
+}
+.img-logo img{
+  width: 250px;
+  height: 150px;
+  margin-bottom: -40px;
+}
+.other-login{
+  display: flex;
+  gap: 3rem;
+}
+.login-banner{
+  width: 45%;
+}
+.login-banner img{
+  width: 768px;
+  height: 810px;
+}
+
+.btn-register{
+  background-color: #00b14f;
+}

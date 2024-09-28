@@ -1,0 +1,50 @@
+.managerment-jobs{
+    position: relative;
+}
+.form-label-filter{
+    position: absolute;
+    margin-left: 1rem;
+    top: -0.6rem;
+    padding: 0 8px;
+    background: #fff;
+    color: #2A6563;
+}
+
+.form-label-post-job{
+    position: absolute;
+    margin-left: 1rem;
+    top: 10rem;
+    padding: 0 8px;
+    background: #fff;
+    color: #2A6563;
+}
+.filter{
+    padding: 20px;
+    border: .1rem solid #2A6563;
+}
+
+.action{
+    margin-top: 2rem;
+    margin-left: -12px;
+    display: flex;
+    gap: 1rem;
+}
+.table{
+    thead {
+      tr{
+        th{
+         background-color: #2A6563;
+         border-color:#2A6563;
+         color: #fff;
+        }
+      }
+    }
+  } 
+
+.step-item-tail{
+  width: 0;
+  height: 1.65rem;
+  border: 0.5px solid #05ad5e;
+  left: 6px;
+  top: 1.4rem;
+}

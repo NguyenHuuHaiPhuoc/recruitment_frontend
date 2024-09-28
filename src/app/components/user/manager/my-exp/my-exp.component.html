@@ -1,0 +1,245 @@
+
+@if(listMyExp.length <= 0){
+    <div class="card-title p-md-4 d-md-flex gap-md-5">
+        <div>
+            <h5>Kinh nghiệm làm việc</h5>
+            <p class="text-secondary">Kinh nghiệm chi tiết phản ánh kỹ năng, giá trị và đóng góp của bạn trong thời gian bạn làm việc tại các công ty trước đây.</p>
+            
+        </div>
+        <img src="/assets/img/users/icon-work-experiences.png" alt="Experiences" />
+        <div role="button" (click)="openAddExptModal()"><i class="bi bi-plus-circle fs-3"></i></div>
+    </div>
+}@else {
+    <div class="card-body">
+        <div class="d-md-flex">
+            <h5 class="flex-grow-1">Kinh nghiệm làm việc</h5>
+            <div role="button" (click)="openAddExptModal()"><i class="bi bi-plus-circle fs-3"></i></div>
+        </div>
+        @for (i of listMyExp; track $index) {
+            <div class="card-exp mt-md-3 p-md-2 d-md-flex gap-md-4">
+                <div class="d-md-flex gap-md-2">
+                    <span>{{i.start_date}}</span>
+                    <span> - </span>
+                    <span>{{(i.end_date != 'NO/NO') ? i.end_date : 'Hiện tại'}}</span>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="text-secondary">
+                        <div class="text-danger">{{i.company}}</div>
+                        <div>{{i.job_position}}</div>
+                        @if (i.skill.length > 0) {
+                            <label class="fw-bold mt-md-3">Kỹ năng</label>
+                            <div class="skill mt-md-2">
+                                <div class="d-md-flex gap-md-2">
+                                    @for (s of listSkillFormat; track $index) {
+                                        <span>{{s}}</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div class="mt-md-3 tex-dark" [innerHTML]="i.description_exp"></div>
+                    </div>
+                </div>
+                <div role="button" (click)="openEditExpModal(i)"><i class="bi bi-pencil fs-5"></i></div>
+                <div role="button" (click)="deleteExp(i.id)"><i class="bi bi-trash fs-5"></i></div>
+            </div>
+        }
+    </div>
+}
+
+<button type="button" class="btn btn-primary" id="btn-model-exp" data-bs-toggle="modal" data-bs-target="#exp-modal" [hidden]="true">
+    Add project modal
+  </button>
+  
+  <!-- Modal -->
+<div class="modal fade" id="exp-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Dự án</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEXP">
+                    <div class="form-group">
+                        <div class="mb-md-3">
+                            <label for="university-name" class="fw-bold">Công ty *</label>
+                            <input type="text" id="university-name" class="form-control mt-md-2" placeholder="Nhập tên công ty" formControlName="company"/>
+                        </div>
+                        <div class="mb-md-3">
+                            <label for="position" class="fw-bold">Vị trí công việc *</label>
+                            <input type="text"id="position" class="form-control mt-md-2" placeholder="Nhập vị trí công việc"  formControlName="job_position"/>
+                        </div>
+                        <div class="mb-md-3">
+                            <label class="fw-bold mb-md-2">Thời gian</label>
+                            <div class="form-check mb-md-2">
+                                <input type="checkbox" class="form-check-input" id="is_working" (click)="isWorking()"/>
+                                <label for="is_working" class="form-check-label">
+                                    Tôi đang làm việc ở đây
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Bắt đầu</label>
+                                    <div class="d-md-flex gap-md-3 mt-md-2">
+                                        <select class="form-select" id="exp-start_month">
+                                            <option value="NO">Chọn tháng</option>
+                                            @for (m of listMonth; track m.id) {
+                                                <option value="{{m.id}}">{{m.name}}</option>
+                                            }
+                                        </select>
+    
+                                        <select class="form-select"id="exp-start_year">
+                                            <option value="NO">Chọn năm</option>
+                                            @for (y of listYear; track y.id) {
+                                                <option value="{{y.id}}">{{y.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-md-2">
+                                    <label>Kết thúc</label>
+                                    <div class="d-md-flex gap-md-3 mt-md-2">
+                                        <select class="form-select" id="exp-end_month">
+                                            <option value="NO">Chọn tháng</option>
+                                            @for (m of listMonth; track m.id) {
+                                                <option value="{{m.id}}">{{m.name}}</option>
+                                            }
+                                        </select>
+                                        
+                                        <select class="form-select" id="exp-end_year">
+                                            <option value="NO">Chọn năm</option>
+                                            @for (y of listYear; track y.id) {
+                                                <option value="{{y.id}}">{{y.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-md-3">
+                            <label class="fw-bold mb-md-2">Công nghệ sử dụng</label>
+                            <div class="form-select d-md-flex gap-md-2 flex-wrap" (click)="showListSkill()">
+                                <div class="view-skill"></div>
+                                <input type="text" class="input-search-skill"/>
+                            </div>
+                            <select class="form-select" size="" [hidden]="isSelectSkill" id="list-skill">
+                                @for (s of listSkill; track $index) {
+                                    <option value="{{s.option_name}}" (click)="chooseSkill(s.option_name)">{{s.option_name}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-md-3">
+                            <label class="mb-md-2 fw-bold">Mô tả chi tiết</label>
+                            <angular-editor [config]="configEditor"  formControlName="description_exp"></angular-editor>
+                        </div>
+                        <div class="form-project p-md-3">
+                            <label class="fw-bold">Dự án trong vị trí này</label>
+                            <p class="text-secondary">Hãy yên tâm, nếu để trống, phần này sẽ không xuất hiện trong profile của bạn</p>
+                            
+                            <div class="view-project_frm_add">
+                                @for (p of listProjectEXP; track $index) {
+                                    <div class="card mt-md-3">
+                                        <div class="card-body d-md-flex gap-md-3">
+                                            <i class="bi bi-projector fs-5"></i>
+                                            <div class="info-project flex-grow-1">
+                                                <div class="fw-bold">{{p.project_name}}</div>
+                                                <div class="d-md-flex gap-md-3">
+                                                    <span>{{p.start_date}}</span>
+                                                    <span>-</span>
+                                                    <span>{{p.completion_date}}</span>
+                                                </div>
+                                                <div class="mt-md-2" [innerHTML]="p.desc_project"></div>
+                                            </div>
+                                            <div class="action-project d-md-flex gap-md-3">
+                                                <i class="bi bi-pencil" role="button" (click)="editProjectEXP(p)"></i>
+                                                <i class="bi bi-trash" role="button" (click)="deleteProjectEXP(p.id)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+    
+                            <div id="form-project_add" [hidden]="true">
+                                <form [formGroup]="formProjectEXP">
+                                    <div class="mt-md-3">
+                                        <label class="fw-bold">Tên dự án *</label>
+                                        <input type="text" class="form-control mt-md-2" placeholder="Nhập tên dự án" formControlName="project_name"/>
+                                    </div>
+                                    <div class="mt-md-3">
+                                        <label class="fw-bold">Thời gian Hoàn thành *</label>
+                                        <div class="row mt-md-2">
+                                            <div class="col-md-6">
+                                                <label>Bắt đầu</label>
+                                                <div class="d-md-flex gap-md-3 mt-md-2">
+                                                    <select class="form-select" id="proj_exp-start_month">
+                                                        <option value="NO">Chọn tháng</option>
+                                                        @for (m of listMonth; track m.id) {
+                                                            <option value="{{m.id}}">{{m.name}}</option>
+                                                        }
+                                                    </select>
+                
+                                                    <select class="form-select"id="proj_exp-start_year">
+                                                        <option value="NO">Chọn năm</option>
+                                                        @for (y of listYear; track y.id) {
+                                                            <option value="{{y.id}}">{{y.name}}</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-md-2">
+                                                <label>Kết thúc</label>
+                                                <div class="d-md-flex gap-md-3 mt-md-2">
+                                                    <select class="form-select" id="proj_exp-end_month">
+                                                        <option value="NO">Chọn tháng</option>
+                                                        @for (m of listMonth; track m.id) {
+                                                            <option value="{{m.id}}">{{m.name}}</option>
+                                                        }
+                                                    </select>
+                                                    
+                                                    <select class="form-select" id="proj_exp-end_year">
+                                                        <option value="NO">Chọn năm</option>
+                                                        @for (y of listYear; track y.id) {
+                                                            <option value="{{y.id}}">{{y.name}}</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-md-3">
+                                        <label class="fw-bold  mb-md-2">Mô tả chi tiết</label>
+                                        <angular-editor [config]="configEditor" formControlName="desc_project"></angular-editor>
+                                    </div>
+                                    <div class="mt-md-3">
+                                        <label class="fw-bold">Link liên kết dự án</label>
+                                        <input type="url" class="form-control mt-md-2" placeholder="http://github.com/abc" formControlName="url"/>
+                                    </div>
+                                </form>
+                            </div>
+    
+                            <div class="mt-md-3 d-md-flex gap-md-3 justify-content-center">
+                                @if (this.hiddenFormProject_addExp) {
+                                    <button class="btn btn-outline-success" (click)="openFormAddProjectEXP()">
+                                        <i class="bi bi-plus-circle fs-5"></i>
+                                        <span class=" fs-5 mx-md-2">Thêm dự án</span>
+                                    </button>
+                                } @else {
+                                    <button class="btn" (click)="closeFormProject_addExp()">
+                                        <span class="fw-bold fs-5 mx-md-2">Hủy</span>
+                                    </button>
+                                    <button class="btn btn-success" (click)="submitFormProjectEXP()">
+                                        <span class="fw-bold fs-5 mx-md-2">Lưu dự án</span>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+    
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer text-right">
+                <button id="btn-add-exp" class="btn btn-success fs-5 fw-bold" (click)="submitFormEXP()">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>

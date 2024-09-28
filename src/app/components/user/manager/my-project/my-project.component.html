@@ -1,0 +1,208 @@
+<div class="card-body">
+    @if (myProject.length <= 0) {
+        <div class="card-project d-md-flex gap-md-5">
+            <div class="tile flex-grow-1">
+                <h5>Dự án</h5>
+                <p class="text-secondary">Bạn có thể mô tả rõ hơn các sản phẩm trong CV bằng cách chèn thêm hình ảnh hoặc liên kết mô tả dự án.</p>
+            </div>
+            <img src="/assets/img/users/icon-project.png" alt="Icon Project">
+            <div role="button" (click)="openAddProjectModal()"><i class="bi bi-plus-circle fs-3"></i></div>
+        </div>
+    } @else {
+        <div class="card-title">
+            <div class="d-md-flex justify-content-between">
+                <h5>Dự án</h5>
+                <div role="button" (click)="openAddProjectModal()"><i class="bi bi-plus-circle fs-3"></i></div>
+            </div>
+            @for (i of myProject; track i.id) {
+                <div class="projects mt-md-3 p-md-3 d-md-flex gap-md-3 rounded-3">
+                  <div class="completion-time d-md-flex gap-md-2">
+                    <span>{{i.start_date}}</span>
+                    <span>-</span>
+                    <span>{{i.end_date ? i.end_date : 'Hiện tại'}}</span>
+                  </div>
+                  <div class="project-body flex-grow-1">
+                    <h4 class="card-title">{{i.name}}</h4>
+                    <div class="d-md-flex gap-md-5">
+                        <span class="text-danger">{{i.position}}</span>
+                        <span><i class="bi bi-person-circle"></i>&ensp;{{i.member}}</span>
+                    </div>
+                    @if (i.skill.length > 0) {
+                        <div class="skill mt-md-2 d-md-flex gap-md-2 flex-wrap">
+                            @for (s of i.skill; track s.id) {
+                                <span class="border border-danger rounded-1 p-md-1 text-danger">{{s.code}}</span>
+                            }
+                        </div>
+                    }
+                    <div class="description mt-md-3" [innerHTML]="i.description"></div>
+                    <div class="url">Link dự án: <span class="text-danger">{{i.url}}</span></div>
+                  </div>
+                  <div role="button" (click)="openEditProjectModal(i.name)"><i class="bi bi-pencil fs-5"></i></div>
+                  <div role="button" (click)="deleteProject(i.name)"><i class="bi bi-trash fs-5"></i></div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<!-- Button trigger add project modal -->
+<button type="button" class="btn btn-primary" id="btn-modal-add_project" data-bs-toggle="modal" data-bs-target="#add-project-modal" [hidden]="true">
+    Launch demo modal
+</button>
+
+<!-- Add Project Modal -->
+<div class="modal fade" id="add-project-modal" tabindex="-1" aria-labelledby="AddProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="AddProjectModalLabel">Dự án</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-md-2">
+                    <label class="fw-bold">Tên dự án *</label>
+                    <input type="text" class="form-control mt-md-2" placeholder="Nhập tên dự án"/>
+                </div>
+                <div class="mt-md-3">
+                    <div class="row">
+                        <div class="col">
+                            <label class="fw-bold">Vị trí *</label>
+                            <input type="text" class="form-control mt-md-2" placeholder="VD: Back-end"/>
+                        </div>
+                        <div class="col">
+                            <label class="fw-bold">Số lượng tham gia *</label>
+                            <input type="number" class="form-control mt-md-2" placeholder="Nhập số thành viên tham gia"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold">Thời gian *</label>
+                    <div class="row mt-md-2">
+                        <div class="col-md-6">
+                            <label>Bắt đầu</label>
+                            <div class="d-md-flex gap-md-3 mt-md-2">
+                                <select class="form-select" name="start_month" id="start-month">
+                                <option value="">Chọn tháng</option>
+                                </select>
+            
+                                <select class="form-select" name="end_month" id="end-month">
+                                    <option value="">Chọn năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-md-2">
+                            <label>Kết thúc</label>
+                            <div class="d-md-flex gap-md-3 mt-md-2">
+                                <select class="form-select" name="start_year" id="start-year">
+                                    <option value="">Chọn tháng</option>
+                                </select>
+                                
+                                <select class="form-select" name="end_year" id="end-year">
+                                    <option value="">Chọn năm</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-md-3">
+                    <label class="mb-md-2 fw-bold">Công nghệ sử dụng *</label>
+                    <select name="" id="" class="form-select">
+                        <option value="null">Chọn công nghệ</option>
+                    </select>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold  mb-md-2">Mô tả chi tiết</label>
+                    <angular-editor [config]="configEditor" ></angular-editor>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold">Link liên kết dự án</label>
+                    <input type="url" class="form-control mt-md-2" placeholder="http://github.com/abc"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success fs-5">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger edit project modal -->
+<button type="button" class="btn btn-primary" id="btn-modal-edit_project" data-bs-toggle="modal" data-bs-target="#edit-project-modal" [hidden]="true">
+    Launch demo modal
+</button>
+
+<!--Edit Project Modal -->
+<div class="modal fade" id="edit-project-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editProjectModalLabel">Dự án</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-md-2">
+                    <label class="fw-bold">Tên dự án *</label>
+                    <input type="text" class="form-control mt-md-2" placeholder="Nhập tên dự án"/>
+                </div>
+                <div class="mt-md-3">
+                    <div class="row">
+                        <div class="col">
+                            <label class="fw-bold">Vị trí *</label>
+                            <input type="text" class="form-control mt-md-2" placeholder="VD: Back-end"/>
+                        </div>
+                        <div class="col">
+                            <label class="fw-bold">Số lượng tham gia *</label>
+                            <input type="number" class="form-control mt-md-2" placeholder="Nhập số thành viên tham gia"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold">Thời gian *</label>
+                    <div class="row mt-md-2">
+                        <div class="col-md-6">
+                            <label>Bắt đầu</label>
+                            <div class="d-md-flex gap-md-3 mt-md-2">
+                                <select class="form-select" name="start_month" id="start-month">
+                                <option value="">Chọn tháng</option>
+                                </select>
+            
+                                <select class="form-select" name="end_month" id="end-month">
+                                    <option value="">Chọn năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-md-2">
+                            <label>Kết thúc</label>
+                            <div class="d-md-flex gap-md-3 mt-md-2">
+                                <select class="form-select" name="start_year" id="start-year">
+                                    <option value="">Chọn tháng</option>
+                                </select>
+                                
+                                <select class="form-select" name="end_year" id="end-year">
+                                    <option value="">Chọn năm</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-md-3">
+                    <label class="mb-md-2 fw-bold">Công nghệ sử dụng *</label>
+                    <select name="" id="" class="form-select">
+                        <option value="null">Chọn công nghệ</option>
+                    </select>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold  mb-md-2">Mô tả chi tiết</label>
+                    <angular-editor [config]="configEditor" ></angular-editor>
+                </div>
+                <div class="mt-md-3">
+                    <label class="fw-bold">Link liên kết dự án</label>
+                    <input type="url" class="form-control mt-md-2" placeholder="http://github.com/abc"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success fs-5 fw-bold">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>

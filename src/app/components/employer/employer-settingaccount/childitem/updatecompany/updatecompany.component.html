@@ -1,0 +1,90 @@
+<div class="headerRight m-2 position-relative">
+  <span class="position-absolute label-form">Cập nhật thông tin công ty</span>
+</div>
+<div class="contentRight mt-md-4 mb-md-3 p-md-3 form">
+  <form [formGroup]="formCompany">
+    <div class="row justify-content-center mb-md-3">
+      <img role="button" [src]="logoReview?logoReview:'/assets/img/logos/logo-company.png'" 
+          alt="Logo" class="logo" (click)="uploadLogo.click()">
+      <input type="file"  [hidden]="true" #uploadLogo accept="image/*" (change)="changeLogo($event)"/>
+      <label class="text-center">Logo</label>
+    </div>
+    <div class="row">
+      <input formControlName="id" [hidden]="true"/>
+      <div class="col-sm-6">
+        <label for="">Tên Công ty</label>
+        <input type="text" class="w-100" formControlName="name">
+      </div>
+      <div class="col-sm-6">
+        <label for="">Mã số thuế</label>
+        <input type="text" class="w-100" formControlName="tax_code">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-sm-6">
+        <label for="">Website</label>
+        <input type="text" class="w-100" placeholder="https://" formControlName="web_url">
+      </div>
+      <div class="col-sm-6">
+        <label>Lĩnh vực hoạt động</label>
+        <select name="" id="" class="w-100" formControlName="business_type">
+          <option value="CNTT">CNTT</option>
+          <option value="Game">Game</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-6">
+        <label for="">Email</label>
+        <input type="text" class="w-100" formControlName="email"/>
+      </div>
+      <div class="col-sm-6">
+        <label for="">Số điện thoại</label>
+        <input type="text" class="w-100" formControlName="phone"/>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-6">
+        <label for="">Ngày thành lập</label>
+        <input type="date" class="w-100" formControlName="establishment_date"/>
+      </div>
+      <div class="col-sm-6">
+        <label for="">Trụ sở</label>
+        <input type="text" class="w-100" formControlName="headquarter"/>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <label>
+          Kỹ năng yêu cầu
+        </label>
+        <div class="view-my-skill d-md-flex gap-md-2 flex-wrap" (click)="openSkillOption()">
+          <div class="skill-item">
+            @for (skill of listSkill; track $index) {
+              <span>{{skill}} <i class="bi bi-x-circle ms-md-2" role="button" (click)="removeChooseSkill(skill)"></i></span>
+            }
+          </div>
+          <input type="text" class="w-10 search-skill" (input)="searchSkill($event)"/>
+        </div>
+        <select class="w-100 list-skill form-select" formControlName="skill" [hidden]="selectHidden">
+          @for (o of skillOptionFilter; track $index) {
+            <option value="{{o.option_name}}" (click)="chooseSkill(o.option_name)">{{o.option_name}}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <label for="">Mô tả về công ty</label>
+      <ckeditor [editor]="Editor" data="<p></p>" formControlName="sumary"></ckeditor>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button type="button" class="btn btn-secondary ">Hủy</button>
+
+      <button type="button" class="btn btn-success " style="margin-left: 1rem;" (click)="updateCompany()">Cập nhật</button>
+    </div>
+
+  </form>
+</div>

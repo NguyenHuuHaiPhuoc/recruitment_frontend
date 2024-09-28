@@ -1,0 +1,49 @@
+  <div class="headerRight m-2">
+        <span>Thông tin giấy phép kinh doanh</span>
+      </div>
+      <div class="contentRight m-2 border p-3">
+        <div><span>Trạng thái:</span> <span>Chưa cập nhật</span></div>
+
+        <div class="d-flex justify-content-between mt-3">
+           <div>
+            <p>Giấy phép kinh doanh / Giấy ủy quyển/ Thẻ nhân viên</p>
+            <p>Dung lượng file không vượt quá 5MB</p>
+           </div>
+           <div>
+            <p>Giấy tờ bổ sung</p>
+            <p>Dung lượng file không vượt quá 5MB</p>
+           </div>
+        </div>
+     <form [formGroup]="userForm">
+        <div class="d-flex justify-content-between mt-4">
+        
+           <div class="p-2 border d-grid justify-center-center">
+             <label for="formFile" class="form-label">Chọn file giấy tờ</label>
+             <input class="form-control w-70" type="file" id="formFile" formControlName="filemain" name=" filemain">
+          </div>
+
+       
+       <div class="p-2 border d-grid justify-center-center">
+             <label for="formFile" class="form-label">Chọn file giấy tờ</label>
+             <input class="form-control w-70" type="file" id="formFile">
+          </div>
+        </div>
+        @if (userForm.controls['filemain'].invalid && userForm.controls['filemain'].touched) {
+            <small class="text-danger">* vui lòng tải hồ sơ!</small>
+        }
+        
+        <div class="m-2 d-flex justify-content-start">
+          <div class="btn btn-danger m-2">Hủy</div> <div class="btn btn-success m-2">Cập Nhật</div>
+        </div>
+        </form>
+      </div>
+    
+  <div class="m-2">
+    <span>Tài liệu hướng dẫn</span>
+    <div>
+      <ul>
+        <li>Mẫu giấy ủy quyền</li>
+        <li>Hướng dẫn đăng tải</li>
+      </ul>
+    </div>
+  </div>

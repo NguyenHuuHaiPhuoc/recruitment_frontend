@@ -1,0 +1,42 @@
+.form{
+  border: 1px solid #2A6563;
+}
+form input,select, .view-my-skill{
+  border: 1px solid rgb(194, 193, 193);
+}
+form label{
+  color: #5e6368;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+.logo{
+  width: 80px;
+  height: 80px;
+  border: 1px solid gainsboro;
+  border-radius: 50%;
+}
+.label-form{
+  top: -13px;
+  left: 1.65rem;
+  padding: 0 10px;
+  font-weight: 700;
+  background-color: #F8F9FA;
+  color: #2A6563;
+}
+.view-my-skill{
+  width: 100%;
+  padding: 5px;
+}
+.skill-item span{
+  margin: 5px;
+  padding: 3px;
+  background-color: #2A6563;
+  color: #FFFFFF;
+}
+.search-skill{
+  border: none !important;
+  background-color: #F8F9FA;
+}
+.search-skill:focus{
+  background-color: #FFFFFF;
+}

@@ -1,0 +1,26 @@
+.form-change-password, .form-update-profile, .form-update-company{
+    padding: 50px 15px;
+    border: 0.5px solid #2a6563;
+}
+.label-tab{
+    padding: 0 10px;
+    background-color: #fff;
+    color: #2a6563;
+    position: absolute;
+    top: -13px;
+    left: 1rem;
+}
+.nav button, .form-label{
+    color: #2a6563;
+}
+.active{
+    color: #fff !important;
+}
+
+.avatar img{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #2a6563;
+    border-radius: 50%;
+    cursor: pointer;
+}

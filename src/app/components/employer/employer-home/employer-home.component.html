@@ -1,0 +1,83 @@
+<div class="container_fluid container-fluid">
+
+  <div class="row menustart d-flex align-items-center py-md-3">
+    <div class="col-sm-4 d-flex flex-wrap align-content-center">
+      <a (click)="openSlideBar()" style="font-size: 20px; font-weight: 700;"><mat-icon>menu</mat-icon></a>
+      <a routerLink="news" style="color: white; margin-left: 10px;">
+        <h5 class="ml-5">Easy Jobs</h5>
+      </a>
+    </div>
+    <div class="col-sm-8 d-flex flex-wrap align-items-center justify-content-evenly">
+      <a href="#" class="quick_tag fs-6 px-md-3">Tải báo cáo thị trường 2023-2024</a>
+      <a href="#" class="quick_tag fs-6 px-md-3">hr inside</a>
+      <a href="#" class="quick_tag fs-6 px-md-3">Tìm cv</a>
+      <a href="#" class="quick_tag fs-6 px-md-3">Đăng tin</a>
+      <a href="#" class="quick_tag fs-6 px-md-3">Connect</a>
+      <a href="#" class="quick_tag fs-6 px-md-3">Trợ giúp</a>
+      <a href="#" class="quick_tag fs-6 px-md-3"><i class="bi bi-bell-fill"></i></a>
+      <button class="quick_tag" mat-button [matMenuTriggerFor]="account"><i class="bi bi-person-circle text-light"
+          style="font-size: 20px;"></i><i class="bi bi-caret-down-fill"></i></button>
+      <mat-menu #account="matMenu">
+        <div mat-menu-item (click)="logout()"><i class="bi bi-box-arrow-left me-md-2"></i>Đăng xuất</div>
+        <div></div>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="row position-relative">
+    <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+      <div class="row">
+        <div class="d-flex" [ngClass]="collapsed?'':'justify-content-center mt-md-2'">
+          <a href="employer-dashboard/settingaccount" class="col-sm-4 img_user">
+            <img [src]="avatar?avatar:'/assets/img/users/icon-user-male-default.png'" alt="Avatar">
+          </a>
+          <div class="col-sm-8 mt-md-2" [hidden]="!collapsed">
+            <span class="name text-capitalize fs-6">{{user.full_name}}</span><br>
+            <span class="role">empolyer</span><br>
+            <span class="level">tai khoan xac thuc</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row content_slidebar">
+        <ul [ngClass]="collapsed?'':'text-center'">
+          <li class="row">
+            <a routerLink="news">
+              <i class="bi bi-columns-gap fs-6" [ngClass]="collapsed?'fw-bold':''"></i>
+              <span class="m-3 title_menu_left fs-6" [hidden]="!collapsed">Bản tin</span>
+            </a>
+          </li>
+          <li class="row">
+            <a>
+              <i class="bi bi-star fs-6" [ngClass]="collapsed?'fw-bold':''"></i> 
+              <span class="m-3 title_menu_left fs-6" [hidden]="!collapsed">Cv đề xuất</span>
+            </a>
+          </li>
+          <li class="row">
+            <a routerLink="campaign">
+              <i class="bi bi-handbag  fs-6" [ngClass]="collapsed?'fw-bold':''"></i>
+              <span class="m-3 title_menu_left fs-6" [hidden]="!collapsed">Chiến dịch tuyển dụng</span>
+            </a>
+          </li>
+          <li class="row">
+            <a href="">
+              <i class="bi bi-file-earmark-text  fs-6" [ngClass]="collapsed?'fw-bold':''"></i> 
+              <span class="m-3 title_menu_left fs-6" [hidden]="!collapsed">Tin tuyển dụng</span>
+            </a>
+          </li>
+          <li class="row">
+            <a routerLink="settingaccount">
+              <i class="bi bi-gear fs-6" [ngClass]="collapsed?'':'fw-bold'"></i>
+              <span class="m-3 title_menu_left fs-6" [hidden]="!collapsed">Cài đặt tài khoản</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </div>
+
+    <div class="dashboard-body" [ngClass]="collapsed ? 'body-trimmed' : 'body-md-screen'" style="height: 730px; overflow-y: scroll;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
